@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BBF Member Login — Sign in to your Brigade Brotherhood Fellowship member account to access your dashboard, events, and fellowship resources." />
+  <meta name="keywords" content="BBF login, Brigade Brotherhood Fellowship member login, BBF member portal" />
+  <meta name="author" content="Brigade Brotherhood Fellowship" />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <title>Member Login — Brigade Brotherhood Fellowship</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════
+       LOGIN PAGE — full-screen split layout, no Bootstrap grid
+    ══════════════════════════════════════════════════════ */
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-body);
+      background: var(--bbf-navy);
+      color: var(--bbf-text);
+    }
+
+    /* ── Layout wrapper ── */
+    .login-page {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Left panel — decorative brand side ── */
+    .login-brand-panel {
+      flex: 0 0 480px;
+      background: linear-gradient(160deg, #060d1a 0%, #0a1628 50%, #102040 100%);
+      border-right: 1px solid rgba(201,168,76,0.12);
+      display: flex;
+      flex-direction: column;
+      padding: 3rem 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative circles */
+    .login-brand-panel::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .login-brand-panel::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -80px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .brand-top {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Logo in panel */
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      margin-bottom: 3rem;
+    }
+    .brand-logo-emblem {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+      background: var(--bbf-white);
+    }
+    .brand-logo-emblem img {
+      width: 100%; height: 100%; object-fit: contain; display: block;
+    }
+    .brand-logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-logo-name {
+      font-family: var(--font-accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bbf-white);
+      line-height: 1.3;
+    }
+    .brand-logo-slogan {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.6);
+      line-height: 1;
+      margin-top: 3px;
+      font-family: var(--font-body);
+    }
+
+    /* Brand headline */
+    .brand-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 800;
+      color: var(--bbf-white);
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+    .brand-headline .gold-text {
+      color: var(--bbf-gold-light);
+    }
+
+    .brand-desc {
+      font-size: var(--fs-sm);
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Divider */
+    .brand-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--gradient-gold);
+      border-radius: var(--radius-pill);
+      margin-bottom: 2.5rem;
+    }
+
+    /* Values pills */
+    .brand-values {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+    }
+    .brand-value-pill {
+      padding: 0.35rem 0.9rem;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-accent);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bbf-gold-light);
+    }
+
+    /* Bible verse */
+    .brand-verse {
+      margin-top: auto;
+      position: relative;
+      z-index: 1;
+      padding: 1.25rem 1.5rem;
+      background: rgba(201,168,76,0.05);
+      border: 1px solid rgba(201,168,76,0.12);
+      border-left: 3px solid var(--bbf-gold);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+    .brand-verse blockquote {
+      margin: 0;
+      font-style: italic;
+      font-size: var(--fs-sm);
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+    }
+    .brand-verse cite {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: var(--fs-xs);
+      font-style: normal;
+      font-family: var(--font-accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bbf-gold);
+      font-weight: 600;
+    }
+
+    /* ── Right panel — form side ── */
+    .login-form-panel {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      background: var(--bbf-off-white);
+      min-height: 100vh;
+    }
+
+    .login-form-inner {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    /* Small top nav link back to site */
+    .login-top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+    }
+    .login-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: var(--fs-xs);
+      font-family: var(--font-accent);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bbf-text-muted);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+    .login-back-link:hover { color: var(--bbf-navy); }
+    .login-back-link i { font-size: 0.7rem; }
+
+    .login-mobile-logo {
+      display: none; /* shown only on mobile */
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+    .login-mobile-logo-emblem {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--bbf-white);
+    }
+    .login-mobile-logo-name {
+      font-family: var(--font-accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bbf-navy);
+    }
+
+    /* Form heading */
+    .login-form-heading {
+      margin-bottom: 2rem;
+    }
+    .login-form-heading .overline {
+      color: var(--bbf-text-muted);
+    }
+    .login-form-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--bbf-navy);
+      line-height: 1.2;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .login-form-sub {
+      font-size: var(--fs-sm);
+      color: var(--bbf-text-muted);
+      line-height: 1.6;
+    }
+    .login-form-sub a {
+      color: var(--bbf-navy);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    .login-form-sub a:hover { color: var(--bbf-gold-dark); }
+
+    /* Form fields */
+    .login-field {
+      margin-bottom: 1.25rem;
+    }
+    .login-label {
+      display: block;
+      font-size: var(--fs-xs);
+      font-family: var(--font-accent);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bbf-text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .login-input-wrap {
+      position: relative;
+    }
+    .login-input-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--bbf-text-light);
+      font-size: 0.85rem;
+      pointer-events: none;
+      transition: color var(--transition-fast);
+    }
+    .login-input {
+      width: 100%;
+      padding: 0.8rem 1rem 0.8rem 2.75rem;
+      border: 1.5px solid var(--bbf-light-grey);
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-sm);
+      font-family: var(--font-body);
+      color: var(--bbf-text);
+      background: var(--bbf-white);
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .login-input:focus {
+      border-color: var(--bbf-gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+    .login-input:focus + .login-input-icon,
+    .login-input-wrap:focus-within .login-input-icon {
+      color: var(--bbf-gold-dark);
+    }
+    .login-input.is-invalid {
+      border-color: var(--bbf-red);
+    }
+    .login-input.is-invalid:focus {
+      box-shadow: 0 0 0 3px rgba(178,34,52,0.10);
+    }
+    .login-input::placeholder { color: var(--bbf-text-light); }
+
+    /* Password toggle */
+    .pw-toggle-btn {
+      position: absolute;
+      right: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      padding: 0.25rem;
+      cursor: pointer;
+      color: var(--bbf-text-light);
+      font-size: 0.85rem;
+      line-height: 1;
+      transition: color var(--transition-fast);
+    }
+    .pw-toggle-btn:hover { color: var(--bbf-navy); }
+    /* Nudge password text right to not overlap toggle */
+    .login-input.has-toggle { padding-right: 2.75rem; }
+
+    .login-error-msg {
+      display: none;
+      font-size: 0.72rem;
+      color: var(--bbf-red);
+      margin-top: 0.3rem;
+      font-family: var(--font-accent);
+    }
+    .login-input.is-invalid ~ .login-error-msg { display: block; }
+
+    /* Remember me + forgot */
+    .login-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      flex-wrap: wrap;
+    }
+    .login-remember {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      font-size: var(--fs-sm);
+      color: var(--bbf-text-muted);
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .login-remember input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--bbf-navy);
+      cursor: pointer;
+    }
+    .login-forgot {
+      font-size: var(--fs-sm);
+      color: var(--bbf-navy);
+      font-weight: 600;
+      text-decoration: underline;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: color var(--transition-fast);
+    }
+    .login-forgot:hover { color: var(--bbf-gold-dark); }
+
+    /* Global form error banner */
+    .login-alert {
+      display: none;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-sm);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+    }
+    .login-alert.error {
+      background: rgba(178,34,52,0.08);
+      border: 1px solid rgba(178,34,52,0.25);
+      color: #8b1a28;
+    }
+    .login-alert.success {
+      background: rgba(26,92,58,0.08);
+      border: 1px solid rgba(26,92,58,0.25);
+      color: #1a5c3a;
+    }
+    .login-alert.show { display: flex; }
+    .login-alert i { margin-top: 2px; flex-shrink: 0; }
+
+    /* Submit button */
+    .login-submit-btn {
+      width: 100%;
+      padding: 0.9rem 2rem;
+      background: var(--gradient-gold);
+      border: none;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-accent);
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bbf-navy);
+      cursor: pointer;
+      box-shadow: var(--shadow-gold);
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .login-submit-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.15);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+    .login-submit-btn:hover::before { opacity: 1; }
+    .login-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(201,168,76,0.35); }
+    .login-submit-btn:active { transform: translateY(0); }
+    .login-submit-btn:disabled {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    /* Divider */
+    .login-form-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.75rem 0;
+      color: var(--bbf-text-light);
+      font-size: var(--fs-xs);
+      font-family: var(--font-accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .login-form-divider::before,
+    .login-form-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--bbf-light-grey);
+    }
+
+    /* Register link */
+    .login-register-row {
+      text-align: center;
+      font-size: var(--fs-sm);
+      color: var(--bbf-text-muted);
+    }
+    .login-register-row a {
+      color: var(--bbf-navy);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    .login-register-row a:hover { color: var(--bbf-gold-dark); }
+
+    /* ── Forgot password panel ── */
+    .login-panel { display: none; }
+    .login-panel.active { display: block; }
+
+    /* ── Footer credit strip ── */
+    .login-footer {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--bbf-text-light);
+      font-family: var(--font-accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .login-footer a {
+      color: var(--bbf-text-muted);
+      text-decoration: underline;
+    }
+
+    /* ══ Responsive ══ */
+    @media (max-width: 900px) {
+      .login-brand-panel { display: none; }
+      .login-form-panel { background: var(--bbf-navy); }
+      .login-form-inner {
+        background: var(--bbf-off-white);
+        border-radius: var(--radius-xl);
+        padding: 2.5rem 2rem;
+        box-shadow: var(--shadow-xl);
+      }
+      .login-mobile-logo { display: flex; }
+    }
+    @media (max-width: 480px) {
+      .login-form-panel { padding: 1.5rem 1rem; align-items: flex-start; }
+      .login-form-inner { padding: 2rem 1.25rem; margin-top: 1rem; }
+      .login-row { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="bbf-preloader" style="position:fixed;inset:0;background:var(--bbf-navy);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:1rem;">
+    <div style="width:56px;height:56px;background:var(--gradient-gold);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:800;color:var(--bbf-navy);animation:preloaderPulse 1.2s ease-in-out infinite;">BBF</div>
+    <div style="font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.6);">Loading…</div>
+  </div>
+  <style>@keyframes preloaderPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:0.8}}</style>
+
+  <div class="login-page">
+
+    <!-- ══════════════════════════════════════════════════
+         LEFT — BRAND PANEL
+    ══════════════════════════════════════════════════ -->
+    <aside class="login-brand-panel" aria-label="BBF brand panel" aria-hidden="true">
+      <div class="brand-top">
+        <a href="index.html" class="brand-logo-wrap" tabindex="-1">
+          <div class="brand-logo-emblem"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+          <div class="brand-logo-text">
+            <span class="brand-logo-name">Brigade Brotherhood Fellowship</span>
+            <span class="brand-logo-slogan">One Brigade · One Brotherhood · One Purpose</span>
+          </div>
+        </a>
+
+        <div class="brand-divider"></div>
+
+        <h2 class="brand-headline">
+          Your Brotherhood<br />
+          <span class="gold-text">Continues Here.</span>
+        </h2>
+        <p class="brand-desc">
+          Sign in to access your BBF member portal — view upcoming events,
+          manage your profile, access fellowship resources, and stay connected
+          with the brotherhood.
+        </p>
+
+        <div class="brand-values" role="list" aria-label="BBF guiding values">
+          <span class="brand-value-pill" role="listitem">Faith</span>
+          <span class="brand-value-pill" role="listitem">Fellowship</span>
+          <span class="brand-value-pill" role="listitem">Service</span>
+          <span class="brand-value-pill" role="listitem">Friendship</span>
+        </div>
+      </div>
+
+      <blockquote class="brand-verse">
+        <blockquote>
+          "Behold, how good and pleasant it is when brothers dwell in unity!"
+          <cite>— Psalm 133:1</cite>
+        </blockquote>
+      </blockquote>
+    </aside>
+
+
+    <!-- ══════════════════════════════════════════════════
+         RIGHT — FORM PANEL
+    ══════════════════════════════════════════════════ -->
+    <main class="login-form-panel" id="login-main">
+      <div class="login-form-inner">
+
+        <!-- Top navigation row -->
+        <div class="login-top-nav">
+          <a href="index.html" class="login-back-link" aria-label="Back to BBF homepage">
+            <i class="fas fa-arrow-left"></i> Back to BBF
+          </a>
+          <!-- Mobile-only logo -->
+          <a href="index.html" class="login-mobile-logo" aria-label="BBF Home">
+            <div class="login-mobile-logo-emblem" aria-hidden="true"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" style="width:100%;height:100%;object-fit:contain;display:block;" /></div>
+            <span class="login-mobile-logo-name">BBF</span>
+          </a>
+        </div>
+
+
+        <!-- ══════════════════════════
+             PANEL A — SIGN IN
+        ══════════════════════════ -->
+        <div class="login-panel active" id="panel-signin" role="region" aria-label="Sign in">
+
+          <div class="login-form-heading">
+            <div class="overline">Member Portal</div>
+            <h1 class="login-form-title">Sign In</h1>
+            <p class="login-form-sub">
+              Not a member yet?
+              <a href="membership.html">Join BBF today</a>.
+            </p>
+          </div>
+
+          <!-- Alert banner (errors / success messages) -->
+          <div class="login-alert error" id="signin-alert" role="alert" aria-live="polite">
+            <i class="fas fa-circle-exclamation"></i>
+            <span id="signin-alert-msg"></span>
+          </div>
+
+          <!-- TODO [BACKEND]: POST /api/auth/login -->
+          <form id="signin-form" novalidate aria-label="Sign in form">
+
+            <!-- Email -->
+            <div class="login-field">
+              <label class="login-label" for="signin-email">Email Address</label>
+              <div class="login-input-wrap">
+                <input
+                  class="login-input"
+                  type="email"
+                  id="signin-email"
+                  name="email"
+                  autocomplete="email"
+                  required
+                  placeholder="you@example.com"
+                  aria-describedby="signin-email-error"
+                />
+                <i class="fas fa-envelope login-input-icon" aria-hidden="true"></i>
+              </div>
+              <div class="login-error-msg" id="signin-email-error" role="alert">Please enter a valid email address.</div>
+            </div>
+
+            <!-- Password -->
+            <div class="login-field">
+              <label class="login-label" for="signin-password">Password</label>
+              <div class="login-input-wrap">
+                <input
+                  class="login-input has-toggle"
+                  type="password"
+                  id="signin-password"
+                  name="password"
+                  autocomplete="current-password"
+                  required
+                  placeholder="Enter your password"
+                  aria-describedby="signin-password-error"
+                />
+                <i class="fas fa-lock login-input-icon" aria-hidden="true"></i>
+                <button
+                  type="button"
+                  class="pw-toggle-btn"
+                  id="pw-toggle"
+                  aria-label="Show password"
+                  aria-pressed="false"
+                >
+                  <i class="fas fa-eye" id="pw-toggle-icon" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="login-error-msg" id="signin-password-error" role="alert">Please enter your password.</div>
+            </div>
+
+            <!-- Remember me + Forgot password -->
+            <div class="login-row">
+              <label class="login-remember">
+                <input type="checkbox" id="remember-me" name="rememberMe" />
+                Remember me
+              </label>
+              <button
+                type="button"
+                class="login-forgot"
+                id="btn-forgot"
+                aria-label="Forgot your password? Reset it here"
+              >
+                Forgot password?
+              </button>
+            </div>
+
+            <button type="submit" class="login-submit-btn" id="signin-btn">
+              <i class="fas fa-sign-in-alt"></i>
+              Sign In
+            </button>
+
+          </form>
+
+          <div class="login-form-divider" aria-hidden="true">or</div>
+
+          <div class="login-register-row">
+            New to BBF?
+            <a href="membership.html">Create an account</a>
+          </div>
+
+        </div><!-- /panel-signin -->
+
+
+        <!-- ══════════════════════════
+             PANEL B — FORGOT PASSWORD
+        ══════════════════════════ -->
+        <div class="login-panel" id="panel-forgot" role="region" aria-label="Reset password">
+
+          <div class="login-form-heading">
+            <div class="overline">Account Recovery</div>
+            <h1 class="login-form-title">Reset Password</h1>
+            <p class="login-form-sub">
+              Enter the email address registered to your BBF account. We'll send
+              reset instructions if the email matches our records.
+            </p>
+          </div>
+
+          <!-- Alert banner -->
+          <div class="login-alert" id="reset-alert" role="alert" aria-live="polite">
+            <i class="fas fa-circle-info" id="reset-alert-icon"></i>
+            <span id="reset-alert-msg"></span>
+          </div>
+
+          <!-- TODO [BACKEND]: POST /api/auth/reset-password -->
+          <form id="reset-form" novalidate aria-label="Password reset form">
+
+            <div class="login-field">
+              <label class="login-label" for="reset-email">Registered Email Address</label>
+              <div class="login-input-wrap">
+                <input
+                  class="login-input"
+                  type="email"
+                  id="reset-email"
+                  name="email"
+                  autocomplete="email"
+                  required
+                  placeholder="you@example.com"
+                  aria-describedby="reset-email-error"
+                />
+                <i class="fas fa-envelope login-input-icon" aria-hidden="true"></i>
+              </div>
+              <div class="login-error-msg" id="reset-email-error" role="alert">Please enter a valid email address.</div>
+            </div>
+
+            <button type="submit" class="login-submit-btn" id="reset-btn">
+              <i class="fas fa-paper-plane"></i>
+              Send Reset Link
+            </button>
+
+          </form>
+
+          <div class="login-form-divider" aria-hidden="true">or</div>
+
+          <div class="login-register-row">
+            <button
+              type="button"
+              class="login-forgot"
+              id="btn-back-signin"
+              style="font-size:var(--fs-sm);"
+            >
+              <i class="fas fa-arrow-left" style="font-size:0.75rem;margin-right:0.3rem;"></i>
+              Back to Sign In
+            </button>
+          </div>
+
+        </div><!-- /panel-forgot -->
+
+
+        <!-- ── Footer ── -->
+        <div class="login-footer" role="contentinfo">
+          &copy; <span id="login-year">2026</span> Brigade Brotherhood Fellowship &nbsp;·&nbsp;
+          <a href="resources.html">Constitution</a> &nbsp;·&nbsp;
+          <a href="contact.html">Contact</a>
+        </div>
+
+      </div><!-- /login-form-inner -->
+    </main>
+
+  </div><!-- /login-page -->
+
+
+  <!-- SCRIPTS -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    /* ══════════════════════════════════════════════════════
+       LOGIN PAGE — inline JS
+       Features:
+         - Sign-in form with client-side validation
+         - Password show/hide toggle
+         - Forgot password panel (slide between panels)
+         - Password reset form with mock send
+         - Mock login (TODO [BACKEND]: POST /api/auth/login)
+         - Mock reset  (TODO [BACKEND]: POST /api/auth/reset-password)
+    ══════════════════════════════════════════════════════ */
+
+    /* ── Panel switcher ── */
+    function showPanel(id) {
+      document.querySelectorAll('.login-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(id)?.classList.add('active');
+    }
+
+    document.getElementById('btn-forgot')?.addEventListener('click', () => showPanel('panel-forgot'));
+    document.getElementById('btn-back-signin')?.addEventListener('click', () => {
+      clearAlert('reset-alert');
+      showPanel('panel-signin');
+    });
+
+    /* ── Password toggle ── */
+    const pwInput  = document.getElementById('signin-password');
+    const pwToggle = document.getElementById('pw-toggle');
+    const pwIcon   = document.getElementById('pw-toggle-icon');
+
+    pwToggle?.addEventListener('click', () => {
+      const isHidden = pwInput.type === 'password';
+      pwInput.type = isHidden ? 'text' : 'password';
+      pwToggle.setAttribute('aria-pressed', String(isHidden));
+      pwToggle.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+      pwIcon.classList.toggle('fa-eye', !isHidden);
+      pwIcon.classList.toggle('fa-eye-slash', isHidden);
+    });
+
+    /* ── Alert helpers ── */
+    function showAlert(id, type, msg) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.className = `login-alert ${type} show`;
+      const msgEl = el.querySelector('span') || el;
+      msgEl.textContent = msg;
+      const iconEl = el.querySelector('i');
+      if (iconEl) {
+        iconEl.className = type === 'error'
+          ? 'fas fa-circle-exclamation'
+          : 'fas fa-circle-check';
+      }
+    }
+    function clearAlert(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('show');
+    }
+
+    /* ── Field validation helpers ── */
+    function setInvalid(inputId) {
+      document.getElementById(inputId)?.classList.add('is-invalid');
+    }
+    function clearInvalid(inputId) {
+      document.getElementById(inputId)?.classList.remove('is-invalid');
+    }
+    function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+
+    /* ── Sign-in form ── */
+    document.getElementById('signin-form')?.addEventListener('submit', e => {
+      e.preventDefault();
+      clearAlert('signin-alert');
+
+      const email = document.getElementById('signin-email')?.value.trim() || '';
+      const pass  = document.getElementById('signin-password')?.value || '';
+
+      let valid = true;
+
+      if (!isValidEmail(email)) { setInvalid('signin-email'); valid = false; }
+      else clearInvalid('signin-email');
+
+      if (pass.length < 1) { setInvalid('signin-password'); valid = false; }
+      else clearInvalid('signin-password');
+
+      if (!valid) return;
+
+      // Disable button & show loading
+      const btn = document.getElementById('signin-btn');
+      if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in…'; }
+
+      // POST /api/auth/login
+      fetch('api/auth/login.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pass,
+          rememberMe: document.getElementById('remember-me')?.checked || false })
+      })
+      .then(r => r.json())
+      .then(res => {
+        if (res.success) {
+          // Store session data for dashboard use
+          sessionStorage.setItem('bbf_logged_in', 'true');
+          sessionStorage.setItem('bbf_member', JSON.stringify(res.data));
+          window.location.href = 'dashboard.html';
+        } else {
+          if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In'; }
+          showAlert('signin-alert', 'error', res.message || 'Incorrect email or password. Please try again.');
+        }
+      })
+      .catch(() => {
+        if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In'; }
+        showAlert('signin-alert', 'error', 'Could not connect to the server. Please try again.');
+      });
+    });
+
+    /* ── Real-time clear on input ── */
+    ['signin-email','signin-password'].forEach(id => {
+      document.getElementById(id)?.addEventListener('input', () => clearInvalid(id));
+    });
+
+    /* ── Forgot password form ── */
+    document.getElementById('reset-form')?.addEventListener('submit', e => {
+      e.preventDefault();
+      clearAlert('reset-alert');
+
+      const email = document.getElementById('reset-email')?.value.trim() || '';
+
+      if (!isValidEmail(email)) {
+        setInvalid('reset-email');
+        return;
+      }
+      clearInvalid('reset-email');
+
+      const btn = document.getElementById('reset-btn');
+      if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…'; }
+
+      // POST /api/auth/reset-password
+      fetch('api/auth/reset-password.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      })
+      .then(r => r.json())
+      .then(res => {
+        if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Reset Link'; }
+        // Always show success (server never reveals if email exists — security)
+        showAlert('reset-alert', 'success',
+          res.message || 'If that email is registered with BBF, a reset link has been sent. Check your inbox and spam folder.');
+        document.getElementById('reset-form')?.reset();
+      })
+      .catch(() => {
+        if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Reset Link'; }
+        showAlert('reset-alert', 'success',
+          'If that email is registered with BBF, a reset link has been sent. Check your inbox and spam folder.');
+        document.getElementById('reset-form')?.reset();
+      });
+    });
+
+    document.getElementById('reset-email')?.addEventListener('input', () => clearInvalid('reset-email'));
+
+    /* ── Footer year ── */
+    const yrEl = document.getElementById('login-year');
+    if (yrEl) yrEl.textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

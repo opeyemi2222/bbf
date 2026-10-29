@@ -1,0 +1,706 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Brigade Brotherhood Fellowship (BBF) — A fellowship platform for Boys' Brigade members built on Faith, Fellowship, Service, and Friendship. One Brigade. One Brotherhood. One Purpose." />
+  <meta name="keywords" content="Brigade Brotherhood Fellowship, BBF, Boys Brigade Fellowship, Boys Brigade Nigeria, Brigade Brotherhood, Christian Fellowship" />
+  <meta name="author" content="Brigade Brotherhood Fellowship" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Brigade Brotherhood Fellowship — One Brigade. One Brotherhood. One Purpose." />
+  <meta property="og:description" content="BBF is a fellowship platform for Boys' Brigade members — united by Faith, Fellowship, Service, and Friendship." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.bbfellowship.org" />
+  <meta property="og:image" content="assets/images/og-image.jpg" />
+
+  <title>Brigade Brotherhood Fellowship — One Brigade. One Brotherhood. One Purpose.</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+
+  <!-- BBF Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       PRELOADER
+  ══════════════════════════════════════════════════════ -->
+  <div id="bbf-preloader" class="bbf-preloader">
+    <div class="bbf-preloader-box">BBF</div>
+    <div class="bbf-preloader-text">Loading…</div>
+  </div>
+  <style>
+    .bbf-preloader{position:fixed;inset:0;background:var(--bbf-navy);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:1rem}
+    .bbf-preloader-box{width:56px;height:56px;background:var(--gradient-gold);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:800;color:var(--bbf-navy);animation:preloaderPulse 1.2s ease-in-out infinite}
+    .bbf-preloader-text{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.6)}
+    @keyframes preloaderPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:0.8}}
+
+    /* Move inline nav chevron styles here to avoid inline styles */
+    .nav-chevron{font-size:0.6rem;margin-left:2px}
+  </style>
+
+  <!-- ══════════════════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════════════════ -->
+  <nav id="bbf-navbar" class="nav-transparent" aria-label="Main navigation">
+    <div class="navbar-inner">
+
+      <!-- Logo -->
+      <a href="index.html" class="bbf-logo-wrap" aria-label="BBF Home">
+        <div class="bbf-logo-emblem" aria-hidden="true"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+        <li><a href="chapters.html">Chapters</a></li>
+        <li class="nav-dropdown">
+          <a href="#" aria-haspopup="true" aria-expanded="false">
+            Programs <i class="fas fa-chevron-down" style="font-size:0.6rem;margin-left:2px;"></i>
+          </a>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="events.html" role="menuitem"><i class="fas fa-calendar-alt nav-menu-icon"></i> Events</a>
+            <a href="activities.html" role="menuitem"><i class="fas fa-hands-helping nav-menu-icon"></i> Activities</a>
+            <a href="gallery.html" role="menuitem"><i class="fas fa-images nav-menu-icon"></i> Gallery</a>
+          </div>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <!-- Desktop CTA -->
+      <a href="membership.html" class="btn-bbf-primary btn-sm-bbf btn-bbf-nav-cta" aria-label="Join BBF membership">
+        <i class="fas fa-user-plus"></i> Join BBF
+      </a>
+
+      <!-- Mobile Toggle -->
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="bbf-offcanvas">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════
+       OFFCANVAS MOBILE MENU
+  ══════════════════════════════════════════════════════ -->
+  <div id="offcanvas-overlay" class="offcanvas-overlay" aria-hidden="true"></div>
+
+  <aside id="bbf-offcanvas" class="bbf-offcanvas" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <div class="offcanvas-header">
+      <a href="index.html" class="bbf-logo-wrap">
+        <div class="bbf-logo-emblem" style="width:38px;height:38px;"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name" style="font-size:0.82rem;">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <button id="offcanvas-close" class="offcanvas-close" aria-label="Close navigation menu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="offcanvas-body">
+      <ul class="offcanvas-nav" role="list">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About BBF</a></li>
+        <li><a href="leadership.html"><i class="fas fa-crown"></i> Leadership</a></li>
+        <li><a href="chapters.html"><i class="fas fa-map-location-dot"></i> Chapters</a></li>
+        <li><a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+        <li><a href="activities.html"><i class="fas fa-hands-helping"></i> Activities &amp; Projects</a></li>
+        <li><a href="news.html"><i class="fas fa-newspaper"></i> News &amp; Announcements</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="resources.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        <li style="margin-top:0.5rem;border-top:1px solid rgba(201,168,76,0.12);padding-top:0.75rem;">
+          <a href="login.html"><i class="fas fa-sign-in-alt"></i> Member Login</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="offcanvas-footer">
+      <a href="membership.html" class="btn-bbf-primary" style="width:100%;justify-content:center;">
+        <i class="fas fa-user-plus"></i> Join BBF Today
+      </a>
+    </div>
+  </aside>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       HERO SECTION
+  ══════════════════════════════════════════════════════ -->
+  <section class="hero" aria-label="Hero section">
+
+    <div class="hero-bg" role="presentation" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-decor hero-decor-1" aria-hidden="true"></div>
+    <div class="hero-decor hero-decor-2" aria-hidden="true"></div>
+    <div class="hero-decor hero-decor-3" aria-hidden="true"></div>
+
+    <div class="hero-content">
+
+      <div class="hero-badge">
+        <i class="fas fa-shield-halved"></i>
+        A Boys' Brigade Fellowship &nbsp;·&nbsp; Faith • Fellowship • Service • Friendship
+      </div>
+
+      <h1 class="hero-title">
+        One <span class="accent-gold">Brigade</span>.<br />
+        One Brotherhood.<br />One Purpose.
+      </h1>
+
+      <p class="hero-slogan">Brigade Brotherhood Fellowship</p>
+
+      <p class="hero-desc">
+        A fellowship platform for Boys' Brigade members — building genuine relationships,
+        promoting unity, and serving God and society together through Faith, Fellowship,
+        Service, and Friendship.
+        <em style="display:block;margin-top:0.75rem;font-style:italic;font-size:0.88em;opacity:0.7;letter-spacing:0.01em;">
+          "Behold, how good and pleasant it is when brothers dwell in unity!" — Psalm 133:1
+        </em>
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="membership.html" class="btn-bbf-primary">
+          <i class="fas fa-user-plus"></i> Join BBF
+        </a>
+        <a href="about.html" class="btn-bbf-outline-white">
+          <i class="fas fa-compass"></i> Explore Fellowship
+        </a>
+      </div>
+
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="scroll-mouse"></div>
+      <span>Scroll</span>
+    </div>
+
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       STATS SECTION
+       NOTE: All figures are SAMPLE/PLACEHOLDER data only.
+       TODO [BACKEND]: Replace with GET /api/stats
+  ══════════════════════════════════════════════════════ -->
+  <section id="stats-section" class="stats-section" aria-label="BBF at a glance">
+    <div class="stats-bg-text" aria-hidden="true">BBF</div>
+    <div class="container-fluid px-4 px-lg-5">
+
+      <div class="text-center mb-4 reveal">
+        <div class="overline-white">BBF at a Glance</div>
+      </div>
+
+      <div id="stats-grid" class="stats-grid" role="list" aria-label="BBF statistics">
+        <!-- Populated by JS → renderStats() from data.js BBF_STATS -->
+      </div>
+
+      <p class="stats-note" aria-label="Data disclaimer">
+        * Sample figures — will reflect live data once the membership system is connected.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       ABOUT BBF PREVIEW
+  ══════════════════════════════════════════════════════ -->
+  <section class="about-preview" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="row align-items-center g-5">
+
+        <!-- Image -->
+        <div class="col-lg-5 reveal-left">
+          <div class="about-preview-image-wrap">
+            <img
+              src="assets/images/about-preview.jpg"
+              alt="BBF members in fellowship"
+              onerror="this.closest('.about-preview-image-wrap').classList.add('img-placeholder');this.style.display='none';this.closest('.about-preview-image-wrap').innerHTML+='<div style=\'height:540px;display:flex;align-items:center;justify-content:center;\'><i class=\'fas fa-users\' style=\'font-size:5rem;color:rgba(255,255,255,0.15);\'></i></div>'"
+              loading="lazy"
+            />
+            <!-- Badge shows the identity statement, not a fabricated founding year -->
+            <div class="about-founded-badge" aria-label="BBF Identity">
+              <div class="year" style="font-size:0.7rem;line-height:1.3;padding:0 4px;text-align:center;">BBF</div>
+              <div class="label">Brigade</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="col-lg-7 reveal-right">
+          <div class="about-content">
+            <div class="overline">Who We Are</div>
+            <div class="gold-divider" style="margin-top:0.5rem;"></div>
+            <h2 class="section-title mt-3" id="about-heading">
+              A Fellowship Built on<br />Brigade Brotherhood
+            </h2>
+            <p class="lead mt-3">
+              Brigade Brotherhood Fellowship (BBF) is a fellowship platform for members
+              of The Boys' Brigade — built on Faith, Fellowship, Service, and Friendship.
+            </p>
+            <p style="color:var(--bbf-text-muted);line-height:1.85;margin-top:1rem;">
+              BBF brings together current and former Boys' Brigade members — from different
+              companies, churches, councils, and locations — to build genuine relationships,
+              support one another, and demonstrate the Brigade spirit through service to God,
+              the Church, and society. BBF respects and upholds the authority, values, and
+              discipline of The Boys' Brigade at all times. We are not a replacement — we
+              are the fellowship that keeps the brotherhood alive.
+            </p>
+
+            <div class="mission-vision-grid">
+              <div class="mv-card">
+                <h5><i class="fas fa-bullseye" style="color:var(--bbf-gold);margin-right:0.5rem;"></i>Our Purpose</h5>
+                <p>To provide a platform through which Boys' Brigade members can build genuine relationships, promote unity, support one another, and participate in positive fellowship and service. — <em>BBF Constitution, Art. 4.1</em></p>
+              </div>
+              <div class="mv-card">
+                <h5><i class="fas fa-cross" style="color:var(--bbf-gold);margin-right:0.5rem;"></i>Our Foundation</h5>
+                <p>Christ is our foundation. BBF operates on the basis of Christian faith and encourages all members to demonstrate Christian character in their conduct and relationships. — <em>BBF Constitution, Art. 2</em></p>
+              </div>
+            </div>
+
+            <div class="mt-4 d-flex flex-wrap gap-3">
+              <a href="about.html" class="btn-bbf-navy">
+                <i class="fas fa-book-open"></i> Read Our Story
+              </a>
+              <a href="membership.html" class="btn-bbf-outline">
+                <i class="fas fa-id-card"></i> Become a Member
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       GUIDING VALUES SECTION
+       Source: BBF Constitution, Articles 1.4, 2, 3.9
+  ══════════════════════════════════════════════════════ -->
+  <section class="values-section" aria-labelledby="values-heading">
+    <div class="values-bg-decor" aria-hidden="true"></div>
+    <div class="container">
+
+      <div class="text-center reveal">
+        <div class="overline-white">What We Stand For</div>
+        <div class="gold-divider-center" style="margin-top:0.5rem;"></div>
+        <h2 class="section-title-light mt-3" id="values-heading">
+          Our Guiding Values
+        </h2>
+        <p class="section-subtitle-light mt-2" style="margin:0 auto;">
+          Four official guiding values and the qualities that shape every BBF member.
+        </p>
+        <div style="margin-top:1rem;font-family:var(--font-accent);letter-spacing:0.18em;
+          font-size:0.8rem;color:var(--bbf-gold-light);opacity:0.9;">
+          FAITH &nbsp;•&nbsp; FELLOWSHIP &nbsp;•&nbsp; SERVICE &nbsp;•&nbsp; FRIENDSHIP
+        </div>
+      </div>
+
+      <!-- Values grid rendered by main.js → renderValues() from BBF_VALUES in data.js -->
+      <div id="values-grid" class="values-grid" role="list" aria-label="BBF guiding values">
+        <!-- Populated by JS -->
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       WHY JOIN BBF — BENEFITS
+       Source: BBF Constitution, Articles 4.2, 5, 15, 19
+  ══════════════════════════════════════════════════════ -->
+  <section class="benefits-section" aria-labelledby="benefits-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-header-left reveal">
+          <div class="overline">Why Join BBF</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="benefits-heading">
+            More Than a Membership
+          </h2>
+          <p class="section-subtitle mt-2">
+            When you join BBF, you gain a genuine brotherhood, a platform for growth,
+            and the support of fellow Boys' Brigade members — wherever you are.
+          </p>
+        </div>
+        <div class="reveal">
+          <a href="membership.html" class="view-all-link">
+            Membership Info <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Benefits grid rendered by main.js → renderBenefits() from BBF_BENEFITS in data.js -->
+      <div id="benefits-grid" class="benefits-grid" role="list" aria-label="BBF membership benefits">
+        <!-- Populated by JS -->
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       LEADERSHIP PREVIEW
+       Source: BBF Constitution, Articles 10, 11, 12
+  ══════════════════════════════════════════════════════ -->
+  <section class="leadership-preview" aria-labelledby="leadership-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-header-left reveal">
+          <div class="overline">BBF Executive</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="leadership-heading">
+            Our Leadership
+          </h2>
+          <p class="section-subtitle mt-2">
+            Elected officers of the BBF Executive — coordinating the fellowship's
+            activities, welfare, and programmes in accordance with the BBF Constitution.
+          </p>
+        </div>
+        <div class="reveal">
+          <a href="leadership.html" class="view-all-link">
+            Full Executive Team <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Leaders grid rendered by main.js → renderLeadershipPreview() from BBF_LEADERS in data.js -->
+      <div id="leaders-preview-grid" class="leaders-grid" role="list" aria-label="BBF executive officers">
+        <!-- Populated by JS -->
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       UPCOMING EVENTS PREVIEW
+       Source: BBF Constitution, Article 19
+  ══════════════════════════════════════════════════════ -->
+  <section class="events-preview" aria-labelledby="events-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-header-left reveal">
+          <div class="overline">Calendar</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="events-heading">
+            Upcoming Events
+          </h2>
+          <p class="section-subtitle mt-2">
+            Fellowship gatherings, community service, personal development, and social
+            activities — bringing BBF members together.
+          </p>
+        </div>
+        <div class="reveal">
+          <a href="events.html" class="view-all-link">
+            All Events <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="events-preview-grid">
+        <!-- Featured event rendered by main.js → renderEventsPreview() -->
+        <div id="event-featured-wrap">
+          <!-- Populated by JS -->
+        </div>
+        <!-- Side mini events rendered by main.js → renderEventsPreview() -->
+        <div id="event-side-list" class="event-side-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       NEWS & ANNOUNCEMENTS PREVIEW
+  ══════════════════════════════════════════════════════ -->
+  <section class="news-preview" aria-labelledby="news-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-header-left reveal">
+          <div class="overline">Latest Updates</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="news-heading">
+            News &amp; Announcements
+          </h2>
+          <p class="section-subtitle mt-2">
+            Stay informed — updates and announcements from the BBF secretariat
+            and chapters.
+          </p>
+        </div>
+        <div class="reveal">
+          <a href="news.html" class="view-all-link">
+            All News <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- News grid rendered by main.js → renderNewsPreview() from BBF_NEWS in data.js -->
+      <div id="news-preview-grid" class="news-grid" role="list" aria-label="Latest BBF news">
+        <!-- Populated by JS -->
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       GALLERY TEASER
+  ══════════════════════════════════════════════════════ -->
+  <section class="gallery-teaser" aria-labelledby="gallery-heading">
+    <div class="container">
+
+      <div class="section-header" style="align-items:center;">
+        <div class="section-header-left reveal">
+          <div class="overline-white">Moments &amp; Memories</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title-light mt-3" id="gallery-heading">
+            BBF in Pictures
+          </h2>
+          <p class="section-subtitle-light mt-2">
+            A glimpse into our fellowship gatherings, service activities, social events,
+            and Brigade moments.
+          </p>
+        </div>
+        <div class="reveal">
+          <a href="gallery.html" class="view-all-link-light">
+            View Full Gallery <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Gallery mosaic rendered by main.js → renderGalleryTeaser() from BBF_GALLERY in data.js -->
+      <div id="gallery-mosaic" class="gallery-mosaic" role="list" aria-label="BBF photo gallery preview">
+        <!-- Populated by JS -->
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       CLOSING CTA
+  ══════════════════════════════════════════════════════ -->
+  <section class="cta-section" aria-labelledby="cta-heading">
+    <div class="cta-top-line" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-1" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-2" aria-hidden="true"></div>
+
+    <div class="cta-content">
+
+      <div class="overline-white reveal">Your Fellowship Home Awaits</div>
+      <div class="gold-divider-center reveal" style="margin-top:0.5rem;"></div>
+
+      <h2 class="cta-title reveal mt-3" id="cta-heading">
+        You Were a Brigade Member.<br /><span class="gold-text">You Still Are.</span>
+      </h2>
+
+      <p class="cta-desc reveal">
+        If you are a Boys' Brigade member — active or former — BBF is your fellowship home.
+        Connect with brothers who share your values, your history, and your Brigade identity.
+        Stand together. Support one another. Serve faithfully.
+      </p>
+
+      <div class="cta-btn-group reveal">
+        <a href="membership.html" class="btn-bbf-primary">
+          <i class="fas fa-user-plus"></i> Join BBF Today
+        </a>
+        <a href="contact.html" class="btn-bbf-outline-white">
+          <i class="fas fa-envelope"></i> Contact Us
+        </a>
+      </div>
+
+      <p class="cta-assurance reveal">
+        <i class="fas fa-cross"></i> Christian fellowship
+        &nbsp;·&nbsp;
+        <i class="fas fa-shield-halved"></i> Boys' Brigade members
+        &nbsp;·&nbsp;
+        <i class="fas fa-handshake"></i> Genuine brotherhood
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════ -->
+  <footer class="bbf-footer" role="contentinfo" aria-label="Site footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <!-- Brand Column -->
+        <div class="footer-brand-col">
+          <a href="index.html" class="bbf-logo-wrap" aria-label="BBF Home">
+            <div class="bbf-logo-emblem"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+            <div class="bbf-logo-text">
+              <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+              <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+            </div>
+          </a>
+          <p class="footer-brand-desc">
+            A fellowship platform for Boys' Brigade members — united by Faith, Fellowship,
+            Service, and Friendship. From the Brigade, we build Brotherhood; through
+            Fellowship, we grow together.
+          </p>
+          <div class="footer-social-links" role="list" aria-label="BBF social media">
+            <a href="#" class="footer-social-link" aria-label="Facebook" role="listitem"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Twitter / X" role="listitem"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Instagram" role="listitem"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-social-link" aria-label="YouTube" role="listitem"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="footer-social-link" aria-label="WhatsApp" role="listitem"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="footer-col-title">Quick Links</h3>
+          <nav class="footer-links" aria-label="Footer quick links">
+            <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+            <a href="about.html"><i class="fas fa-chevron-right"></i> About BBF</a>
+            <a href="leadership.html"><i class="fas fa-chevron-right"></i> Leadership</a>
+            <a href="chapters.html"><i class="fas fa-chevron-right"></i> Chapters</a>
+            <a href="membership.html"><i class="fas fa-chevron-right"></i> Membership</a>
+            <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a>
+          </nav>
+        </div>
+
+        <!-- Fellowship Links -->
+        <div>
+          <h3 class="footer-col-title">Fellowship</h3>
+          <nav class="footer-links" aria-label="Footer fellowship links">
+            <a href="events.html"><i class="fas fa-chevron-right"></i> Events</a>
+            <a href="news.html"><i class="fas fa-chevron-right"></i> News &amp; Announcements</a>
+            <a href="activities.html"><i class="fas fa-chevron-right"></i> Activities &amp; Projects</a>
+            <a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a>
+            <a href="resources.html"><i class="fas fa-chevron-right"></i> Resources</a>
+            <a href="login.html"><i class="fas fa-chevron-right"></i> Member Login</a>
+          </nav>
+        </div>
+
+        <!-- Contact + Newsletter -->
+        <div>
+          <h3 class="footer-col-title">Get in Touch</h3>
+
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="footer-contact-text">bbfellowship26@gmail.com</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-globe"></i></div>
+            <div class="footer-contact-text">www.bbfellowship.org</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-phone"></i></div>
+            <div class="footer-contact-text">09066681922</div>
+          </div>
+
+          <!-- Newsletter -->
+          <div style="margin-top:1.5rem;">
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:0.75rem;line-height:1.5;">
+              Get BBF updates delivered to your inbox.
+            </p>
+            <!-- TODO [BACKEND]: Wire submit to POST /api/newsletter/subscribe -->
+            <form id="newsletter-form" novalidate aria-label="Newsletter signup">
+              <div class="footer-newsletter-form">
+                <input
+                  type="email"
+                  id="newsletter-email"
+                  class="footer-newsletter-input"
+                  placeholder="Your email address"
+                  aria-label="Email address for newsletter"
+                  autocomplete="email"
+                  required
+                />
+                <button type="submit" class="footer-newsletter-btn" aria-label="Subscribe to newsletter">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </form>
+            <span id="newsletter-msg" role="alert" aria-live="polite"></span>
+          </div>
+        </div>
+
+      </div><!-- /.footer-grid -->
+
+      <!-- Footer bottom bar -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <p class="footer-copyright">
+            &copy; <span id="footer-year">2026</span> Brigade Brotherhood Fellowship.
+            All rights reserved.
+          </p>
+          <nav class="footer-legal-links" aria-label="Legal links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Cookie Policy</a>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top"
+    aria-label="Back to top"
+    title="Back to top"
+    style="
+      position:fixed;bottom:2rem;right:2rem;
+      width:46px;height:46px;
+      background:var(--gradient-gold);
+      border:none;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      color:var(--bbf-navy);font-size:1rem;
+      box-shadow:var(--shadow-gold);
+      cursor:pointer;z-index:900;
+      opacity:0;pointer-events:none;
+      transform:translateY(10px);
+      transition:all var(--transition-base);">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SCRIPTS — load order matters
+       1. data.js  — global data (must come first)
+       2. Bootstrap bundle
+       3. main.js  — consumes data + Bootstrap
+  ══════════════════════════════════════════════════════ -->
+  <script src="assets/js/data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>

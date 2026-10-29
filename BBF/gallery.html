@@ -1,0 +1,1146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BBF Gallery — Photos from Brigade Brotherhood Fellowship gatherings, community service activities, social events, and fellowship moments." />
+  <meta name="keywords" content="BBF Gallery, Brigade Brotherhood Fellowship photos, Boys Brigade Fellowship pictures" />
+  <meta name="author" content="Brigade Brotherhood Fellowship" />
+
+  <title>Gallery — Brigade Brotherhood Fellowship</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════
+       GALLERY PAGE — scoped styles
+    ══════════════════════════════════════════════════════ */
+
+    /* ── Category filter bar ── */
+    .gallery-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    .gal-filter-btn {
+      padding: 0.5rem 1.25rem;
+      background: var(--bbf-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-accent);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bbf-text-muted);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .gal-filter-btn:hover { border-color: var(--bbf-navy); color: var(--bbf-navy); }
+    .gal-filter-btn.active {
+      background: var(--bbf-navy);
+      color: var(--bbf-white);
+      border-color: var(--bbf-navy);
+      box-shadow: var(--shadow-sm);
+    }
+    .gal-filter-btn .gal-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      height: 20px;
+      background: rgba(255,255,255,0.15);
+      border-radius: var(--radius-pill);
+      font-size: 0.6rem;
+      padding: 0 0.35rem;
+      transition: all var(--transition-fast);
+    }
+    .gal-filter-btn:not(.active) .gal-count {
+      background: var(--bbf-light-grey);
+      color: var(--bbf-text-muted);
+    }
+
+    /* ── Results info bar ── */
+    .gallery-info-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding: 0 0.25rem;
+    }
+    .gallery-count-text {
+      font-size: var(--fs-xs);
+      font-family: var(--font-accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bbf-text-light);
+    }
+    .gallery-view-toggle {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .view-btn {
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--bbf-light-grey);
+      background: var(--bbf-white);
+      color: var(--bbf-text-muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all var(--transition-fast);
+    }
+    .view-btn.active, .view-btn:hover {
+      background: var(--bbf-navy);
+      color: var(--bbf-white);
+      border-color: var(--bbf-navy);
+    }
+
+    /* ── Masonry grid ── */
+    .gallery-masonry {
+      columns: 4;
+      column-gap: 1rem;
+    }
+    .gallery-masonry.cols-3 { columns: 3; }
+    .gallery-masonry.cols-2 { columns: 2; }
+
+    /* ── Gallery item ── */
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--bbf-navy-mid);
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+    .gallery-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      z-index: 2;
+    }
+
+    /* The actual image */
+    .gallery-item-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 120px;
+      object-fit: cover;
+      transition: transform var(--transition-slow), opacity var(--transition-base);
+      opacity: 0.85;
+    }
+    .gallery-item:hover .gallery-item-img {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+
+    /* Placeholder tile (when no real image) */
+    .gallery-placeholder-tile {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, var(--bbf-navy) 0%, var(--bbf-navy-light) 100%);
+      color: rgba(255,255,255,0.3);
+      padding: 2.5rem 1rem;
+      min-height: 160px;
+      transition: background var(--transition-base);
+    }
+    .gallery-item:hover .gallery-placeholder-tile {
+      background: linear-gradient(135deg, var(--bbf-navy-mid) 0%, var(--bbf-navy-soft) 100%);
+    }
+    .gallery-placeholder-tile i { font-size: 2rem; }
+    .gallery-placeholder-tile span {
+      font-size: var(--fs-xs);
+      font-family: var(--font-accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* Category badge on tile */
+    .gallery-item-cat {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      padding: 0.2rem 0.65rem;
+      background: rgba(10,22,40,0.75);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: var(--radius-pill);
+      font-size: 0.6rem;
+      font-family: var(--font-accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bbf-gold-light);
+    }
+
+    /* Hover overlay */
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,13,26,0.88) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-base);
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+    .gallery-item-caption {
+      font-size: var(--fs-xs);
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+      line-height: 1.3;
+      flex: 1;
+    }
+    .gallery-zoom-icon {
+      width: 32px; height: 32px;
+      background: rgba(201,168,76,0.20);
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bbf-gold-light);
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      transition: all var(--transition-fast);
+    }
+    .gallery-item:hover .gallery-zoom-icon {
+      background: var(--bbf-gold);
+      color: var(--bbf-navy);
+      border-color: var(--bbf-gold);
+    }
+
+    /* Hidden state during filter */
+    .gallery-item.hidden {
+      display: none;
+    }
+
+    /* ── Empty state ── */
+    .gallery-empty {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: var(--bbf-off-white);
+      border-radius: var(--radius-lg);
+      border: 2px dashed var(--bbf-light-grey);
+    }
+    .gallery-empty i { font-size: 3rem; color: var(--bbf-mid-grey); display: block; margin-bottom: 1rem; }
+    .gallery-empty p { color: var(--bbf-text-muted); font-size: var(--fs-md); margin: 0; }
+
+    /* ══════════════════════════════════════════════════════
+       LIGHTBOX — full vanilla JS, no external library
+    ══════════════════════════════════════════════════════ */
+    .bbf-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(4, 9, 18, 0.96);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      padding: 1rem;
+    }
+    .bbf-lightbox.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Close button */
+    .lightbox-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bbf-white);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      z-index: 10;
+    }
+    .lightbox-close:hover {
+      background: var(--bbf-red);
+      border-color: var(--bbf-red);
+    }
+
+    /* Navigation arrows */
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bbf-white);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      z-index: 10;
+      user-select: none;
+    }
+    .lightbox-nav:hover {
+      background: rgba(201,168,76,0.2);
+      border-color: rgba(201,168,76,0.4);
+      color: var(--bbf-gold-light);
+    }
+    .lightbox-nav.prev { left: 1.25rem; }
+    .lightbox-nav.next { right: 1.25rem; }
+    .lightbox-nav:disabled { opacity: 0.3; pointer-events: none; }
+
+    /* Image container */
+    .lightbox-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: min(900px, 90vw);
+      width: 100%;
+      position: relative;
+    }
+    .lightbox-img-wrap {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bbf-navy-mid);
+      position: relative;
+    }
+    .lightbox-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 72vh;
+      object-fit: contain;
+    }
+    /* Placeholder in lightbox when no real image */
+    .lightbox-placeholder {
+      width: 100%;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: linear-gradient(135deg, var(--bbf-navy) 0%, var(--bbf-navy-light) 100%);
+      border-radius: var(--radius-lg);
+    }
+    .lightbox-placeholder i { font-size: 4rem; color: rgba(201,168,76,0.25); }
+    .lightbox-placeholder span { font-size: var(--fs-sm); color: rgba(255,255,255,0.4); font-family: var(--font-accent); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* Caption bar */
+    .lightbox-caption {
+      margin-top: 1.25rem;
+      text-align: center;
+      width: 100%;
+    }
+    .lightbox-caption-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--bbf-white);
+      margin-bottom: 0.4rem;
+    }
+    .lightbox-caption-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .lightbox-caption-cat {
+      font-family: var(--font-accent);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bbf-gold-light);
+      background: rgba(201,168,76,0.10);
+      border: 1px solid rgba(201,168,76,0.22);
+      border-radius: var(--radius-pill);
+      padding: 0.2rem 0.7rem;
+    }
+    .lightbox-caption-year {
+      font-size: var(--fs-xs);
+      color: rgba(255,255,255,0.45);
+      font-family: var(--font-accent);
+      letter-spacing: 0.06em;
+    }
+
+    /* Counter indicator */
+    .lightbox-counter {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: var(--fs-xs);
+      font-family: var(--font-accent);
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.45);
+      background: rgba(10,22,40,0.6);
+      padding: 0.3rem 0.875rem;
+      border-radius: var(--radius-pill);
+      backdrop-filter: blur(6px);
+    }
+
+    /* Upload placeholder section */
+    .upload-placeholder {
+      background: var(--bbf-off-white);
+      border: 2px dashed var(--bbf-light-grey);
+      border-radius: var(--radius-xl);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .upload-icon-wrap {
+      width: 72px; height: 72px;
+      background: var(--bbf-navy);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.75rem;
+      color: var(--bbf-gold);
+      margin: 0 auto 1.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) { .gallery-masonry { columns: 3; } .gallery-masonry.cols-3 { columns: 3; } }
+    @media (max-width: 768px)  {
+      .gallery-masonry, .gallery-masonry.cols-3, .gallery-masonry.cols-2 { columns: 2; }
+      .lightbox-nav.prev { left: 0.5rem; }
+      .lightbox-nav.next { right: 0.5rem; }
+      .lightbox-content { max-width: 95vw; }
+    }
+    @media (max-width: 480px)  {
+      .gallery-masonry, .gallery-masonry.cols-3, .gallery-masonry.cols-2 { columns: 2; }
+      .gallery-filter-bar { justify-content: flex-start; }
+      .lightbox-placeholder { min-height: 260px; }
+    }
+    @media (max-width: 360px)  { .gallery-masonry { columns: 1; } }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="bbf-preloader" style="position:fixed;inset:0;background:var(--bbf-navy);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:1rem;">
+    <div style="width:56px;height:56px;background:var(--gradient-gold);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:800;color:var(--bbf-navy);animation:preloaderPulse 1.2s ease-in-out infinite;">BBF</div>
+    <div style="font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.6);">Loading…</div>
+  </div>
+  <style>@keyframes preloaderPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:0.8}}</style>
+
+  <!-- ══════════════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════════════ -->
+  <nav id="bbf-navbar" class="nav-transparent" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="bbf-logo-wrap" aria-label="BBF Home">
+        <div class="bbf-logo-emblem" aria-hidden="true"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+        <li><a href="chapters.html">Chapters</a></li>
+        <li class="nav-dropdown">
+          <a href="#" aria-haspopup="true">Programs <i class="fas fa-chevron-down" style="font-size:0.6rem;margin-left:2px;"></i></a>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="events.html" role="menuitem"><i class="fas fa-calendar-alt" style="width:16px;color:var(--bbf-gold);"></i> Events</a>
+            <a href="activities.html" role="menuitem"><i class="fas fa-hands-helping" style="width:16px;color:var(--bbf-gold);"></i> Activities</a>
+            <a href="gallery.html" role="menuitem" class="active"><i class="fas fa-images" style="width:16px;color:var(--bbf-gold);"></i> Gallery</a>
+          </div>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="membership.html" class="btn-bbf-primary btn-sm-bbf btn-bbf-nav-cta">
+        <i class="fas fa-user-plus"></i> Join BBF
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="bbf-offcanvas">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- OFFCANVAS -->
+  <div id="offcanvas-overlay" class="offcanvas-overlay" aria-hidden="true"></div>
+  <aside id="bbf-offcanvas" class="bbf-offcanvas" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <div class="offcanvas-header">
+      <a href="index.html" class="bbf-logo-wrap">
+        <div class="bbf-logo-emblem" style="width:38px;height:38px;"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name" style="font-size:0.82rem;">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <button id="offcanvas-close" class="offcanvas-close" aria-label="Close navigation menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="offcanvas-nav" role="list">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About BBF</a></li>
+        <li><a href="leadership.html"><i class="fas fa-crown"></i> Leadership</a></li>
+        <li><a href="chapters.html"><i class="fas fa-map-location-dot"></i> Chapters</a></li>
+        <li><a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+        <li><a href="activities.html"><i class="fas fa-hands-helping"></i> Activities &amp; Projects</a></li>
+        <li><a href="news.html"><i class="fas fa-newspaper"></i> News &amp; Announcements</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="resources.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        <li style="margin-top:0.5rem;border-top:1px solid rgba(201,168,76,0.12);padding-top:0.75rem;">
+          <a href="login.html"><i class="fas fa-sign-in-alt"></i> Member Login</a>
+        </li>
+      </ul>
+    </div>
+    <div class="offcanvas-footer">
+      <a href="membership.html" class="btn-bbf-primary" style="width:100%;justify-content:center;">
+        <i class="fas fa-user-plus"></i> Join BBF Today
+      </a>
+    </div>
+  </aside>
+
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE HEADER
+  ══════════════════════════════════════════════════ -->
+  <header class="page-header" aria-label="Gallery page header">
+    <div class="page-header-bg" aria-hidden="true"></div>
+    <div class="page-header-decor" aria-hidden="true"></div>
+    <div class="container page-header-content">
+      <nav class="page-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep" aria-hidden="true"><i class="fas fa-chevron-right" style="font-size:0.55rem;"></i></span>
+        <span class="current" aria-current="page">Gallery</span>
+      </nav>
+      <h1 class="page-header-title reveal">BBF Gallery</h1>
+      <p class="page-header-subtitle reveal">
+        Moments and memories from BBF fellowship gatherings, community service,
+        social events, and Brigade activities.
+      </p>
+    </div>
+  </header>
+
+
+  <!-- ══════════════════════════════════════════════════
+       PLACEHOLDER NOTICE (shown until real photos added)
+  ══════════════════════════════════════════════════ -->
+  <div id="gallery-placeholder-notice" class="section-py-sm" style="background:var(--bbf-navy-mid);">
+    <div class="container">
+      <div class="d-flex align-items-start gap-3 reveal"
+           style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);
+                  border-radius:var(--radius-md);padding:1.25rem 1.5rem;">
+        <i class="fas fa-images" style="color:var(--bbf-gold);font-size:1.25rem;margin-top:2px;flex-shrink:0;"></i>
+        <div>
+          <div style="font-family:var(--font-accent);font-size:var(--fs-sm);font-weight:700;
+            letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-gold-light);margin-bottom:0.35rem;">
+            Photos Coming Soon
+          </div>
+          <p style="font-size:var(--fs-sm);color:rgba(255,255,255,0.6);line-height:1.65;margin:0;">
+            Real photos will be added as BBF activities take place. The gallery below shows
+            placeholder tiles representing each category.
+            <!-- TODO [BACKEND]: Replace BBF_GALLERY image paths with real uploaded photo URLs
+                 from GET /api/gallery. Tiles below auto-update once real images are available. -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       GALLERY SECTION
+       TODO [BACKEND]: Replace BBF_GALLERY with GET /api/gallery
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-off-white);" aria-labelledby="gallery-heading">
+    <div class="container">
+
+      <!-- Section header -->
+      <div class="text-center reveal" style="max-width:500px;margin:0 auto 3rem;">
+        <div class="overline">Moments &amp; Memories</div>
+        <div class="gold-divider-center" style="margin-top:0.5rem;"></div>
+        <h2 class="section-title mt-3" id="gallery-heading">BBF in Pictures</h2>
+        <p class="section-subtitle mt-2" style="margin:0 auto;">
+          Browse photos by category. Click any image to open the full-size lightbox.
+        </p>
+      </div>
+
+      <!-- Category filter bar -->
+      <div class="gallery-filter-bar reveal" role="group" aria-label="Filter gallery by category" id="gallery-filter-bar">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Info bar: count + view toggle -->
+      <div class="gallery-info-bar reveal">
+        <span class="gallery-count-text" id="gallery-count-text" aria-live="polite"></span>
+        <div class="gallery-view-toggle" role="group" aria-label="Gallery layout">
+          <button class="view-btn active" id="view-4" title="4 columns" aria-label="4 column view">
+            <i class="fas fa-grip"></i>
+          </button>
+          <button class="view-btn" id="view-3" title="3 columns" aria-label="3 column view">
+            <i class="fas fa-table-cells-large"></i>
+          </button>
+          <button class="view-btn" id="view-2" title="2 columns" aria-label="2 column view">
+            <i class="fas fa-table-columns"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Masonry gallery grid -->
+      <div class="gallery-masonry" id="gallery-grid" role="list" aria-label="BBF photo gallery">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Empty state (shown when filter has no matches) -->
+      <div id="gallery-empty" class="gallery-empty" style="display:none;">
+        <i class="fas fa-images"></i>
+        <p id="gallery-empty-msg">No photos in this category yet.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       SUBMIT A PHOTO
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-white);" aria-labelledby="submit-photo-heading">
+    <div class="container">
+      <div class="row align-items-center g-5">
+
+        <div class="col-lg-5 reveal-left">
+          <div class="overline">Share Your Moments</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="submit-photo-heading">
+            Have Photos from a BBF Event?
+          </h2>
+          <p style="color:var(--bbf-text-muted);line-height:1.85;margin-top:1rem;">
+            If you have photos from a BBF fellowship gathering, community service activity,
+            social event, or any BBF moment, share them with the fellowship.
+          </p>
+          <p style="color:var(--bbf-text-muted);line-height:1.85;margin-top:0.75rem;">
+            Send your photos to the BBF Publicity/Media Officer for review and publication.
+            Please ensure all individuals in the photos have given consent for their images
+            to be published in line with the BBF Constitution, Article 11.9.
+          </p>
+          <div class="mt-4">
+            <a href="contact.html" class="btn-bbf-primary">
+              <i class="fas fa-paper-plane"></i> Submit Photos
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-7 reveal-right">
+          <div class="upload-placeholder">
+            <div class="upload-icon-wrap">
+              <i class="fas fa-camera"></i>
+            </div>
+            <h3 style="font-family:var(--font-heading);font-size:1.3rem;font-weight:700;
+              color:var(--bbf-navy);margin-bottom:0.75rem;">Photo Submission Guidelines</h3>
+            <div class="row g-3 text-start mt-2" style="max-width:480px;margin:0 auto;">
+              <div class="col-sm-6">
+                <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                  <i class="fas fa-check-circle" style="color:var(--bbf-gold);margin-top:2px;flex-shrink:0;"></i>
+                  BBF-related events and activities only
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                  <i class="fas fa-check-circle" style="color:var(--bbf-gold);margin-top:2px;flex-shrink:0;"></i>
+                  Consent obtained from individuals pictured
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                  <i class="fas fa-check-circle" style="color:var(--bbf-gold);margin-top:2px;flex-shrink:0;"></i>
+                  High quality (minimum 1MB recommended)
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                  <i class="fas fa-check-circle" style="color:var(--bbf-gold);margin-top:2px;flex-shrink:0;"></i>
+                  Include caption: event name &amp; date
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                  <i class="fas fa-check-circle" style="color:var(--bbf-gold);margin-top:2px;flex-shrink:0;"></i>
+                  JPG, PNG, or WEBP format
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                  <i class="fas fa-check-circle" style="color:var(--bbf-gold);margin-top:2px;flex-shrink:0;"></i>
+                  Reviewed by Media Officer before publish
+                </div>
+              </div>
+            </div>
+            <p style="font-size:var(--fs-xs);color:var(--bbf-text-light);margin-top:1.5rem;line-height:1.6;">
+              <i class="fas fa-info-circle" style="color:var(--bbf-gold);margin-right:0.3rem;"></i>
+              Only persons authorised by the Fellowship may publish official content.
+              — <em>BBF Constitution, Art. 11.9 &amp; 18.3</em>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       CTA
+  ══════════════════════════════════════════════════ -->
+  <section class="cta-section" aria-labelledby="gallery-cta-heading">
+    <div class="cta-top-line" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-1" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-2" aria-hidden="true"></div>
+    <div class="cta-content">
+      <div class="overline-white reveal">Be in the Picture</div>
+      <div class="gold-divider-center reveal" style="margin-top:0.5rem;"></div>
+      <h2 class="cta-title reveal mt-3" id="gallery-cta-heading">
+        Your Story Belongs<br /><span class="gold-text">In This Gallery.</span>
+      </h2>
+      <p class="cta-desc reveal">
+        Join BBF, attend events, and be part of the fellowship moments that
+        fill this gallery. Every photo here is a memory made together.
+      </p>
+      <div class="cta-btn-group reveal">
+        <a href="membership.html" class="btn-bbf-primary">
+          <i class="fas fa-user-plus"></i> Join BBF Today
+        </a>
+        <a href="events.html" class="btn-bbf-outline-white">
+          <i class="fas fa-calendar-alt"></i> View Events
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="bbf-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="bbf-logo-wrap">
+            <div class="bbf-logo-emblem"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+            <div class="bbf-logo-text">
+              <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+              <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+            </div>
+          </a>
+          <p class="footer-brand-desc">
+            A fellowship platform for Boys' Brigade members — united by Faith, Fellowship,
+            Service, and Friendship. From the Brigade, we build Brotherhood; through
+            Fellowship, we grow together.
+          </p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="footer-social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Quick Links</h3>
+          <nav class="footer-links">
+            <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+            <a href="about.html"><i class="fas fa-chevron-right"></i> About BBF</a>
+            <a href="leadership.html"><i class="fas fa-chevron-right"></i> Leadership</a>
+            <a href="chapters.html"><i class="fas fa-chevron-right"></i> Chapters</a>
+            <a href="membership.html"><i class="fas fa-chevron-right"></i> Membership</a>
+            <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Fellowship</h3>
+          <nav class="footer-links">
+            <a href="events.html"><i class="fas fa-chevron-right"></i> Events</a>
+            <a href="news.html"><i class="fas fa-chevron-right"></i> News &amp; Announcements</a>
+            <a href="activities.html"><i class="fas fa-chevron-right"></i> Activities &amp; Projects</a>
+            <a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a>
+            <a href="resources.html"><i class="fas fa-chevron-right"></i> Resources</a>
+            <a href="login.html"><i class="fas fa-chevron-right"></i> Member Login</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Get in Touch</h3>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="footer-contact-text">bbfellowship26@gmail.com</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-globe"></i></div>
+            <div class="footer-contact-text">www.bbfellowship.org</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-phone"></i></div>
+            <div class="footer-contact-text">09066681922</div>
+          </div>
+          <div style="margin-top:1.5rem;">
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:0.75rem;">Get BBF updates in your inbox.</p>
+            <form id="newsletter-form" novalidate>
+              <div class="footer-newsletter-form">
+                <input type="email" id="newsletter-email" class="footer-newsletter-input" placeholder="Your email address" autocomplete="email" required />
+                <button type="submit" class="footer-newsletter-btn" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </form>
+            <span id="newsletter-msg" role="alert" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <p class="footer-copyright">&copy; <span id="footer-year">2026</span> Brigade Brotherhood Fellowship. All rights reserved.</p>
+          <nav class="footer-legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Cookie Policy</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:46px;height:46px;background:var(--gradient-gold);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--bbf-navy);font-size:1rem;box-shadow:var(--shadow-gold);cursor:pointer;z-index:900;opacity:0;pointer-events:none;transform:translateY(10px);transition:all var(--transition-base);">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+
+  <!-- ══════════════════════════════════════════════════
+       LIGHTBOX DOM (injected once, reused for all photos)
+  ══════════════════════════════════════════════════ -->
+  <div id="bbf-lightbox" class="bbf-lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">
+      <i class="fas fa-times"></i>
+    </button>
+    <button class="lightbox-nav prev" id="lightbox-prev" aria-label="Previous photo">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="lightbox-nav next" id="lightbox-next" aria-label="Next photo">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    <div class="lightbox-content" id="lightbox-content">
+      <!-- Populated dynamically -->
+    </div>
+    <div class="lightbox-counter" id="lightbox-counter" aria-live="polite"></div>
+  </div>
+
+
+  <!-- SCRIPTS -->
+  <script src="assets/js/data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    /* ══════════════════════════════════════════════════════
+       GALLERY PAGE — inline JS
+       Features:
+         - Category filter pills (auto-built from BBF_GALLERY)
+         - Masonry grid with placeholder tiles
+         - 3 column-count views (2/3/4)
+         - Full vanilla JS lightbox (prev/next/keyboard/close)
+         - Graceful image error → placeholder fallback
+       TODO [BACKEND]: Replace BBF_GALLERY with GET /api/gallery
+    ══════════════════════════════════════════════════════ */
+
+    /* ── Category → icon map ── */
+    const CAT_ICONS = {
+      'Fellowship':       'fa-people-roof',
+      'Community Service':'fa-hand-holding-heart',
+      'Training':         'fa-person-chalkboard',
+      'Social':           'fa-users',
+      'Parade':           'fa-flag',
+      'Outreach':         'fa-bullhorn',
+    };
+    function catIcon(cat) { return CAT_ICONS[cat] || 'fa-image'; }
+
+    /* ── State ── */
+    let activeCategory = 'all';
+    let filteredItems  = [];   // items visible after current filter
+    let currentIndex   = 0;   // lightbox position in filteredItems
+
+    /* ── Build category filter pills ── */
+    function buildFilters() {
+      const bar = document.getElementById('gallery-filter-bar');
+      if (!bar) return;
+      // TODO [BACKEND]: Replace with GET /api/gallery/categories
+      const cats = ['all', ...new Set(BBF_GALLERY.map(i => i.category))].sort((a,b) => a === 'all' ? -1 : b === 'all' ? 1 : a.localeCompare(b));
+      bar.innerHTML = cats.map(cat => {
+        const count = cat === 'all' ? BBF_GALLERY.length : BBF_GALLERY.filter(i => i.category === cat).length;
+        const label = cat === 'all' ? 'All Photos' : cat;
+        return `
+          <button class="gal-filter-btn${cat === 'all' ? ' active' : ''}"
+                  data-cat="${cat}"
+                  aria-pressed="${cat === 'all'}"
+                  aria-label="Filter: ${label} (${count})">
+            ${cat !== 'all' ? `<i class="fas ${catIcon(cat)}" style="font-size:0.65rem;"></i>` : ''}
+            ${label}
+            <span class="gal-count">${count}</span>
+          </button>
+        `;
+      }).join('');
+
+      bar.querySelectorAll('.gal-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          bar.querySelectorAll('.gal-filter-btn').forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
+          activeCategory = btn.dataset.cat;
+          renderGallery();
+        });
+      });
+    }
+
+    /* ── Check whether an image path is a real photo or placeholder ── */
+    function isPlaceholderPath(path) {
+      return !path || path.includes('placeholder-gallery') || path.includes('placeholder');
+    }
+
+    /* ── Build a single gallery tile ── */
+    function buildTile(item, indexInFiltered) {
+      const isPlaceholder = isPlaceholderPath(item.image);
+      const div = document.createElement('div');
+      div.className = 'gallery-item';
+      div.setAttribute('role', 'listitem');
+      div.setAttribute('tabindex', '0');
+      div.setAttribute('aria-label', `${item.title} — ${item.category}`);
+      div.dataset.index = indexInFiltered;
+
+      if (isPlaceholder) {
+        div.innerHTML = `
+          <div class="gallery-placeholder-tile">
+            <i class="fas ${catIcon(item.category)}"></i>
+            <span>${item.title}</span>
+          </div>
+          <div class="gallery-item-cat">${item.category}</div>
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-caption">${item.title}</div>
+            <div class="gallery-zoom-icon" aria-hidden="true"><i class="fas fa-expand"></i></div>
+          </div>
+        `;
+      } else {
+        div.innerHTML = `
+          <img
+            src="${item.image}"
+            alt="${item.title}"
+            class="gallery-item-img"
+            loading="lazy"
+            onerror="this.parentElement.querySelector('.gallery-placeholder-tile')?.style.display='flex';this.style.display='none';"
+          />
+          <div class="gallery-placeholder-tile" style="display:none;">
+            <i class="fas ${catIcon(item.category)}"></i>
+            <span>${item.title}</span>
+          </div>
+          <div class="gallery-item-cat">${item.category}</div>
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-caption">${item.title}</div>
+            <div class="gallery-zoom-icon" aria-hidden="true"><i class="fas fa-expand"></i></div>
+          </div>
+        `;
+      }
+
+      div.addEventListener('click',    () => openLightbox(indexInFiltered));
+      div.addEventListener('keydown',  e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(indexInFiltered); } });
+      return div;
+    }
+
+    /* ── Render the masonry grid ── */
+    function renderGallery() {
+      const grid     = document.getElementById('gallery-grid');
+      const emptyEl  = document.getElementById('gallery-empty');
+      const emptyMsg = document.getElementById('gallery-empty-msg');
+      const countEl  = document.getElementById('gallery-count-text');
+      if (!grid) return;
+
+      // TODO [BACKEND]: Replace with GET /api/gallery?category={activeCategory}
+      filteredItems = activeCategory === 'all'
+        ? [...BBF_GALLERY]
+        : BBF_GALLERY.filter(i => i.category === activeCategory);
+
+      if (countEl) {
+        countEl.textContent = `Showing ${filteredItems.length} of ${BBF_GALLERY.length} photo${BBF_GALLERY.length !== 1 ? 's' : ''}`;
+      }
+
+      if (filteredItems.length === 0) {
+        grid.innerHTML = '';
+        if (emptyEl) { emptyEl.style.display = 'block'; }
+        if (emptyMsg) emptyMsg.textContent = `No photos in the "${activeCategory}" category yet.`;
+        return;
+      }
+
+      if (emptyEl) emptyEl.style.display = 'none';
+      grid.innerHTML = '';
+      filteredItems.forEach((item, idx) => {
+        grid.appendChild(buildTile(item, idx));
+      });
+    }
+
+    /* ══════════════════════════════════════════════════
+       LIGHTBOX
+    ══════════════════════════════════════════════════ */
+    const lightbox     = document.getElementById('bbf-lightbox');
+    const lbContent    = document.getElementById('lightbox-content');
+    const lbCounter    = document.getElementById('lightbox-counter');
+    const lbClose      = document.getElementById('lightbox-close');
+    const lbPrev       = document.getElementById('lightbox-prev');
+    const lbNext       = document.getElementById('lightbox-next');
+
+    function openLightbox(index) {
+      currentIndex = index;
+      renderLightboxSlide();
+      lightbox?.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lbClose?.focus();
+    }
+
+    function closeLightbox() {
+      lightbox?.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function renderLightboxSlide() {
+      if (!lbContent || !filteredItems.length) return;
+      const item = filteredItems[currentIndex];
+      const isPlaceholder = isPlaceholderPath(item.image);
+
+      // Counter
+      if (lbCounter) lbCounter.textContent = `${currentIndex + 1} / ${filteredItems.length}`;
+
+      // Prev/next button states
+      if (lbPrev) lbPrev.disabled = currentIndex === 0;
+      if (lbNext) lbNext.disabled = currentIndex === filteredItems.length - 1;
+
+      // Slide content
+      lbContent.innerHTML = `
+        <div class="lightbox-img-wrap">
+          ${isPlaceholder
+            ? `<div class="lightbox-placeholder">
+                 <i class="fas ${catIcon(item.category)}"></i>
+                 <span>${item.title}</span>
+               </div>`
+            : `<img
+                 src="${item.image}"
+                 alt="${item.title}"
+                 class="lightbox-img"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+               />
+               <div class="lightbox-placeholder" style="display:none;">
+                 <i class="fas ${catIcon(item.category)}"></i>
+                 <span>${item.title}</span>
+               </div>`
+          }
+        </div>
+        <div class="lightbox-caption">
+          <div class="lightbox-caption-title">${item.title}</div>
+          <div class="lightbox-caption-meta">
+            <span class="lightbox-caption-cat">
+              <i class="fas ${catIcon(item.category)}" style="font-size:0.6rem;margin-right:0.3rem;"></i>
+              ${item.category}
+            </span>
+            <span class="lightbox-caption-year">${item.year}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function prevSlide() { if (currentIndex > 0) { currentIndex--; renderLightboxSlide(); } }
+    function nextSlide() { if (currentIndex < filteredItems.length - 1) { currentIndex++; renderLightboxSlide(); } }
+
+    // Event listeners
+    lbClose?.addEventListener('click', closeLightbox);
+    lbPrev?.addEventListener('click',  prevSlide);
+    lbNext?.addEventListener('click',  nextSlide);
+
+    // Close on overlay click (not on content)
+    lightbox?.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+      if (!lightbox?.classList.contains('open')) return;
+      if (e.key === 'Escape')     closeLightbox();
+      if (e.key === 'ArrowLeft')  prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    });
+
+    /* ── View toggle (2/3/4 columns) ── */
+    function initViewToggle() {
+      const grid = document.getElementById('gallery-grid');
+      document.getElementById('view-4')?.addEventListener('click', () => {
+        grid?.classList.remove('cols-3', 'cols-2');
+        setActiveViewBtn('view-4');
+      });
+      document.getElementById('view-3')?.addEventListener('click', () => {
+        grid?.classList.remove('cols-2');
+        grid?.classList.add('cols-3');
+        setActiveViewBtn('view-3');
+      });
+      document.getElementById('view-2')?.addEventListener('click', () => {
+        grid?.classList.remove('cols-3');
+        grid?.classList.add('cols-2');
+        setActiveViewBtn('view-2');
+      });
+    }
+    function setActiveViewBtn(id) {
+      ['view-4','view-3','view-2'].forEach(v => document.getElementById(v)?.classList.remove('active'));
+      document.getElementById(id)?.classList.add('active');
+    }
+
+    /* ── Init ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      buildFilters();
+      renderGallery();
+      initViewToggle();
+
+      // Scroll reveal
+      setTimeout(() => {
+        const els = document.querySelectorAll('.reveal:not(.revealed),.reveal-left:not(.revealed),.reveal-right:not(.revealed)');
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        els.forEach(el => obs.observe(el));
+      }, 80);
+    });
+  </script>
+
+</body>
+</html>

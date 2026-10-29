@@ -1,0 +1,949 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BBF Resources — Access the BBF Constitution, membership forms, code of conduct, and key fellowship documents for Brigade Brotherhood Fellowship members." />
+  <meta name="keywords" content="BBF Resources, Brigade Brotherhood Fellowship constitution, BBF documents, Boys Brigade Fellowship forms" />
+  <meta name="author" content="Brigade Brotherhood Fellowship" />
+
+  <title>Resources — Brigade Brotherhood Fellowship</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════
+       RESOURCES PAGE — scoped styles
+    ══════════════════════════════════════════════════════ */
+
+    /* ── Featured document card ── */
+    .doc-hero {
+      background: var(--gradient-navy-dark);
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: var(--radius-xl);
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      box-shadow: var(--shadow-xl);
+    }
+    .doc-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient-gold);
+    }
+    /* Decorative large icon bg */
+    .doc-hero::after {
+      content: '\f1c1';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 2rem; top: 50%;
+      transform: translateY(-50%);
+      font-size: 10rem;
+      color: rgba(201,168,76,0.04);
+      pointer-events: none;
+      user-select: none;
+    }
+    .doc-hero-icon {
+      width: 80px; height: 80px;
+      background: var(--gradient-gold);
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; color: var(--bbf-navy);
+      flex-shrink: 0;
+      box-shadow: var(--shadow-gold);
+    }
+    .doc-hero-body { flex: 1; }
+    .doc-hero-tag {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.3rem 0.875rem;
+      background: rgba(201,168,76,0.10);
+      border: 1px solid rgba(201,168,76,0.28);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-accent); font-size: 0.68rem;
+      font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--bbf-gold-light); margin-bottom: 0.875rem;
+    }
+    .doc-hero-title {
+      font-family: var(--font-heading); font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 800; color: var(--bbf-white);
+      line-height: 1.2; margin-bottom: 0.875rem;
+    }
+    .doc-hero-desc {
+      font-size: var(--fs-sm); color: rgba(255,255,255,0.6);
+      line-height: 1.7; max-width: 500px; margin-bottom: 1.5rem;
+    }
+    .doc-hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+    /* ── Document cards grid ── */
+    .doc-card {
+      background: var(--bbf-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-base);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .doc-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+      border-color: rgba(201,168,76,0.3);
+    }
+    .doc-card-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+    .doc-card-icon {
+      width: 48px; height: 48px;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+      transition: all var(--transition-base);
+    }
+    .doc-card:hover .doc-card-icon { transform: scale(1.05); }
+    .doc-card-type {
+      font-size: 0.6rem; font-family: var(--font-accent);
+      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--bbf-text-light); margin-bottom: 0.25rem;
+    }
+    .doc-card-title {
+      font-family: var(--font-heading); font-size: 1rem; font-weight: 700;
+      color: var(--bbf-navy); line-height: 1.3;
+    }
+    .doc-card-desc {
+      font-size: var(--fs-sm); color: var(--bbf-text-muted);
+      line-height: 1.65; flex: 1; margin-bottom: 1.25rem;
+    }
+    .doc-card-footer {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--bbf-light-grey);
+      margin-top: auto;
+    }
+    .doc-availability {
+      font-size: var(--fs-xs); font-family: var(--font-accent);
+      font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .doc-available { color: #2DA66A; }
+    .doc-coming-soon { color: var(--bbf-text-light); }
+
+    /* ── Constitution article index ── */
+    .constitution-index {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+    }
+    .art-index-item {
+      display: flex; align-items: flex-start; gap: 0.875rem;
+      padding: 0.875rem 1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.08);
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-base);
+      cursor: default;
+    }
+    .art-index-item:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(201,168,76,0.18);
+      transform: translateX(3px);
+    }
+    .art-num {
+      font-family: var(--font-accent); font-size: 0.65rem;
+      font-weight: 700; letter-spacing: 0.08em;
+      color: var(--bbf-gold); min-width: 28px;
+      padding-top: 1px;
+    }
+    .art-title {
+      font-size: var(--fs-sm); color: rgba(255,255,255,0.7);
+      line-height: 1.4;
+    }
+
+    /* ── Expandable article preview ── */
+    .article-accordion {
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .accordion-item-bbf {
+      border-bottom: 1px solid var(--bbf-light-grey);
+    }
+    .accordion-item-bbf:last-child { border-bottom: none; }
+    .accordion-btn-bbf {
+      width: 100%;
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.1rem 1.5rem;
+      background: var(--bbf-white);
+      border: none; cursor: pointer; text-align: left;
+      transition: background var(--transition-fast);
+    }
+    .accordion-btn-bbf:hover { background: var(--bbf-off-white); }
+    .accordion-btn-bbf.open { background: var(--bbf-off-white); }
+    .accordion-art-num {
+      width: 36px; height: 36px;
+      background: var(--bbf-navy); border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-accent); font-size: 0.72rem;
+      font-weight: 700; color: var(--bbf-gold);
+      flex-shrink: 0;
+    }
+    .accordion-art-title {
+      font-family: var(--font-accent); font-size: var(--fs-sm);
+      font-weight: 700; letter-spacing: 0.04em; color: var(--bbf-navy);
+      flex: 1;
+    }
+    .accordion-chevron {
+      color: var(--bbf-text-light); font-size: 0.75rem;
+      transition: transform var(--transition-base);
+      flex-shrink: 0;
+    }
+    .accordion-btn-bbf.open .accordion-chevron { transform: rotate(180deg); }
+    .accordion-body-bbf {
+      display: none;
+      padding: 0 1.5rem 1.25rem 4.5rem;
+      font-size: var(--fs-sm); color: var(--bbf-text-muted);
+      line-height: 1.7;
+    }
+    .accordion-body-bbf.open { display: block; }
+
+    /* ── Tip/info boxes ── */
+    .resource-tip {
+      display: flex; align-items: flex-start; gap: 0.875rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius-md);
+    }
+    .resource-tip-gold {
+      background: rgba(201,168,76,0.06);
+      border: 1px solid rgba(201,168,76,0.15);
+    }
+    .resource-tip-navy {
+      background: rgba(10,22,40,0.06);
+      border: 1px solid rgba(10,22,40,0.12);
+    }
+    .resource-tip i { font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+    .resource-tip p { font-size: var(--fs-sm); color: var(--bbf-text-muted); line-height: 1.65; margin: 0; }
+    .resource-tip strong { color: var(--bbf-navy); }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .doc-hero { flex-direction: column; gap: 1.5rem; padding: 2.5rem; }
+      .constitution-index { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .doc-hero { padding: 2rem; }
+      .doc-hero::after { display: none; }
+      .constitution-index { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 576px) {
+      .doc-hero-icon { width: 60px; height: 60px; font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="bbf-preloader" style="position:fixed;inset:0;background:var(--bbf-navy);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:1rem;">
+    <div style="width:56px;height:56px;background:var(--gradient-gold);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:800;color:var(--bbf-navy);animation:preloaderPulse 1.2s ease-in-out infinite;">BBF</div>
+    <div style="font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.6);">Loading…</div>
+  </div>
+  <style>@keyframes preloaderPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:0.8}}</style>
+
+  <!-- NAVBAR -->
+  <nav id="bbf-navbar" class="nav-transparent" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="bbf-logo-wrap" aria-label="BBF Home">
+        <div class="bbf-logo-emblem" aria-hidden="true"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+        <li><a href="chapters.html">Chapters</a></li>
+        <li class="nav-dropdown">
+          <a href="#" aria-haspopup="true">Programs <i class="fas fa-chevron-down" style="font-size:0.6rem;margin-left:2px;"></i></a>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="events.html" role="menuitem"><i class="fas fa-calendar-alt" style="width:16px;color:var(--bbf-gold);"></i> Events</a>
+            <a href="activities.html" role="menuitem"><i class="fas fa-hands-helping" style="width:16px;color:var(--bbf-gold);"></i> Activities</a>
+            <a href="gallery.html" role="menuitem"><i class="fas fa-images" style="width:16px;color:var(--bbf-gold);"></i> Gallery</a>
+          </div>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="resources.html" class="active">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="membership.html" class="btn-bbf-primary btn-sm-bbf btn-bbf-nav-cta">
+        <i class="fas fa-user-plus"></i> Join BBF
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="bbf-offcanvas">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- OFFCANVAS -->
+  <div id="offcanvas-overlay" class="offcanvas-overlay" aria-hidden="true"></div>
+  <aside id="bbf-offcanvas" class="bbf-offcanvas" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <div class="offcanvas-header">
+      <a href="index.html" class="bbf-logo-wrap">
+        <div class="bbf-logo-emblem" style="width:38px;height:38px;"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name" style="font-size:0.82rem;">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <button id="offcanvas-close" class="offcanvas-close" aria-label="Close navigation menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="offcanvas-nav" role="list">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About BBF</a></li>
+        <li><a href="leadership.html"><i class="fas fa-crown"></i> Leadership</a></li>
+        <li><a href="chapters.html"><i class="fas fa-map-location-dot"></i> Chapters</a></li>
+        <li><a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+        <li><a href="activities.html"><i class="fas fa-hands-helping"></i> Activities &amp; Projects</a></li>
+        <li><a href="news.html"><i class="fas fa-newspaper"></i> News &amp; Announcements</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="resources.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        <li style="margin-top:0.5rem;border-top:1px solid rgba(201,168,76,0.12);padding-top:0.75rem;">
+          <a href="login.html"><i class="fas fa-sign-in-alt"></i> Member Login</a>
+        </li>
+      </ul>
+    </div>
+    <div class="offcanvas-footer">
+      <a href="membership.html" class="btn-bbf-primary" style="width:100%;justify-content:center;">
+        <i class="fas fa-user-plus"></i> Join BBF Today
+      </a>
+    </div>
+  </aside>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header" aria-label="Resources page header">
+    <div class="page-header-bg" aria-hidden="true"></div>
+    <div class="page-header-decor" aria-hidden="true"></div>
+    <div class="container page-header-content">
+      <nav class="page-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep" aria-hidden="true"><i class="fas fa-chevron-right" style="font-size:0.55rem;"></i></span>
+        <span class="current" aria-current="page">Resources</span>
+      </nav>
+      <h1 class="page-header-title reveal">Resources</h1>
+      <p class="page-header-subtitle reveal">
+        Key documents, forms, and reference materials for BBF members — starting
+        with the BBF Constitution, the governing framework of the Fellowship.
+      </p>
+    </div>
+  </header>
+
+
+  <!-- ══════════════════════════════════════════════════
+       01. FEATURED DOCUMENT — BBF CONSTITUTION
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py bg-off-white" aria-labelledby="constitution-doc-heading">
+    <div class="container">
+
+      <div class="text-center reveal" style="max-width:520px;margin:0 auto 3rem;">
+        <div class="overline">Primary Governing Document</div>
+        <div class="gold-divider-center" style="margin-top:0.5rem;"></div>
+        <h2 class="section-title mt-3" id="constitution-doc-heading">
+          The BBF Constitution
+        </h2>
+        <p class="section-subtitle mt-2" style="margin:0 auto;">
+          The Constitution is the supreme internal governing document of the
+          Brigade Brotherhood Fellowship. Every member is expected to know and
+          abide by its provisions.
+        </p>
+      </div>
+
+      <div class="doc-hero reveal">
+        <div class="doc-hero-icon" aria-hidden="true">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <div class="doc-hero-body">
+          <div class="doc-hero-tag">
+            <i class="fas fa-gavel" style="font-size:0.6rem;"></i>
+            Official Governing Document
+          </div>
+          <h3 class="doc-hero-title">
+            Constitution of the Brigade Brotherhood Fellowship (BBF)
+          </h3>
+          <p class="doc-hero-desc">
+            26 articles covering BBF's identity, purpose, Christian foundation, values,
+            membership, code of conduct, leadership structure, elections, meetings,
+            finance, discipline, communication, activities, service, amendments,
+            and dissolution. The definitive reference for all BBF members.
+          </p>
+          <div class="doc-hero-actions">
+            <!-- TODO [BACKEND]: Link to actual PDF once uploaded to server -->
+            <a href="contact.html" class="btn-bbf-primary">
+              <i class="fas fa-file-pdf"></i> Request Constitution PDF
+            </a>
+            <a href="#constitution-index" class="btn-bbf-outline-white">
+              <i class="fas fa-list-ol"></i> Browse Articles
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key facts strip -->
+      <div class="row g-3 mt-4 reveal">
+        <div class="col-sm-6 col-lg-3">
+          <div style="background:var(--bbf-white);border:1px solid var(--bbf-light-grey);border-radius:var(--radius-md);padding:1.25rem;text-align:center;box-shadow:var(--shadow-sm);">
+            <div style="font-family:var(--font-heading);font-size:2rem;font-weight:800;color:var(--bbf-gold);line-height:1;">26</div>
+            <div style="font-size:var(--fs-xs);font-family:var(--font-accent);letter-spacing:0.1em;text-transform:uppercase;color:var(--bbf-text-muted);margin-top:0.3rem;">Articles</div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div style="background:var(--bbf-white);border:1px solid var(--bbf-light-grey);border-radius:var(--radius-md);padding:1.25rem;text-align:center;box-shadow:var(--shadow-sm);">
+            <div style="font-family:var(--font-heading);font-size:2rem;font-weight:800;color:var(--bbf-gold);line-height:1;">4</div>
+            <div style="font-size:var(--fs-xs);font-family:var(--font-accent);letter-spacing:0.1em;text-transform:uppercase;color:var(--bbf-text-muted);margin-top:0.3rem;">Guiding Values</div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div style="background:var(--bbf-white);border:1px solid var(--bbf-light-grey);border-radius:var(--radius-md);padding:1.25rem;text-align:center;box-shadow:var(--shadow-sm);">
+            <div style="font-family:var(--font-heading);font-size:2rem;font-weight:800;color:var(--bbf-gold);line-height:1;">9</div>
+            <div style="font-size:var(--fs-xs);font-family:var(--font-accent);letter-spacing:0.1em;text-transform:uppercase;color:var(--bbf-text-muted);margin-top:0.3rem;">Executive Offices</div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div style="background:var(--bbf-white);border:1px solid var(--bbf-light-grey);border-radius:var(--radius-md);padding:1.25rem;text-align:center;box-shadow:var(--shadow-sm);">
+            <div style="font-family:var(--font-heading);font-size:2rem;font-weight:800;color:var(--bbf-gold);line-height:1;">⅔</div>
+            <div style="font-size:var(--fs-xs);font-family:var(--font-accent);letter-spacing:0.1em;text-transform:uppercase;color:var(--bbf-text-muted);margin-top:0.3rem;">To Amend</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       02. CONSTITUTION ARTICLE INDEX
+       Rendered from BBF_CONSTITUTION_ARTICLES in data.js
+  ══════════════════════════════════════════════════ -->
+  <section id="constitution-index" class="section-py" style="background:var(--bbf-navy);" aria-labelledby="art-index-heading">
+    <div class="container">
+
+      <div class="row align-items-start g-5">
+
+        <!-- Left: intro -->
+        <div class="col-lg-4 reveal-left" style="position:sticky;top:calc(var(--navbar-height) + 2rem);">
+          <div class="overline-white">Complete Index</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title-light mt-3" id="art-index-heading">
+            26 Articles at a Glance
+          </h2>
+          <p class="section-subtitle-light mt-2">
+            Every article of the BBF Constitution listed — the complete governance
+            framework of the fellowship.
+          </p>
+
+          <!-- Quick highlights -->
+          <div class="d-flex flex-column gap-2 mt-4">
+            <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;
+              background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.12);
+              border-radius:var(--radius-sm);">
+              <i class="fas fa-cross" style="color:var(--bbf-gold);width:16px;"></i>
+              <span style="font-size:var(--fs-sm);color:rgba(255,255,255,0.7);">
+                <strong style="color:var(--bbf-white);">Arts. 1–3</strong> — Identity &amp; Foundation
+              </span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;
+              background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.12);
+              border-radius:var(--radius-sm);">
+              <i class="fas fa-bullseye" style="color:var(--bbf-gold);width:16px;"></i>
+              <span style="font-size:var(--fs-sm);color:rgba(255,255,255,0.7);">
+                <strong style="color:var(--bbf-white);">Arts. 4–6</strong> — Purpose &amp; Scope
+              </span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;
+              background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.12);
+              border-radius:var(--radius-sm);">
+              <i class="fas fa-users" style="color:var(--bbf-gold);width:16px;"></i>
+              <span style="font-size:var(--fs-sm);color:rgba(255,255,255,0.7);">
+                <strong style="color:var(--bbf-white);">Arts. 7–9</strong> — Membership &amp; Conduct
+              </span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;
+              background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.12);
+              border-radius:var(--radius-sm);">
+              <i class="fas fa-crown" style="color:var(--bbf-gold);width:16px;"></i>
+              <span style="font-size:var(--fs-sm);color:rgba(255,255,255,0.7);">
+                <strong style="color:var(--bbf-white);">Arts. 10–12</strong> — Leadership
+              </span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;
+              background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.12);
+              border-radius:var(--radius-sm);">
+              <i class="fas fa-gavel" style="color:var(--bbf-gold);width:16px;"></i>
+              <span style="font-size:var(--fs-sm);color:rgba(255,255,255,0.7);">
+                <strong style="color:var(--bbf-white);">Arts. 13–17</strong> — Governance
+              </span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;
+              background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.12);
+              border-radius:var(--radius-sm);">
+              <i class="fas fa-hands-helping" style="color:var(--bbf-gold);width:16px;"></i>
+              <span style="font-size:var(--fs-sm);color:rgba(255,255,255,0.7);">
+                <strong style="color:var(--bbf-white);">Arts. 18–20</strong> — Communication &amp; Service
+              </span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;
+              background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.12);
+              border-radius:var(--radius-sm);">
+              <i class="fas fa-scale-balanced" style="color:var(--bbf-gold);width:16px;"></i>
+              <span style="font-size:var(--fs-sm);color:rgba(255,255,255,0.7);">
+                <strong style="color:var(--bbf-white);">Arts. 21–26</strong> — Amendments &amp; Closing
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: full article index grid -->
+        <div class="col-lg-8 reveal-right">
+          <div id="constitution-grid" class="constitution-index">
+            <!-- Populated by JS from BBF_CONSTITUTION_ARTICLES -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       03. KEY ARTICLES — EXPANDABLE ACCORDION
+       Highlights the most member-relevant articles
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py bg-off-white" aria-labelledby="key-articles-heading">
+    <div class="container">
+
+      <div class="text-center reveal" style="max-width:520px;margin:0 auto 3rem;">
+        <div class="overline">Must-Read Sections</div>
+        <div class="gold-divider-center" style="margin-top:0.5rem;"></div>
+        <h2 class="section-title mt-3" id="key-articles-heading">
+          Key Articles for Every Member
+        </h2>
+        <p class="section-subtitle mt-2" style="margin:0 auto;">
+          These articles from the BBF Constitution are most directly relevant
+          to every member's daily participation in the fellowship.
+        </p>
+      </div>
+
+      <div class="article-accordion reveal" id="key-articles-accordion" role="list">
+        <!-- Populated by JS -->
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       04. OTHER DOCUMENTS
+       TODO [BACKEND]: When real docs are uploaded, replace
+       href="#" with actual file URLs.
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-white);" aria-labelledby="docs-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-header-left reveal">
+          <div class="overline">Document Library</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="docs-heading">
+            Other Documents &amp; Forms
+          </h2>
+          <p class="section-subtitle mt-2">
+            Additional forms and reference documents for BBF members.
+            New documents are added as they become available.
+          </p>
+        </div>
+      </div>
+
+      <div class="row g-4" id="docs-grid">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="resource-tip resource-tip-gold mt-4 reveal">
+        <i class="fas fa-info-circle" style="color:var(--bbf-gold);"></i>
+        <p>
+          <strong>Can't find what you need?</strong> Contact the BBF Secretary at
+          <a href="mailto:secretary@bbfellowship.org" style="color:var(--bbf-gold-dark);">secretary@bbfellowship.org</a>
+          or use the <a href="contact.html" style="color:var(--bbf-gold-dark);">contact form</a>.
+          All documents are subject to the provisions of the BBF Constitution.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       05. CTA
+  ══════════════════════════════════════════════════ -->
+  <section class="cta-section" aria-labelledby="resources-cta-heading">
+    <div class="cta-top-line" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-1" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-2" aria-hidden="true"></div>
+    <div class="cta-content">
+      <div class="overline-white reveal">Know the Constitution</div>
+      <div class="gold-divider-center reveal" style="margin-top:0.5rem;"></div>
+      <h2 class="cta-title reveal mt-3" id="resources-cta-heading">
+        Every Member Should<br /><span class="gold-text">Know the Rules.</span>
+      </h2>
+      <p class="cta-desc reveal">
+        The BBF Constitution protects every member and keeps the fellowship healthy.
+        Read it, understand it, and hold your leaders — and yourself — to it.
+      </p>
+      <div class="cta-btn-group reveal">
+        <a href="membership.html" class="btn-bbf-primary">
+          <i class="fas fa-user-plus"></i> Join BBF
+        </a>
+        <a href="contact.html" class="btn-bbf-outline-white">
+          <i class="fas fa-file-pdf"></i> Request a Copy
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bbf-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="bbf-logo-wrap">
+            <div class="bbf-logo-emblem"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+            <div class="bbf-logo-text">
+              <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+              <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+            </div>
+          </a>
+          <p class="footer-brand-desc">A fellowship platform for Boys' Brigade members — united by Faith, Fellowship, Service, and Friendship. From the Brigade, we build Brotherhood; through Fellowship, we grow together.</p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="footer-social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Quick Links</h3>
+          <nav class="footer-links">
+            <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+            <a href="about.html"><i class="fas fa-chevron-right"></i> About BBF</a>
+            <a href="leadership.html"><i class="fas fa-chevron-right"></i> Leadership</a>
+            <a href="chapters.html"><i class="fas fa-chevron-right"></i> Chapters</a>
+            <a href="membership.html"><i class="fas fa-chevron-right"></i> Membership</a>
+            <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Fellowship</h3>
+          <nav class="footer-links">
+            <a href="events.html"><i class="fas fa-chevron-right"></i> Events</a>
+            <a href="news.html"><i class="fas fa-chevron-right"></i> News &amp; Announcements</a>
+            <a href="activities.html"><i class="fas fa-chevron-right"></i> Activities &amp; Projects</a>
+            <a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a>
+            <a href="resources.html"><i class="fas fa-chevron-right"></i> Resources</a>
+            <a href="login.html"><i class="fas fa-chevron-right"></i> Member Login</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Get in Touch</h3>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="footer-contact-text">bbfellowship26@gmail.com</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-globe"></i></div>
+            <div class="footer-contact-text">www.bbfellowship.org</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-phone"></i></div>
+            <div class="footer-contact-text">09066681922</div>
+          </div>
+          <div style="margin-top:1.5rem;">
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:0.75rem;">Get BBF updates in your inbox.</p>
+            <form id="newsletter-form" novalidate>
+              <div class="footer-newsletter-form">
+                <input type="email" id="newsletter-email" class="footer-newsletter-input" placeholder="Your email address" autocomplete="email" required />
+                <button type="submit" class="footer-newsletter-btn" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </form>
+            <span id="newsletter-msg" role="alert" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <p class="footer-copyright">&copy; <span id="footer-year">2026</span> Brigade Brotherhood Fellowship. All rights reserved.</p>
+          <nav class="footer-legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Cookie Policy</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:46px;height:46px;background:var(--gradient-gold);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--bbf-navy);font-size:1rem;box-shadow:var(--shadow-gold);cursor:pointer;z-index:900;opacity:0;pointer-events:none;transform:translateY(10px);transition:all var(--transition-base);">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="assets/js/data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    /* ══════════════════════════════════════════════════════
+       RESOURCES PAGE — inline JS
+       Renders: constitution article index grid,
+                key articles accordion, documents grid.
+    ══════════════════════════════════════════════════════ */
+
+    /* ── Key articles for accordion ── */
+    const KEY_ARTICLES = [
+      {
+        num: 1,
+        title: 'Name, Identity and Motto',
+        content: 'BBF\'s full name is Brigade Brotherhood Fellowship. It may be referred to as BBF. The official motto is: ONE BRIGADE • ONE BROTHERHOOD • ONE PURPOSE. The official guiding values are: FAITH • FELLOWSHIP • SERVICE • FRIENDSHIP.',
+      },
+      {
+        num: 7,
+        title: 'Membership',
+        content: 'Membership is open to: active Boys\' Brigade members who meet constitution requirements; former Boys\' Brigade members committed to BBF objectives; new applicants satisfying the Brigade School Certificate requirement. All members have equal membership status regardless of company, church, council, rank, or location.',
+      },
+      {
+        num: 8,
+        title: 'Rights and Responsibilities of Members',
+        content: 'Every member has the right to: participate in activities, express opinions respectfully, vote where eligible, seek election where qualified, receive fair treatment, raise concerns through appropriate channels. Every member is responsible for: respecting fellow members, upholding BBF values, upholding Brigade principles, participating positively, supporting unity, and avoiding actions that could bring BBF into disrepute.',
+      },
+      {
+        num: 9,
+        title: 'Code of Conduct',
+        content: 'The Code of Conduct covers: general conduct (no insults, bullying, harassment, threats, discrimination, or deliberate provocation); conduct in Brigade uniform; confidentiality (members must not disclose internal matters without authorisation); Christian conduct (promoting love, forgiveness, respect, humility, integrity, reconciliation, peace, and service); and protection of Fellowship unity.',
+      },
+      {
+        num: 12,
+        title: 'Elections and Tenure of Office',
+        content: 'Officers are elected by eligible members. To stand for office, a candidate must be a recognised BBF member, demonstrate commitment to the Fellowship\'s objectives, have a record of responsible conduct, and be willing and available to perform the duties. Tenure is two (2) years. Officers may be eligible for re-election.',
+      },
+      {
+        num: 16,
+        title: 'Discipline and Dispute Resolution',
+        content: 'Discipline is corrective, fair, respectful, and consistent with Christian principles. Before serious action is taken, the matter is brought to leadership attention, considered fairly, and the member is given an opportunity to respond. Possible sanctions range from a verbal warning to termination of membership. A member who believes disciplinary action was unfair may appeal.',
+      },
+      {
+        num: 21,
+        title: 'Constitutional Amendments',
+        content: 'An amendment may be proposed by the Executive or by a reasonable number of members. Members must receive reasonable notice before it is considered. An amendment requires approval by at least two-thirds (⅔) of eligible members present and voting. No amendment shall remove the fundamental Christian foundation, Brigade identity, commitment to unity, or the principle that BBF shall not operate as a competing structure to The Boys\' Brigade.',
+      },
+    ];
+
+    /* ── Other documents data ── */
+    // TODO [BACKEND]: Replace with GET /api/resources when document management system is available
+    const BBF_DOCS = [
+      {
+        icon: 'fa-file-alt',
+        iconBg: '#0A1628',
+        iconColor: '#C9A84C',
+        type: 'Form',
+        title: 'BBF Membership Registration Form',
+        desc: 'The official form for registering as a new BBF member. Complete and submit to the BBF Secretary.',
+        available: true,
+        href: 'membership.html',
+        btnLabel: 'Register Online',
+      },
+      {
+        icon: 'fa-scale-balanced',
+        iconBg: '#0A1628',
+        iconColor: '#C9A84C',
+        type: 'Policy',
+        title: 'BBF Code of Conduct Summary',
+        desc: 'A summary of the Code of Conduct from Article 9 of the BBF Constitution — acceptable and unacceptable member behaviour.',
+        available: true,
+        href: 'about.html#values-heading',
+        btnLabel: 'View on About Page',
+      },
+      {
+        icon: 'fa-gavel',
+        iconBg: '#0A1628',
+        iconColor: '#C9A84C',
+        type: 'Document',
+        title: 'BBF Disciplinary Procedure Guide',
+        desc: 'A member-friendly guide to the disciplinary and dispute resolution process outlined in Article 16 of the Constitution.',
+        available: false,
+        href: '#',
+        btnLabel: 'Coming Soon',
+      },
+      {
+        icon: 'fa-coins',
+        iconBg: '#0A1628',
+        iconColor: '#C9A84C',
+        type: 'Policy',
+        title: 'BBF Financial Policy',
+        desc: 'Financial procedures, approved expenditure processes, and accountability guidelines based on Articles 14 and 17 of the Constitution.',
+        available: false,
+        href: '#',
+        btnLabel: 'Coming Soon',
+      },
+      {
+        icon: 'fa-crown',
+        iconBg: '#0A1628',
+        iconColor: '#C9A84C',
+        type: 'Guide',
+        title: 'Officer Duties Reference Card',
+        desc: 'A quick-reference card summarising the duties of all nine executive offices as defined in Article 11 of the Constitution.',
+        available: false,
+        href: '#',
+        btnLabel: 'Coming Soon',
+      },
+      {
+        icon: 'fa-book-open',
+        iconBg: '#0A1628',
+        iconColor: '#C9A84C',
+        type: 'Reference',
+        title: 'Brigade School Certificate — What It Is',
+        desc: 'An explainer for new members on the Brigade School Certificate requirement (Article 5.2) and the transition arrangement for existing members.',
+        available: true,
+        href: 'about.html#eligibility-heading',
+        btnLabel: 'View on About Page',
+      },
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* ── Constitution article index grid ── */
+      // TODO [BACKEND]: Replace BBF_CONSTITUTION_ARTICLES with GET /api/constitution/articles
+      const constGrid = document.getElementById('constitution-grid');
+      if (constGrid && typeof BBF_CONSTITUTION_ARTICLES !== 'undefined') {
+        constGrid.innerHTML = BBF_CONSTITUTION_ARTICLES.map(art => `
+          <div class="art-index-item">
+            <div class="art-num">Art. ${art.num}</div>
+            <div class="art-title">${art.title}</div>
+          </div>
+        `).join('');
+      }
+
+      /* ── Key articles accordion ── */
+      const accordion = document.getElementById('key-articles-accordion');
+      if (accordion) {
+        accordion.innerHTML = KEY_ARTICLES.map((art, i) => `
+          <div class="accordion-item-bbf" role="listitem">
+            <button
+              class="accordion-btn-bbf${i === 0 ? ' open' : ''}"
+              aria-expanded="${i === 0}"
+              aria-controls="acc-body-${art.num}"
+              id="acc-btn-${art.num}"
+              onclick="toggleAccordion(${art.num})"
+            >
+              <div class="accordion-art-num">
+                <span>${art.num}</span>
+              </div>
+              <div class="accordion-art-title">Article ${art.num}: ${art.title}</div>
+              <i class="fas fa-chevron-down accordion-chevron"></i>
+            </button>
+            <div
+              class="accordion-body-bbf${i === 0 ? ' open' : ''}"
+              id="acc-body-${art.num}"
+              role="region"
+              aria-labelledby="acc-btn-${art.num}"
+            >
+              ${art.content}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      /* ── Documents grid ── */
+      const docsGrid = document.getElementById('docs-grid');
+      if (docsGrid) {
+        docsGrid.innerHTML = BBF_DOCS.map((doc, i) => `
+          <div class="col-lg-4 col-md-6 reveal reveal-delay-${Math.min(i + 1, 6)}">
+            <div class="doc-card">
+              <div class="doc-card-header">
+                <div class="doc-card-icon"
+                     style="background:${doc.iconBg};color:${doc.iconColor};">
+                  <i class="fas ${doc.icon}"></i>
+                </div>
+                <div>
+                  <div class="doc-card-type">${doc.type}</div>
+                  <div class="doc-card-title">${doc.title}</div>
+                </div>
+              </div>
+              <p class="doc-card-desc">${doc.desc}</p>
+              <div class="doc-card-footer">
+                <span class="doc-availability ${doc.available ? 'doc-available' : 'doc-coming-soon'}">
+                  <i class="fas ${doc.available ? 'fa-check-circle' : 'fa-clock'}"
+                     style="margin-right:0.3rem;"></i>
+                  ${doc.available ? 'Available' : 'Coming Soon'}
+                </span>
+                <a href="${doc.href}"
+                   class="${doc.available ? 'btn-bbf-navy' : 'btn-bbf-outline'} btn-sm-bbf"
+                   style="font-size:0.68rem;padding:0.5rem 1rem;"
+                   ${!doc.available ? 'aria-disabled="true"' : ''}>
+                  ${doc.available
+                    ? `<i class="fas fa-arrow-right"></i> ${doc.btnLabel}`
+                    : `<i class="fas fa-clock"></i> ${doc.btnLabel}`
+                  }
+                </a>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      /* ── Scroll reveal ── */
+      setTimeout(() => {
+        const els = document.querySelectorAll('.reveal:not(.revealed),.reveal-left:not(.revealed),.reveal-right:not(.revealed)');
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        els.forEach(el => obs.observe(el));
+      }, 80);
+    });
+
+    /* ── Accordion toggle ── */
+    function toggleAccordion(artNum) {
+      const btn  = document.getElementById(`acc-btn-${artNum}`);
+      const body = document.getElementById(`acc-body-${artNum}`);
+      if (!btn || !body) return;
+
+      const isOpen = btn.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.accordion-btn-bbf').forEach(b => {
+        b.classList.remove('open');
+        b.setAttribute('aria-expanded', 'false');
+      });
+      document.querySelectorAll('.accordion-body-bbf').forEach(b => b.classList.remove('open'));
+
+      // Open clicked if it was closed
+      if (!isOpen) {
+        btn.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        body.classList.add('open');
+      }
+    }
+  </script>
+
+</body>
+</html>

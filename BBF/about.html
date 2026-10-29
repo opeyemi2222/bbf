@@ -1,0 +1,1027 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Brigade Brotherhood Fellowship — our purpose, Christian foundation, guiding values, constitution, and the brigade identity that connects every member." />
+  <meta name="keywords" content="About BBF, Brigade Brotherhood Fellowship, Boys Brigade Fellowship, BBF constitution, BBF values, Brigade Nigeria" />
+  <meta name="author" content="Brigade Brotherhood Fellowship" />
+
+  <title>About BBF — Brigade Brotherhood Fellowship</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+
+  <!-- BBF Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════
+       ABOUT PAGE — scoped styles
+       Source: BBF Constitution
+    ══════════════════════════════════════════════════════ */
+
+    /* Pillar cards (purpose / foundation / aims) */
+    .pillar-card {
+      background: var(--bbf-white);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem;
+      border: 1px solid var(--bbf-light-grey);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-base);
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gradient-gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition-base);
+    }
+    .pillar-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px); border-color: transparent; }
+    .pillar-card:hover::before { transform: scaleX(1); }
+    .pillar-num {
+      font-family: var(--font-heading);
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--bbf-light-grey);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .pillar-icon {
+      width: 52px; height: 52px;
+      background: var(--bbf-navy);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; color: var(--bbf-gold);
+      margin-bottom: 1.25rem;
+      transition: all var(--transition-base);
+    }
+    .pillar-card:hover .pillar-icon { background: var(--gradient-gold); color: var(--bbf-navy); }
+    .pillar-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--bbf-navy); margin-bottom: 0.75rem; }
+    .pillar-desc { font-size: var(--fs-sm); color: var(--bbf-text-muted); line-height: 1.7; margin: 0; }
+
+    /* Values list (full-page alternating layout) */
+    .value-list-item {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.10);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-base);
+    }
+    .value-list-item:hover {
+      background: rgba(255,255,255,0.055);
+      border-color: rgba(201,168,76,0.25);
+      transform: translateX(6px);
+    }
+    .value-list-icon {
+      width: 50px; height: 50px;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; color: var(--bbf-gold);
+      flex-shrink: 0;
+      transition: all var(--transition-base);
+    }
+    .value-list-item:hover .value-list-icon { background: var(--bbf-gold); color: var(--bbf-navy); border-color: var(--bbf-gold); }
+    .value-list-title {
+      font-family: var(--font-accent);
+      font-size: var(--fs-base); font-weight: 700;
+      letter-spacing: 0.05em; color: var(--bbf-white); margin-bottom: 0.35rem;
+    }
+    .value-official-tag {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-family: var(--font-accent);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bbf-gold);
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: var(--radius-pill);
+      padding: 0.15rem 0.6rem;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    .value-list-desc { font-size: var(--fs-sm); color: rgba(255,255,255,0.55); line-height: 1.6; margin: 0; }
+
+    /* Quote block */
+    .about-quote {
+      position: relative;
+      padding: 2.5rem 2.5rem 2.5rem 3rem;
+      background: var(--gradient-navy-dark);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(201,168,76,0.15);
+      overflow: hidden;
+    }
+    .about-quote::before {
+      content: '\201C';
+      position: absolute;
+      top: -1rem; left: 1rem;
+      font-family: var(--font-heading);
+      font-size: 8rem;
+      color: rgba(201,168,76,0.07);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .about-quote blockquote {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+      color: var(--bbf-white);
+      line-height: 1.7;
+      margin: 0 0 1rem;
+      position: relative; z-index: 1;
+    }
+    .about-quote cite {
+      font-style: normal;
+      font-family: var(--font-accent);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bbf-gold);
+    }
+
+    /* Stat pill strip */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(201,168,76,0.12);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,0.12);
+    }
+    .stat-strip-item {
+      background: var(--bbf-navy-mid);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: background var(--transition-base);
+    }
+    .stat-strip-item:hover { background: rgba(255,255,255,0.03); }
+    .stat-strip-num { font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; color: var(--bbf-gold); line-height: 1; display: block; }
+    .stat-strip-label { font-size: var(--fs-xs); font-family: var(--font-accent); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 0.4rem; display: block; }
+
+    /* Logo symbolism cards */
+    .symbol-card {
+      background: var(--bbf-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      transition: all var(--transition-base);
+      height: 100%;
+    }
+    .symbol-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); border-color: rgba(201,168,76,0.3); }
+    .symbol-icon {
+      width: 48px; height: 48px;
+      background: var(--bbf-navy);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: var(--bbf-gold);
+      margin-bottom: 1rem;
+      transition: all var(--transition-base);
+    }
+    .symbol-card:hover .symbol-icon { background: var(--gradient-gold); color: var(--bbf-navy); }
+    .symbol-element { font-family: var(--font-accent); font-size: var(--fs-sm); font-weight: 700; color: var(--bbf-navy); margin-bottom: 0.5rem; }
+    .symbol-meaning { font-size: var(--fs-sm); color: var(--bbf-text-muted); line-height: 1.65; margin: 0; }
+
+    /* Colour swatches */
+    .colour-swatch {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--bbf-off-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-base);
+    }
+    .colour-swatch:hover { box-shadow: var(--shadow-sm); border-color: rgba(201,168,76,0.25); }
+    .swatch-dot { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; box-shadow: var(--shadow-sm); border: 2px solid rgba(0,0,0,0.06); }
+    .swatch-name { font-family: var(--font-accent); font-size: var(--fs-sm); font-weight: 700; color: var(--bbf-navy); margin-bottom: 0.2rem; }
+    .swatch-meaning { font-size: var(--fs-xs); color: var(--bbf-text-muted); line-height: 1.5; }
+
+    /* Aims list */
+    .aims-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .aim-item {
+      display: flex; align-items: flex-start; gap: 0.875rem;
+      padding: 1rem 1.25rem;
+      background: var(--bbf-off-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-base);
+    }
+    .aim-item:hover { background: var(--bbf-light-grey); border-color: rgba(201,168,76,0.35); transform: translateX(4px); }
+    .aim-num {
+      width: 28px; height: 28px; flex-shrink: 0;
+      background: var(--bbf-navy);
+      border: 1px solid rgba(10,22,40,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-accent); font-size: 0.7rem; font-weight: 700; color: var(--bbf-gold-light);
+      margin-top: 1px;
+    }
+    .aim-text { font-size: var(--fs-sm); color: var(--bbf-text); line-height: 1.6; }
+
+    /* Image mosaic */
+    .about-mosaic {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 220px 220px;
+      gap: 1rem;
+    }
+    .about-mosaic-item { border-radius: var(--radius-md); overflow: hidden; background: var(--bbf-navy-mid); position: relative; }
+    .about-mosaic-item.tall { grid-row: span 2; }
+    .about-mosaic-item .img-placeholder {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.04);
+    }
+    .about-mosaic-item .img-placeholder i {
+      opacity: 0.15;
+      color: var(--bbf-white);
+    }
+    .about-mosaic-item .img-placeholder .fa-users { font-size: 3rem; }
+    .about-mosaic-item .img-placeholder .fa-shield-halved,
+    .about-mosaic-item .img-placeholder .fa-cross { font-size: 2rem; }
+    .about-mosaic-item img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow); opacity: 0.8; }
+    .about-mosaic-item:hover img { transform: scale(1.05); }
+
+    .nav-dropdown-link-icon {
+      font-size: 0.6rem;
+      margin-left: 2px;
+    }
+    .nav-dropdown-menu-icon {
+      width: 16px;
+      color: var(--bbf-gold);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .about-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: 160px 160px; }
+      .about-quote { padding: 2rem 1.5rem 2rem 2rem; }
+    }
+    @media (max-width: 576px) {
+      .about-mosaic { grid-template-columns: 1fr; grid-template-rows: repeat(3,150px); }
+      .about-mosaic-item.tall { grid-row: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="bbf-preloader" style="position:fixed;inset:0;background:var(--bbf-navy);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:1rem;">
+    <div style="width:56px;height:56px;background:var(--gradient-gold);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:800;color:var(--bbf-navy);animation:preloaderPulse 1.2s ease-in-out infinite;">BBF</div>
+    <div style="font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.6);">Loading…</div>
+  </div>
+  <style>@keyframes preloaderPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:0.8}}</style>
+
+  <!-- ══════════════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════════════ -->
+  <nav id="bbf-navbar" class="nav-transparent" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="bbf-logo-wrap" aria-label="BBF Home">
+        <div class="bbf-logo-emblem" aria-hidden="true"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+        <li><a href="chapters.html">Chapters</a></li>
+        <li class="nav-dropdown">
+          <a href="#" aria-haspopup="true">Programs <i class="fas fa-chevron-down" style="font-size:0.6rem;margin-left:2px;"></i></a>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="events.html" role="menuitem"><i class="fas fa-calendar-alt" style="width:16px;color:var(--bbf-gold);"></i> Events</a>
+            <a href="activities.html" role="menuitem"><i class="fas fa-hands-helping" style="width:16px;color:var(--bbf-gold);"></i> Activities</a>
+            <a href="gallery.html" role="menuitem"><i class="fas fa-images" style="width:16px;color:var(--bbf-gold);"></i> Gallery</a>
+          </div>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="membership.html" class="btn-bbf-primary btn-sm-bbf btn-bbf-nav-cta">
+        <i class="fas fa-user-plus"></i> Join BBF
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="bbf-offcanvas">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- OFFCANVAS -->
+  <div id="offcanvas-overlay" class="offcanvas-overlay" aria-hidden="true"></div>
+  <aside id="bbf-offcanvas" class="bbf-offcanvas" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <div class="offcanvas-header">
+      <a href="index.html" class="bbf-logo-wrap">
+        <div class="bbf-logo-emblem" style="width:38px;height:38px;"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name" style="font-size:0.82rem;">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <button id="offcanvas-close" class="offcanvas-close" aria-label="Close navigation menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="offcanvas-nav" role="list">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About BBF</a></li>
+        <li><a href="leadership.html"><i class="fas fa-crown"></i> Leadership</a></li>
+        <li><a href="chapters.html"><i class="fas fa-map-location-dot"></i> Chapters</a></li>
+        <li><a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+        <li><a href="activities.html"><i class="fas fa-hands-helping"></i> Activities &amp; Projects</a></li>
+        <li><a href="news.html"><i class="fas fa-newspaper"></i> News &amp; Announcements</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="resources.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        <li style="margin-top:0.5rem;border-top:1px solid rgba(201,168,76,0.12);padding-top:0.75rem;">
+          <a href="login.html"><i class="fas fa-sign-in-alt"></i> Member Login</a>
+        </li>
+      </ul>
+    </div>
+    <div class="offcanvas-footer">
+      <a href="membership.html" class="btn-bbf-primary" style="width:100%;justify-content:center;">
+        <i class="fas fa-user-plus"></i> Join BBF Today
+      </a>
+    </div>
+  </aside>
+
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE HEADER
+  ══════════════════════════════════════════════════ -->
+  <header class="page-header" aria-label="About BBF page header">
+    <div class="page-header-bg" aria-hidden="true"></div>
+    <div class="page-header-decor" aria-hidden="true"></div>
+    <div class="container page-header-content">
+      <nav class="page-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep" aria-hidden="true"><i class="fas fa-chevron-right" style="font-size:0.55rem;"></i></span>
+        <span class="current" aria-current="page">About BBF</span>
+      </nav>
+      <h1 class="page-header-title reveal">About Brigade Brotherhood Fellowship</h1>
+      <p class="page-header-subtitle reveal">
+        Our identity, purpose, Christian foundation, guiding values, and the Brigade
+        bond that connects every member.
+      </p>
+    </div>
+  </header>
+
+
+  <!-- ══════════════════════════════════════════════════
+       01. WHO WE ARE
+       Source: BBF Constitution, Articles 1, 2, 4, 5, 6
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py bg-off-white" aria-labelledby="who-heading">
+    <div class="container">
+      <div class="row align-items-center g-5">
+
+        <!-- Text -->
+        <div class="col-lg-6 reveal-left">
+          <div class="overline">Who We Are</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="who-heading">
+            A Fellowship Platform for<br />Boys' Brigade Members
+          </h2>
+          <p class="lead mt-3">
+            Brigade Brotherhood Fellowship (BBF) is a fellowship platform established
+            for members of The Boys' Brigade — built to promote Christian faith, brotherhood,
+            friendship, fellowship, service, unity, discipline, personal development,
+            team spirit, and positive social interaction.
+          </p>
+          <p style="color:var(--bbf-text-muted);line-height:1.85;margin-top:1rem;">
+            BBF recognises that members may belong to different companies, churches,
+            councils, dioceses, organisations, and locations. Nevertheless, the shared
+            Brigade identity provides a foundation upon which meaningful relationships
+            and cooperation can be built. BBF serves as the platform through which
+            members can come together, support one another, develop their abilities,
+            share experiences, serve God and society, and strengthen the bonds of
+            friendship and brotherhood.
+          </p>
+          <p style="color:var(--bbf-text-muted);line-height:1.85;margin-top:1rem;">
+            BBF shall at all times respect the authority, structure, regulations,
+            objectives, and discipline of The Boys' Brigade. BBF is not a replacement
+            for The Boys' Brigade — and shall never operate as a competing structure.
+          </p>
+          <div class="mt-4 d-flex flex-wrap gap-3">
+            <a href="membership.html" class="btn-bbf-primary">
+              <i class="fas fa-user-plus"></i> Join the Fellowship
+            </a>
+            <a href="leadership.html" class="btn-bbf-outline">
+              <i class="fas fa-crown"></i> Meet Our Officers
+            </a>
+          </div>
+        </div>
+
+        <!-- Image Mosaic -->
+        <div class="col-lg-6 reveal-right">
+          <div class="about-mosaic">
+            <div class="about-mosaic-item tall">
+              <div class="img-placeholder" style="height:100%;"><i class="fas fa-users" style="font-size:3rem;opacity:0.15;color:#fff;"></i></div>
+            </div>
+            <div class="about-mosaic-item">
+              <div class="img-placeholder" style="height:100%;"><i class="fas fa-shield-halved" style="font-size:2rem;opacity:0.15;color:#fff;"></i></div>
+            </div>
+            <div class="about-mosaic-item">
+              <div class="img-placeholder" style="height:100%;"><i class="fas fa-cross" style="font-size:2rem;opacity:0.15;color:#fff;"></i></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       02. IDENTITY STATEMENT STRIP
+  ══════════════════════════════════════════════════ -->
+  <section style="background:var(--bbf-navy-mid);padding:2.5rem 0;" aria-label="BBF identity statement">
+    <div class="container text-center reveal">
+      <div class="overline-white" style="margin-bottom:0.75rem;">Official Identity Statement</div>
+      <p style="font-family:var(--font-heading);font-style:italic;font-size:clamp(1.1rem,2vw,1.5rem);
+        color:var(--bbf-white);line-height:1.6;max-width:720px;margin:0 auto 1rem;">
+        "From the Brigade, we build Brotherhood; through Fellowship, we grow together."
+      </p>
+      <div style="font-family:var(--font-accent);letter-spacing:0.2em;font-size:0.78rem;
+        color:var(--bbf-gold);margin-bottom:0.5rem;">
+        ONE BRIGADE &nbsp;•&nbsp; ONE BROTHERHOOD &nbsp;•&nbsp; ONE PURPOSE
+      </div>
+      <div style="font-family:var(--font-accent);letter-spacing:0.15em;font-size:0.72rem;
+        color:rgba(201,168,76,0.65);">
+        FAITH &nbsp;•&nbsp; FELLOWSHIP &nbsp;•&nbsp; SERVICE &nbsp;•&nbsp; FRIENDSHIP
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       03. PURPOSE, AIMS & OBJECTIVES
+       Source: BBF Constitution, Articles 4.1, 4.2
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-white);" aria-labelledby="purpose-heading">
+    <div class="container">
+
+      <div class="text-center reveal" style="max-width:600px;margin:0 auto 4rem;">
+        <div class="overline">Constitution, Article 4</div>
+        <div class="gold-divider-center" style="margin-top:0.5rem;"></div>
+        <h2 class="section-title mt-3" id="purpose-heading">Purpose, Aims &amp; Objectives</h2>
+        <p class="section-subtitle mt-2" style="margin:0 auto;">
+          Why BBF exists — and what it seeks to accomplish for every member and community.
+        </p>
+      </div>
+
+      <div class="row g-4 mb-5">
+        <div class="col-lg-4 col-md-6 reveal reveal-delay-1">
+          <div class="pillar-card">
+            <span class="pillar-num" aria-hidden="true">01</span>
+            <div class="pillar-icon"><i class="fas fa-bullseye"></i></div>
+            <h3 class="pillar-title">Our Purpose</h3>
+            <p class="pillar-desc">
+              To provide a platform through which members of The Boys' Brigade can build
+              genuine relationships, promote unity, support one another, and participate
+              in positive fellowship and service.
+              <br /><em style="font-size:0.78rem;color:var(--bbf-text-light);display:block;margin-top:0.5rem;">— BBF Constitution, Art. 4.1</em>
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 reveal reveal-delay-2">
+          <div class="pillar-card">
+            <span class="pillar-num" aria-hidden="true">02</span>
+            <div class="pillar-icon"><i class="fas fa-cross"></i></div>
+            <h3 class="pillar-title">Our Christian Foundation</h3>
+            <p class="pillar-desc">
+              BBF shall operate on the foundation of Christian faith and shall encourage
+              members to demonstrate Christian character in their conduct and relationships.
+              The Boys' Brigade shall remain the common Brigade foundation and identity
+              connecting all members of BBF.
+              <br /><em style="font-size:0.78rem;color:var(--bbf-text-light);display:block;margin-top:0.5rem;">— BBF Constitution, Art. 2</em>
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 reveal reveal-delay-3">
+          <div class="pillar-card">
+            <span class="pillar-num" aria-hidden="true">03</span>
+            <div class="pillar-icon"><i class="fas fa-shield-halved"></i></div>
+            <h3 class="pillar-title">Our Relationship with The Boys' Brigade</h3>
+            <p class="pillar-desc">
+              BBF shall not be a replacement for, or a competing structure to, The Boys'
+              Brigade. BBF shall recognise and respect the existing authority, leadership,
+              structure, regulations, and discipline of The Boys' Brigade at all times.
+              <br /><em style="font-size:0.78rem;color:var(--bbf-text-light);display:block;margin-top:0.5rem;">— BBF Constitution, Art. 6</em>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aims list — 13 aims from Art. 4.2 -->
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-5 reveal-left">
+          <div class="overline">Article 4.2</div>
+          <h3 class="section-title mt-2" style="font-size:1.6rem;">13 Aims of BBF</h3>
+          <p style="color:var(--bbf-text-muted);line-height:1.75;margin-top:0.75rem;">
+            The Fellowship shall seek to accomplish these thirteen aims in the life of
+            every member and the communities they serve.
+          </p>
+          <div class="about-quote mt-4">
+            <blockquote>
+              "Behold, how good and pleasant it is when brothers dwell in unity!"
+            </blockquote>
+            <cite>— Psalm 133:1 · BBF Biblical Principle, Art. 2.3</cite>
+          </div>
+        </div>
+        <div class="col-lg-7 reveal-right">
+          <div class="aims-list" id="aims-list">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       04. GUIDING VALUES (FULL)
+       Source: BBF Constitution, Articles 1.2, 1.4, 3.9
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-navy);" aria-labelledby="values-heading">
+    <div class="container">
+
+      <div class="row align-items-center g-5">
+
+        <!-- Left: context + quote -->
+        <div class="col-lg-5 reveal-left">
+          <div class="overline-white">Constitution, Articles 1.4 &amp; 1.2</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title-light mt-3" id="values-heading">
+            Our Guiding Values
+          </h2>
+          <p class="section-subtitle-light mt-2">
+            BBF has four official guiding values — and a set of identity values that
+            shape the character of every member and chapter.
+          </p>
+          <div style="margin-top:1.5rem;padding:1.25rem 1.5rem;
+            background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);
+            border-radius:var(--radius-md);">
+            <div style="font-family:var(--font-accent);font-size:0.68rem;letter-spacing:0.14em;
+              text-transform:uppercase;color:var(--bbf-gold);margin-bottom:0.75rem;">
+              Official Guiding Values — Art. 1.4
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);
+                color:var(--bbf-gold-light);font-family:var(--font-accent);font-size:0.75rem;
+                font-weight:700;letter-spacing:0.1em;padding:0.35rem 0.875rem;
+                border-radius:var(--radius-pill);">FAITH</span>
+              <span style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);
+                color:var(--bbf-gold-light);font-family:var(--font-accent);font-size:0.75rem;
+                font-weight:700;letter-spacing:0.1em;padding:0.35rem 0.875rem;
+                border-radius:var(--radius-pill);">FELLOWSHIP</span>
+              <span style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);
+                color:var(--bbf-gold-light);font-family:var(--font-accent);font-size:0.75rem;
+                font-weight:700;letter-spacing:0.1em;padding:0.35rem 0.875rem;
+                border-radius:var(--radius-pill);">SERVICE</span>
+              <span style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);
+                color:var(--bbf-gold-light);font-family:var(--font-accent);font-size:0.75rem;
+                font-weight:700;letter-spacing:0.1em;padding:0.35rem 0.875rem;
+                border-radius:var(--radius-pill);">FRIENDSHIP</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: values list from data.js BBF_VALUES -->
+        <div class="col-lg-7">
+          <div class="d-flex flex-column gap-3" id="values-full-list" role="list">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       05. LOGO SYMBOLISM
+       Source: BBF Constitution, Article 3
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py bg-off-white" aria-labelledby="logo-heading">
+    <div class="container">
+
+      <div class="text-center reveal" style="max-width:560px;margin:0 auto 3.5rem;">
+        <div class="overline">Constitution, Article 3</div>
+        <div class="gold-divider-center" style="margin-top:0.5rem;"></div>
+        <h2 class="section-title mt-3" id="logo-heading">The BBF Logo &amp; Its Meaning</h2>
+        <p class="section-subtitle mt-2" style="margin:0 auto;">
+          Every element of the BBF logo carries deliberate meaning — rooted in the
+          constitution and the identity of the fellowship.
+        </p>
+      </div>
+
+      <!-- Symbol cards from data.js BBF_LOGO_SYMBOLISM -->
+      <div class="row g-3 mb-5" id="logo-symbolism-grid">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Colour swatches from data.js BBF_COLOURS -->
+      <div class="reveal mt-2">
+        <h3 class="section-title" style="font-size:1.4rem;margin-bottom:1.5rem;">
+          <i class="fas fa-palette" style="color:var(--bbf-gold);margin-right:0.5rem;"></i>
+          BBF Colours &amp; Their Meaning
+          <span style="font-size:0.8rem;font-family:var(--font-body);font-weight:400;
+            color:var(--bbf-text-muted);margin-left:0.5rem;">— Art. 3.8</span>
+        </h3>
+        <div class="row g-3" id="colour-swatches">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       06. WHAT BBF DOES
+       Source: BBF Constitution, Articles 19, 20
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-white);" aria-labelledby="activities-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-header-left reveal">
+          <div class="overline">Constitution, Articles 19 &amp; 20</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="activities-heading">
+            What BBF Does
+          </h2>
+          <p class="section-subtitle mt-2">
+            Activities and programmes BBF may organise — all aimed at positive
+            fellowship, personal development, and service to God and society.
+          </p>
+        </div>
+        <div class="reveal">
+          <a href="activities.html" class="view-all-link">
+            All Activities <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6 reveal reveal-delay-1">
+          <div class="pillar-card">
+            <div class="pillar-icon"><i class="fas fa-people-roof"></i></div>
+            <h3 class="pillar-title">Fellowship Gatherings</h3>
+            <p class="pillar-desc">Regular fellowship gatherings for worship, sharing, networking, and mutual encouragement — the heart of BBF life.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 reveal reveal-delay-2">
+          <div class="pillar-card">
+            <div class="pillar-icon"><i class="fas fa-hand-holding-heart"></i></div>
+            <h3 class="pillar-title">Community Service</h3>
+            <p class="pillar-desc">Meaningful contributions to the Church, local communities, schools, and charitable causes — demonstrating the brigade spirit of service.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 reveal reveal-delay-3">
+          <div class="pillar-card">
+            <div class="pillar-icon"><i class="fas fa-person-chalkboard"></i></div>
+            <h3 class="pillar-title">Personal Development</h3>
+            <p class="pillar-desc">Educational programmes, skills development, Brigade advancement training, sports, music, and talent programmes.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 reveal reveal-delay-4">
+          <div class="pillar-card">
+            <div class="pillar-icon"><i class="fas fa-heart-pulse"></i></div>
+            <h3 class="pillar-title">Welfare &amp; Support</h3>
+            <p class="pillar-desc">Supporting members through significant occasions and challenges — ensuring no member of the fellowship stands alone.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       07. MEMBERSHIP ELIGIBILITY OVERVIEW
+       Source: BBF Constitution, Articles 5, 7
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py-sm" style="background:var(--bbf-navy-mid);" aria-labelledby="eligibility-heading">
+    <div class="container">
+
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6 reveal-left">
+          <div class="overline-white">Constitution, Articles 5 &amp; 7</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title-light mt-3" id="eligibility-heading" style="font-size:1.75rem;">
+            Who Can Join BBF?
+          </h2>
+          <p class="section-subtitle-light mt-2">
+            BBF membership is open to active and former Boys' Brigade members who share
+            a commitment to Christian values, brotherhood, friendship, service, and the
+            ideals of The Boys' Brigade.
+          </p>
+          <div style="margin-top:1.75rem;">
+            <a href="membership.html" class="btn-bbf-primary">
+              <i class="fas fa-id-card"></i> Register as a Member
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal-right">
+          <div class="d-flex flex-column gap-3" id="requirements-list">
+            <!-- Populated by JS from BBF_MEMBERSHIP_REQUIREMENTS -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       08. CLOSING CTA
+  ══════════════════════════════════════════════════ -->
+  <section class="cta-section" aria-labelledby="about-cta-heading">
+    <div class="cta-top-line" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-1" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-2" aria-hidden="true"></div>
+    <div class="cta-content">
+      <div class="overline-white reveal">Stand Together. Serve Faithfully.</div>
+      <div class="gold-divider-center reveal" style="margin-top:0.5rem;"></div>
+      <h2 class="cta-title reveal mt-3" id="about-cta-heading">
+        You Were a Brigade Member.<br /><span class="gold-text">You Still Are.</span>
+      </h2>
+      <p class="cta-desc reveal">
+        The discipline, the values, the bonds — they don't retire with the uniform. 
+        Join BBF and reconnect with a brotherhood that has never stopped marching.
+      </p>
+      <div class="cta-btn-group reveal">
+        <a href="membership.html" class="btn-bbf-primary">
+          <i class="fas fa-user-plus"></i> Register as a Member
+        </a>
+        <a href="chapters.html" class="btn-bbf-outline-white">
+          <i class="fas fa-map-location-dot"></i> Find Your Chapter
+        </a>
+      </div>
+      <p class="cta-assurance reveal">
+        <i class="fas fa-cross"></i> Christian foundation &nbsp;·&nbsp;
+        <i class="fas fa-shield-halved"></i> Boys' Brigade members &nbsp;·&nbsp;
+        <i class="fas fa-handshake"></i> Genuine brotherhood
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════ -->
+  <footer class="bbf-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="bbf-logo-wrap">
+            <div class="bbf-logo-emblem"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+            <div class="bbf-logo-text">
+              <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+              <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+            </div>
+          </a>
+          <p class="footer-brand-desc">
+            A fellowship platform for Boys' Brigade members — united by Faith, Fellowship,
+            Service, and Friendship. From the Brigade, we build Brotherhood; through
+            Fellowship, we grow together.
+          </p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="footer-social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Quick Links</h3>
+          <nav class="footer-links">
+            <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+            <a href="about.html"><i class="fas fa-chevron-right"></i> About BBF</a>
+            <a href="leadership.html"><i class="fas fa-chevron-right"></i> Leadership</a>
+            <a href="chapters.html"><i class="fas fa-chevron-right"></i> Chapters</a>
+            <a href="membership.html"><i class="fas fa-chevron-right"></i> Membership</a>
+            <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Fellowship</h3>
+          <nav class="footer-links">
+            <a href="events.html"><i class="fas fa-chevron-right"></i> Events</a>
+            <a href="news.html"><i class="fas fa-chevron-right"></i> News &amp; Announcements</a>
+            <a href="activities.html"><i class="fas fa-chevron-right"></i> Activities &amp; Projects</a>
+            <a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a>
+            <a href="resources.html"><i class="fas fa-chevron-right"></i> Resources</a>
+            <a href="login.html"><i class="fas fa-chevron-right"></i> Member Login</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Get in Touch</h3>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="footer-contact-text">bbfellowship26@gmail.com</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-globe"></i></div>
+            <div class="footer-contact-text">www.bbfellowship.org</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-phone"></i></div>
+            <div class="footer-contact-text">09066681922</div>
+          </div>
+          <div style="margin-top:1.5rem;">
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:0.75rem;">Get BBF updates in your inbox.</p>
+            <form id="newsletter-form" novalidate>
+              <div class="footer-newsletter-form">
+                <input type="email" id="newsletter-email" class="footer-newsletter-input" placeholder="Your email address" autocomplete="email" required />
+                <button type="submit" class="footer-newsletter-btn" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </form>
+            <span id="newsletter-msg" role="alert" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <p class="footer-copyright">&copy; <span id="footer-year">2026</span> Brigade Brotherhood Fellowship. All rights reserved.</p>
+          <nav class="footer-legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Cookie Policy</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:46px;height:46px;background:var(--gradient-gold);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--bbf-navy);font-size:1rem;box-shadow:var(--shadow-gold);cursor:pointer;z-index:900;opacity:0;pointer-events:none;transform:translateY(10px);transition:all var(--transition-base);">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- SCRIPTS -->
+  <script src="assets/js/data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    /* ══════════════════════════════════════════════════════
+       ABOUT PAGE — inline JS
+       Renders: values list, aims list, logo symbolism,
+                colour swatches, membership requirements.
+       All data from data.js globals (BBF_VALUES, BBF_LOGO_SYMBOLISM,
+       BBF_COLOURS, BBF_MEMBERSHIP_REQUIREMENTS).
+    ══════════════════════════════════════════════════════ */
+
+    // BBF Aims — 13 aims direct from BBF Constitution Article 4.2
+    // TODO [BACKEND]: Replace with GET /api/config/aims if made dynamic
+    const BBF_AIMS = [
+      'Promote unity and genuine brotherhood among members.',
+      'Encourage members to do things together and build meaningful relationships.',
+      'Create a platform where members can support and assist one another when reasonably possible.',
+      'Encourage teamwork, cooperation, and mutual development.',
+      'Promote friendship and healthy social interaction.',
+      'Create opportunities for members to share knowledge, skills, ideas, and experiences.',
+      'Encourage personal, professional, and Brigade development.',
+      'Uphold and promote the aims, objectives, discipline, and Christian values of The Boys\' Brigade.',
+      'Encourage members to contribute positively to The Boys\' Brigade, the Church, and society.',
+      'Organise constructive social, educational, developmental, and service-oriented activities.',
+      'Encourage members to use their talents and resources positively.',
+      'Promote peace, reconciliation, respect, and cooperation among members.',
+      'Build a network of responsible Brigade members who can positively influence their communities.',
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // ── Render aims list
+      const aimsList = document.getElementById('aims-list');
+      if (aimsList) {
+        aimsList.innerHTML = BBF_AIMS.map((aim, i) => `
+          <div class="aim-item reveal reveal-delay-${Math.min(i + 1, 8)}">
+            <div class="aim-num">${i + 1}</div>
+            <div class="aim-text">${aim}</div>
+          </div>
+        `).join('');
+      }
+
+      // ── Render full values list (BBF_VALUES from data.js)
+      // TODO [BACKEND]: Replace BBF_VALUES with GET /api/config/values
+      const vList = document.getElementById('values-full-list');
+      if (vList && typeof BBF_VALUES !== 'undefined') {
+        vList.innerHTML = BBF_VALUES.map((v, i) => `
+          <div class="value-list-item reveal reveal-delay-${Math.min(i + 1, 8)}" role="listitem">
+            <div class="value-list-icon"><i class="fas ${v.icon}"></i></div>
+            <div>
+              <div class="value-list-title">
+                ${v.title}
+                ${v.official ? '<span class="value-official-tag">Official Value</span>' : ''}
+              </div>
+              <p class="value-list-desc">${v.description}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // ── Render logo symbolism (BBF_LOGO_SYMBOLISM from data.js)
+      // TODO [BACKEND]: Replace with GET /api/config/logo-symbolism if dynamic
+      const symbolGrid = document.getElementById('logo-symbolism-grid');
+      if (symbolGrid && typeof BBF_LOGO_SYMBOLISM !== 'undefined') {
+        symbolGrid.innerHTML = BBF_LOGO_SYMBOLISM.map((item, i) => `
+          <div class="col-lg-3 col-md-6 reveal reveal-delay-${Math.min(i + 1, 7)}">
+            <div class="symbol-card">
+              <div class="symbol-icon"><i class="fas ${item.icon}"></i></div>
+              <div class="symbol-element">${item.element}</div>
+              <p class="symbol-meaning">${item.meaning}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // ── Render colour swatches (BBF_COLOURS from data.js)
+      // TODO [BACKEND]: Replace with GET /api/config/colours if dynamic
+      const colourGrid = document.getElementById('colour-swatches');
+      if (colourGrid && typeof BBF_COLOURS !== 'undefined') {
+        colourGrid.innerHTML = BBF_COLOURS.map((c, i) => `
+          <div class="col-lg-3 col-md-6 reveal reveal-delay-${i + 1}">
+            <div class="colour-swatch">
+              <div class="swatch-dot" style="background:${c.hex};" aria-hidden="true"></div>
+              <div>
+                <div class="swatch-name">${c.name}</div>
+                <div class="swatch-meaning">${c.meaning}</div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // ── Render membership requirements (BBF_MEMBERSHIP_REQUIREMENTS from data.js)
+      // TODO [BACKEND]: Replace with GET /api/config/membership-requirements if dynamic
+      const reqList = document.getElementById('requirements-list');
+      if (reqList && typeof BBF_MEMBERSHIP_REQUIREMENTS !== 'undefined') {
+        reqList.innerHTML = BBF_MEMBERSHIP_REQUIREMENTS.map((req, i) => `
+          <div class="value-list-item reveal reveal-delay-${i + 1}"
+               style="background:rgba(255,255,255,0.04);">
+            <div class="value-list-icon" style="background:rgba(201,168,76,0.08);">
+              <i class="fas ${req.icon}"></i>
+            </div>
+            <div>
+              <div class="value-list-title" style="color:var(--bbf-white);">${req.title}</div>
+              <p class="value-list-desc">${req.desc}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // ── Re-trigger scroll reveal for injected elements
+      setTimeout(() => {
+        const revealEls = document.querySelectorAll(
+          '.reveal:not(.revealed), .reveal-left:not(.revealed), .reveal-right:not(.revealed)'
+        );
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        revealEls.forEach(el => obs.observe(el));
+      }, 80);
+
+    });
+  </script>
+
+</body>
+</html>

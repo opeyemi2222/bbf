@@ -1,0 +1,1037 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BBF Chapters — Find your local Brigade Brotherhood Fellowship chapter. BBF brings together Boys' Brigade members across different companies, churches, councils, and locations." />
+  <meta name="keywords" content="BBF Chapters, Brigade Brotherhood Fellowship chapters, Boys Brigade Fellowship locations, BBF local chapter" />
+  <meta name="author" content="Brigade Brotherhood Fellowship" />
+
+  <title>Chapters — Brigade Brotherhood Fellowship</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+
+  <!-- BBF Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════
+       CHAPTERS PAGE — scoped styles
+       Source: BBF Constitution, Article 5.3
+    ══════════════════════════════════════════════════════ */
+
+    /* ── What a chapter is — explainer strip ── */
+    .chapter-explainer {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--bbf-light-grey);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--bbf-light-grey);
+    }
+    .chapter-explainer-item {
+      background: var(--bbf-white);
+      padding: 2rem 1.75rem;
+      text-align: center;
+      transition: background var(--transition-base);
+    }
+    .chapter-explainer-item:hover { background: var(--bbf-off-white); }
+    .explainer-icon {
+      width: 56px; height: 56px;
+      background: var(--bbf-navy);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.35rem; color: var(--bbf-gold);
+      margin: 0 auto 1.25rem;
+      transition: all var(--transition-base);
+    }
+    .chapter-explainer-item:hover .explainer-icon {
+      background: var(--gradient-gold);
+      color: var(--bbf-navy);
+    }
+    .explainer-title {
+      font-family: var(--font-accent);
+      font-size: var(--fs-sm); font-weight: 700;
+      letter-spacing: 0.05em; color: var(--bbf-navy);
+      margin-bottom: 0.5rem;
+    }
+    .explainer-desc {
+      font-size: var(--fs-sm);
+      color: var(--bbf-text-muted);
+      line-height: 1.65; margin: 0;
+    }
+
+    /* ── Chapter card ── */
+    .chapter-card {
+      background: var(--bbf-white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--bbf-light-grey);
+      box-shadow: var(--shadow-sm);
+      padding: 1.75rem;
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .chapter-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gradient-gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition-base);
+    }
+    .chapter-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-6px);
+      border-color: transparent;
+    }
+    .chapter-card:hover::before { transform: scaleX(1); }
+
+    .chapter-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .chapter-avatar {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--bbf-navy) 0%, var(--bbf-navy-light) 100%);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-accent);
+      font-size: 1.1rem; font-weight: 800;
+      color: var(--bbf-gold);
+      flex-shrink: 0;
+    }
+    .chapter-name {
+      font-family: var(--font-heading);
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--bbf-navy);
+      line-height: 1.3;
+      margin-bottom: 0.25rem;
+    }
+    .chapter-location {
+      display: flex; align-items: center; gap: 0.35rem;
+      font-size: var(--fs-xs);
+      color: var(--bbf-text-light);
+      font-family: var(--font-accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .chapter-location i { font-size: 0.6rem; color: var(--bbf-gold); }
+
+    .chapter-meta {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      margin: 1rem 0;
+      padding: 1rem 0;
+      border-top: 1px solid var(--bbf-light-grey);
+      border-bottom: 1px solid var(--bbf-light-grey);
+    }
+    .chapter-meta-item {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-size: var(--fs-xs); color: var(--bbf-text-muted);
+    }
+    .chapter-meta-item i { color: var(--bbf-gold); font-size: 0.65rem; }
+
+    .chapter-coordinator {
+      font-size: var(--fs-sm);
+      color: var(--bbf-text-muted);
+      margin-top: auto;
+      padding-top: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .chapter-coordinator i { color: var(--bbf-gold); font-size: 0.8rem; }
+
+    /* ── Coming soon / empty state ── */
+    .chapters-empty-state {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: var(--bbf-off-white);
+      border-radius: var(--radius-xl);
+      border: 2px dashed var(--bbf-light-grey);
+    }
+    .empty-state-icon {
+      width: 80px; height: 80px;
+      background: var(--bbf-navy);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; color: var(--bbf-gold);
+      margin: 0 auto 1.5rem;
+    }
+    .empty-state-title {
+      font-family: var(--font-heading);
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--bbf-navy); margin-bottom: 0.75rem;
+    }
+    .empty-state-desc {
+      font-size: var(--fs-md);
+      color: var(--bbf-text-muted);
+      line-height: 1.75;
+      max-width: 500px; margin: 0 auto 2rem;
+    }
+
+    /* ── Search & filter bar ── */
+    .chapters-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .chapters-search {
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+      max-width: 340px;
+    }
+    .chapters-search input {
+      width: 100%;
+      padding: 0.6rem 1rem 0.6rem 2.5rem;
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-pill);
+      font-size: var(--fs-sm);
+      font-family: var(--font-body);
+      background: var(--bbf-white);
+      color: var(--bbf-text);
+      transition: all var(--transition-fast);
+      outline: none;
+    }
+    .chapters-search input:focus {
+      border-color: var(--bbf-gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+    .chapters-search i {
+      position: absolute;
+      left: 0.875rem; top: 50%;
+      transform: translateY(-50%);
+      color: var(--bbf-text-light);
+      font-size: 0.8rem;
+      pointer-events: none;
+    }
+    .chapters-results-count {
+      font-size: var(--fs-xs);
+      font-family: var(--font-accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bbf-text-light);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── How to start a chapter ── */
+    .start-chapter-card {
+      background: var(--gradient-navy-dark);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: var(--radius-xl);
+      padding: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .start-chapter-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient-gold);
+    }
+    .start-chapter-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .start-chapter-step:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-num {
+      width: 36px; height: 36px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-accent);
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--bbf-gold);
+      flex-shrink: 0;
+    }
+    .step-content-title {
+      font-family: var(--font-accent);
+      font-size: var(--fs-sm); font-weight: 700;
+      letter-spacing: 0.04em; color: var(--bbf-white);
+      margin-bottom: 0.3rem;
+    }
+    .step-content-desc {
+      font-size: var(--fs-sm);
+      color: rgba(255,255,255,0.55);
+      line-height: 1.65; margin: 0;
+    }
+
+    /* ── Constitution scope explainer ── */
+    .scope-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .scope-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.10);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      text-align: center;
+      transition: all var(--transition-base);
+    }
+    .scope-item:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(201,168,76,0.22);
+      transform: translateY(-3px);
+    }
+    .scope-item i {
+      font-size: 1.75rem;
+      color: var(--bbf-gold);
+      display: block;
+      margin-bottom: 0.875rem;
+    }
+    .scope-item-title {
+      font-family: var(--font-accent);
+      font-size: var(--fs-sm); font-weight: 700;
+      letter-spacing: 0.06em; color: var(--bbf-white);
+      margin-bottom: 0.5rem;
+    }
+    .scope-item-desc {
+      font-size: var(--fs-sm);
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6; margin: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .chapter-explainer { grid-template-columns: repeat(2, 1fr); }
+      .scope-grid { grid-template-columns: repeat(2, 1fr); }
+      .start-chapter-card { padding: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .chapter-explainer { grid-template-columns: repeat(2, 1fr); }
+      .chapters-filter-bar { flex-direction: column; align-items: stretch; }
+      .chapters-search { max-width: 100%; }
+    }
+    @media (max-width: 576px) {
+      .chapter-explainer { grid-template-columns: 1fr; }
+      .scope-grid { grid-template-columns: 1fr; }
+      .start-chapter-card { padding: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="bbf-preloader" style="position:fixed;inset:0;background:var(--bbf-navy);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:1rem;">
+    <div style="width:56px;height:56px;background:var(--gradient-gold);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:800;color:var(--bbf-navy);animation:preloaderPulse 1.2s ease-in-out infinite;">BBF</div>
+    <div style="font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.6);">Loading…</div>
+  </div>
+  <style>@keyframes preloaderPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:0.8}}</style>
+
+  <!-- ══════════════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════════════ -->
+  <nav id="bbf-navbar" class="nav-transparent" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="bbf-logo-wrap" aria-label="BBF Home">
+        <div class="bbf-logo-emblem" aria-hidden="true"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+        <li><a href="chapters.html" class="active">Chapters</a></li>
+        <li class="nav-dropdown">
+          <a href="#" aria-haspopup="true">Programs <i class="fas fa-chevron-down" style="font-size:0.6rem;margin-left:2px;"></i></a>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="events.html" role="menuitem"><i class="fas fa-calendar-alt" style="width:16px;color:var(--bbf-gold);"></i> Events</a>
+            <a href="activities.html" role="menuitem"><i class="fas fa-hands-helping" style="width:16px;color:var(--bbf-gold);"></i> Activities</a>
+            <a href="gallery.html" role="menuitem"><i class="fas fa-images" style="width:16px;color:var(--bbf-gold);"></i> Gallery</a>
+          </div>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="membership.html" class="btn-bbf-primary btn-sm-bbf btn-bbf-nav-cta">
+        <i class="fas fa-user-plus"></i> Join BBF
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="bbf-offcanvas">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- OFFCANVAS -->
+  <div id="offcanvas-overlay" class="offcanvas-overlay" aria-hidden="true"></div>
+  <aside id="bbf-offcanvas" class="bbf-offcanvas" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <div class="offcanvas-header">
+      <a href="index.html" class="bbf-logo-wrap">
+        <div class="bbf-logo-emblem" style="width:38px;height:38px;"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name" style="font-size:0.82rem;">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <button id="offcanvas-close" class="offcanvas-close" aria-label="Close navigation menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="offcanvas-nav" role="list">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About BBF</a></li>
+        <li><a href="leadership.html"><i class="fas fa-crown"></i> Leadership</a></li>
+        <li><a href="chapters.html"><i class="fas fa-map-location-dot"></i> Chapters</a></li>
+        <li><a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+        <li><a href="activities.html"><i class="fas fa-hands-helping"></i> Activities &amp; Projects</a></li>
+        <li><a href="news.html"><i class="fas fa-newspaper"></i> News &amp; Announcements</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="resources.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        <li style="margin-top:0.5rem;border-top:1px solid rgba(201,168,76,0.12);padding-top:0.75rem;">
+          <a href="login.html"><i class="fas fa-sign-in-alt"></i> Member Login</a>
+        </li>
+      </ul>
+    </div>
+    <div class="offcanvas-footer">
+      <a href="membership.html" class="btn-bbf-primary" style="width:100%;justify-content:center;">
+        <i class="fas fa-user-plus"></i> Join BBF Today
+      </a>
+    </div>
+  </aside>
+
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE HEADER
+  ══════════════════════════════════════════════════ -->
+  <header class="page-header" aria-label="Chapters page header">
+    <div class="page-header-bg" aria-hidden="true"></div>
+    <div class="page-header-decor" aria-hidden="true"></div>
+    <div class="container page-header-content">
+      <nav class="page-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep" aria-hidden="true"><i class="fas fa-chevron-right" style="font-size:0.55rem;"></i></span>
+        <span class="current" aria-current="page">Chapters</span>
+      </nav>
+      <h1 class="page-header-title reveal">BBF Chapters</h1>
+      <p class="page-header-subtitle reveal">
+        BBF brings together Boys' Brigade members across companies, churches,
+        councils, and locations — find your chapter or help start one.
+      </p>
+    </div>
+  </header>
+
+
+  <!-- ══════════════════════════════════════════════════
+       01. WHAT IS A BBF CHAPTER?
+       Source: BBF Constitution, Articles 5.3, 4.1
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py bg-off-white" aria-labelledby="what-is-heading">
+    <div class="container">
+
+      <div class="text-center reveal" style="max-width:620px;margin:0 auto 3.5rem;">
+        <div class="overline">Constitution, Article 5.3</div>
+        <div class="gold-divider-center" style="margin-top:0.5rem;"></div>
+        <h2 class="section-title mt-3" id="what-is-heading">
+          What is a BBF Chapter?
+        </h2>
+        <p class="section-subtitle mt-2" style="margin:0 auto;">
+          A BBF chapter is a local gathering of Boys' Brigade members connected
+          through the Fellowship. BBF may bring together members from:
+        </p>
+      </div>
+
+      <div class="chapter-explainer reveal">
+        <div class="chapter-explainer-item">
+          <div class="explainer-icon"><i class="fas fa-church"></i></div>
+          <div class="explainer-title">Churches</div>
+          <p class="explainer-desc">Members from different churches and denominations — united by their shared Brigade identity and Christian faith.</p>
+        </div>
+        <div class="chapter-explainer-item">
+          <div class="explainer-icon"><i class="fas fa-flag"></i></div>
+          <div class="explainer-title">Companies</div>
+          <p class="explainer-desc">Active members from various Boys' Brigade companies who wish to maintain fellowship beyond their company activities.</p>
+        </div>
+        <div class="chapter-explainer-item">
+          <div class="explainer-icon"><i class="fas fa-sitemap"></i></div>
+          <div class="explainer-title">Councils &amp; Dioceses</div>
+          <p class="explainer-desc">Members from different Boys' Brigade councils, dioceses, and organisational structures across a given area.</p>
+        </div>
+        <div class="chapter-explainer-item">
+          <div class="explainer-icon"><i class="fas fa-map-location-dot"></i></div>
+          <div class="explainer-title">Locations</div>
+          <p class="explainer-desc">Members from the same town, city, or area — regardless of which company, church, or council they belong to.</p>
+        </div>
+      </div>
+
+      <!-- Important note: BBF does not replace BB structures -->
+      <div class="reveal mt-4 p-4 d-flex align-items-start gap-3"
+           style="background:var(--bbf-white);border:1px solid var(--bbf-light-grey);
+                  border-left:4px solid var(--bbf-gold);border-radius:var(--radius-md);">
+        <i class="fas fa-info-circle" style="color:var(--bbf-gold);font-size:1.25rem;margin-top:2px;flex-shrink:0;"></i>
+        <div>
+          <div style="font-family:var(--font-accent);font-size:var(--fs-sm);font-weight:700;
+            letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-navy);margin-bottom:0.4rem;">
+            Important — Art. 6
+          </div>
+          <p style="font-size:var(--fs-sm);color:var(--bbf-text-muted);line-height:1.7;margin:0;">
+            BBF chapters shall not replace or interfere with the authority and activities of any Boys' Brigade company,
+            church, council, diocese, or other recognised Brigade structure. Membership of a BBF chapter does not
+            exempt any member from responsibilities to their respective Brigade company or church.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       02. SCOPE — WHO BBF CONNECTS
+       Source: BBF Constitution, Article 5.3
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-navy);" aria-labelledby="scope-heading">
+    <div class="container">
+
+      <div class="text-center reveal" style="max-width:560px;margin:0 auto 3.5rem;">
+        <div class="overline-white">Constitution, Article 5.3</div>
+        <div class="gold-divider-center" style="margin-top:0.5rem;"></div>
+        <h2 class="section-title-light mt-3" id="scope-heading">
+          The Scope of BBF Fellowship
+        </h2>
+        <p class="section-subtitle-light mt-2" style="margin:0 auto;">
+          BBF promotes unity across all these dimensions — without interfering with
+          the legitimate structures and responsibilities of individual members.
+        </p>
+      </div>
+
+      <div class="scope-grid">
+        <div class="scope-item reveal reveal-delay-1">
+          <i class="fas fa-flag"></i>
+          <div class="scope-item-title">Different Companies</div>
+          <p class="scope-item-desc">Members from different Boys' Brigade companies come together as one fellowship within BBF.</p>
+        </div>
+        <div class="scope-item reveal reveal-delay-2">
+          <i class="fas fa-church"></i>
+          <div class="scope-item-title">Different Churches</div>
+          <p class="scope-item-desc">BBF is interdenominational — members from Baptist, Anglican, Methodist, RCCG, CAC, and all churches are welcome.</p>
+        </div>
+        <div class="scope-item reveal reveal-delay-3">
+          <i class="fas fa-sitemap"></i>
+          <div class="scope-item-title">Different Councils</div>
+          <p class="scope-item-desc">Brigade councils and dioceses may differ, but the shared identity of Boys' Brigade membership unites all.</p>
+        </div>
+        <div class="scope-item reveal reveal-delay-4">
+          <i class="fas fa-map-location-dot"></i>
+          <div class="scope-item-title">Different Locations</div>
+          <p class="scope-item-desc">Members from different states, cities, towns, and communities — one fellowship regardless of geography.</p>
+        </div>
+        <div class="scope-item reveal reveal-delay-5">
+          <i class="fas fa-users"></i>
+          <div class="scope-item-title">Active &amp; Former Members</div>
+          <p class="scope-item-desc">Both currently active Boys' Brigade members and former members who remain committed to Brigade values are welcome.</p>
+        </div>
+        <div class="scope-item reveal reveal-delay-6">
+          <i class="fas fa-shield-halved"></i>
+          <div class="scope-item-title">Brigade School Certified</div>
+          <p class="scope-item-desc">New members must hold the Brigade School Certificate. Existing members without it may remain during the transition period.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       03. CURRENT CHAPTERS DIRECTORY
+       TODO [BACKEND]: Replace BBF_CHAPTERS with GET /api/chapters
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-white);" aria-labelledby="chapters-dir-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-header-left reveal">
+          <div class="overline">Chapter Directory</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="chapters-dir-heading">
+            Find a Chapter
+          </h2>
+          <p class="section-subtitle mt-2">
+            Search and browse registered BBF chapters. More chapters are being
+            established as the fellowship grows.
+          </p>
+        </div>
+        <div class="reveal" id="chapters-count-wrap">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Filter / search bar -->
+      <div class="chapters-filter-bar reveal" role="search" aria-label="Search chapters">
+        <div class="chapters-search">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input
+            type="search"
+            id="chapters-search-input"
+            placeholder="Search by name or location…"
+            aria-label="Search chapters by name or location"
+            autocomplete="off"
+          />
+        </div>
+        <button class="coord-filter-btn active" data-status="all"
+          style="padding:0.55rem 1.1rem;background:var(--bbf-off-white);
+            border:1px solid var(--bbf-light-grey);border-radius:var(--radius-pill);
+            font-family:var(--font-accent);font-size:0.72rem;font-weight:600;
+            letter-spacing:0.08em;text-transform:uppercase;color:var(--bbf-text-muted);
+            cursor:pointer;transition:all var(--transition-fast);"
+          id="filter-all">All</button>
+        <button class="coord-filter-btn" data-status="active"
+          style="padding:0.55rem 1.1rem;background:var(--bbf-off-white);
+            border:1px solid var(--bbf-light-grey);border-radius:var(--radius-pill);
+            font-family:var(--font-accent);font-size:0.72rem;font-weight:600;
+            letter-spacing:0.08em;text-transform:uppercase;color:var(--bbf-text-muted);
+            cursor:pointer;transition:all var(--transition-fast);"
+          id="filter-active">Active</button>
+      </div>
+
+      <p id="chapters-results-count" class="chapters-results-count" aria-live="polite"></p>
+
+      <!-- Chapters grid — populated by JS -->
+      <div id="chapters-grid" class="row g-4" role="list" aria-label="BBF chapters directory">
+        <!-- Populated by JS -->
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       04. HOW TO START A CHAPTER
+       Source: BBF Constitution, Articles 7.3, 13, 10
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py bg-off-white" aria-labelledby="start-heading">
+    <div class="container">
+
+      <div class="row align-items-start g-5">
+
+        <!-- Left col: intro -->
+        <div class="col-lg-5 reveal-left">
+          <div class="overline">Grow the Fellowship</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="start-heading">
+            Start a Chapter<br />in Your Area
+          </h2>
+          <p style="color:var(--bbf-text-muted);line-height:1.85;margin-top:1rem;">
+            If there is no BBF chapter in your area and you are a Boys' Brigade member
+            who shares our values, you can take the initiative to bring brothers together.
+            Starting a chapter begins with registering as a BBF member and contacting
+            the BBF Secretary.
+          </p>
+          <p style="color:var(--bbf-text-muted);line-height:1.85;margin-top:0.75rem;">
+            Every chapter must operate in line with the BBF Constitution and shall at
+            all times respect the authority of The Boys' Brigade in its area.
+          </p>
+          <div class="mt-4 d-flex flex-wrap gap-3">
+            <a href="membership.html" class="btn-bbf-primary">
+              <i class="fas fa-user-plus"></i> Register as a Member
+            </a>
+            <a href="contact.html" class="btn-bbf-outline">
+              <i class="fas fa-envelope"></i> Contact the Secretary
+            </a>
+          </div>
+        </div>
+
+        <!-- Right col: steps -->
+        <div class="col-lg-7 reveal-right">
+          <div class="start-chapter-card">
+            <div class="overline-white" style="margin-bottom:1.25rem;">Step-by-Step Process</div>
+            <div class="start-chapter-step">
+              <div class="step-num">1</div>
+              <div>
+                <div class="step-content-title">Register as a BBF Member</div>
+                <p class="step-content-desc">Complete your BBF membership registration. You must be an active or former Boys' Brigade member and hold (or be working towards) the Brigade School Certificate.</p>
+              </div>
+            </div>
+            <div class="start-chapter-step">
+              <div class="step-num">2</div>
+              <div>
+                <div class="step-content-title">Identify Interested Members</div>
+                <p class="step-content-desc">Reach out to fellow Boys' Brigade members in your area — from your company, church, council, or location — who share the values and purpose of BBF.</p>
+              </div>
+            </div>
+            <div class="start-chapter-step">
+              <div class="step-num">3</div>
+              <div>
+                <div class="step-content-title">Contact the BBF Secretary</div>
+                <p class="step-content-desc">Write to the BBF Secretary expressing your intention to form a chapter, providing details of the proposed location and the members who would be involved.</p>
+              </div>
+            </div>
+            <div class="start-chapter-step">
+              <div class="step-num">4</div>
+              <div>
+                <div class="step-content-title">Await Approval &amp; Guidance</div>
+                <p class="step-content-desc">The BBF Executive will review your application and provide guidance on the formal recognition process for the new chapter.</p>
+              </div>
+            </div>
+            <div class="start-chapter-step">
+              <div class="step-num">5</div>
+              <div>
+                <div class="step-content-title">Hold Your Inaugural Meeting</div>
+                <p class="step-content-desc">Once approved, hold your inaugural chapter meeting, elect chapter officers, and begin your fellowship activities in line with the BBF Constitution.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       05. CLOSING CTA
+  ══════════════════════════════════════════════════ -->
+  <section class="cta-section" aria-labelledby="chapters-cta-heading">
+    <div class="cta-top-line" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-1" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-2" aria-hidden="true"></div>
+    <div class="cta-content">
+      <div class="overline-white reveal">No Chapter Near You?</div>
+      <div class="gold-divider-center reveal" style="margin-top:0.5rem;"></div>
+      <h2 class="cta-title reveal mt-3" id="chapters-cta-heading">
+        Be the One Who<br /><span class="gold-text">Brings Brothers Together.</span>
+      </h2>
+      <p class="cta-desc reveal">
+        Every chapter starts with one person who decided to make it happen.
+        Register as a BBF member today and take the first step toward building
+        a fellowship in your area.
+      </p>
+      <div class="cta-btn-group reveal">
+        <a href="membership.html" class="btn-bbf-primary">
+          <i class="fas fa-user-plus"></i> Join BBF Today
+        </a>
+        <a href="contact.html" class="btn-bbf-outline-white">
+          <i class="fas fa-envelope"></i> Contact the Secretary
+        </a>
+      </div>
+      <p class="cta-assurance reveal">
+        <i class="fas fa-shield-halved"></i> Boys' Brigade members only
+        &nbsp;·&nbsp;
+        <i class="fas fa-cross"></i> Christian fellowship
+        &nbsp;·&nbsp;
+        <i class="fas fa-book-open"></i> Constitution-governed
+      </p>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="bbf-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="bbf-logo-wrap">
+            <div class="bbf-logo-emblem"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+            <div class="bbf-logo-text">
+              <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+              <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+            </div>
+          </a>
+          <p class="footer-brand-desc">
+            A fellowship platform for Boys' Brigade members — united by Faith, Fellowship,
+            Service, and Friendship. From the Brigade, we build Brotherhood; through
+            Fellowship, we grow together.
+          </p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="footer-social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Quick Links</h3>
+          <nav class="footer-links">
+            <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+            <a href="about.html"><i class="fas fa-chevron-right"></i> About BBF</a>
+            <a href="leadership.html"><i class="fas fa-chevron-right"></i> Leadership</a>
+            <a href="chapters.html"><i class="fas fa-chevron-right"></i> Chapters</a>
+            <a href="membership.html"><i class="fas fa-chevron-right"></i> Membership</a>
+            <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Fellowship</h3>
+          <nav class="footer-links">
+            <a href="events.html"><i class="fas fa-chevron-right"></i> Events</a>
+            <a href="news.html"><i class="fas fa-chevron-right"></i> News &amp; Announcements</a>
+            <a href="activities.html"><i class="fas fa-chevron-right"></i> Activities &amp; Projects</a>
+            <a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a>
+            <a href="resources.html"><i class="fas fa-chevron-right"></i> Resources</a>
+            <a href="login.html"><i class="fas fa-chevron-right"></i> Member Login</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Get in Touch</h3>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="footer-contact-text">bbfellowship26@gmail.com</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-globe"></i></div>
+            <div class="footer-contact-text">www.bbfellowship.org</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-phone"></i></div>
+            <div class="footer-contact-text">09066681922</div>
+          </div>
+          <div style="margin-top:1.5rem;">
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:0.75rem;">Get BBF updates in your inbox.</p>
+            <form id="newsletter-form" novalidate>
+              <div class="footer-newsletter-form">
+                <input type="email" id="newsletter-email" class="footer-newsletter-input" placeholder="Your email address" autocomplete="email" required />
+                <button type="submit" class="footer-newsletter-btn" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </form>
+            <span id="newsletter-msg" role="alert" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <p class="footer-copyright">&copy; <span id="footer-year">2026</span> Brigade Brotherhood Fellowship. All rights reserved.</p>
+          <nav class="footer-legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Cookie Policy</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:46px;height:46px;background:var(--gradient-gold);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--bbf-navy);font-size:1rem;box-shadow:var(--shadow-gold);cursor:pointer;z-index:900;opacity:0;pointer-events:none;transform:translateY(10px);transition:all var(--transition-base);">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- SCRIPTS -->
+  <script src="assets/js/data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    /* ══════════════════════════════════════════════════════
+       CHAPTERS PAGE — inline JS
+       Renders chapter cards from BBF_CHAPTERS (data.js).
+       Handles search, status filter, and empty/placeholder state.
+       TODO [BACKEND]: Replace BBF_CHAPTERS with GET /api/chapters
+    ══════════════════════════════════════════════════════ */
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      const grid         = document.getElementById('chapters-grid');
+      const searchInput  = document.getElementById('chapters-search-input');
+      const countEl      = document.getElementById('chapters-results-count');
+      const countWrap    = document.getElementById('chapters-count-wrap');
+      const filterBtns   = document.querySelectorAll('[data-status]');
+
+      let activeStatus = 'all';
+      let searchQuery  = '';
+
+      // ── Derive initials from chapter name
+      function chapterInitials(name) {
+        return name.split(' ').filter(Boolean).slice(0, 2)
+          .map(w => w[0].toUpperCase()).join('');
+      }
+
+      // ── Format status badge
+      function statusBadge(status) {
+        if (status === 'active') {
+          return '<span class="badge-active">Active</span>';
+        }
+        return `<span style="display:inline-flex;align-items:center;gap:0.3rem;
+          background:rgba(180,140,20,0.12);color:#C89A30;
+          border:1px solid rgba(180,140,20,0.2);font-size:0.65rem;
+          font-family:var(--font-accent);font-weight:600;letter-spacing:0.06em;
+          text-transform:uppercase;padding:0.2rem 0.65rem;border-radius:9999px;">
+          ${status}
+        </span>`;
+      }
+
+      // ── Render all matching chapters
+      function renderChapters() {
+        const filtered = BBF_CHAPTERS.filter(ch => {
+          const q = searchQuery.toLowerCase();
+          const statusMatch = activeStatus === 'all' || ch.status === activeStatus;
+          const textMatch = !q
+            || ch.name.toLowerCase().includes(q)
+            || ch.location.toLowerCase().includes(q);
+          return statusMatch && textMatch;
+        });
+
+        // Update counts
+        if (countEl) {
+          countEl.textContent = filtered.length > 0
+            ? `Showing ${filtered.length} of ${BBF_CHAPTERS.length} chapter${BBF_CHAPTERS.length !== 1 ? 's' : ''}`
+            : '';
+        }
+        if (countWrap) {
+          countWrap.innerHTML = `<span class="badge-gold"><i class="fas fa-building-user"></i> ${BBF_CHAPTERS.length} Chapter${BBF_CHAPTERS.length !== 1 ? 's' : ''}</span>`;
+        }
+
+        if (!grid) return;
+
+        // ── Empty state: no real chapters yet
+        const hasRealChapters = BBF_CHAPTERS.some(ch =>
+          ch.name !== 'Founding Chapter' && ch.location !== 'To be confirmed'
+        );
+
+        if (!hasRealChapters) {
+          grid.innerHTML = `
+            <div class="col-12">
+              <div class="chapters-empty-state">
+                <div class="empty-state-icon">
+                  <i class="fas fa-map-location-dot"></i>
+                </div>
+                <div class="empty-state-title">Chapters Are Being Established</div>
+                <p class="empty-state-desc">
+                  BBF is a new fellowship and chapters are currently being set up.
+                  Register as a member today and be part of founding a chapter
+                  in your area.
+                </p>
+                <div class="d-flex flex-wrap gap-3 justify-content-center">
+                  <a href="membership.html" class="btn-bbf-primary">
+                    <i class="fas fa-user-plus"></i> Register as a Member
+                  </a>
+                  <a href="contact.html" class="btn-bbf-outline">
+                    <i class="fas fa-envelope"></i> Contact the Secretary
+                  </a>
+                </div>
+                <p style="margin-top:1.5rem;font-size:var(--fs-xs);color:var(--bbf-text-light);
+                  font-family:var(--font-accent);letter-spacing:0.06em;text-transform:uppercase;">
+                  <!-- TODO [BACKEND]: This state disappears once GET /api/chapters returns real data -->
+                  Chapter data will populate here once connected to the membership system.
+                </p>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        // ── No search results
+        if (filtered.length === 0) {
+          grid.innerHTML = `
+            <div class="col-12 text-center py-5">
+              <i class="fas fa-search" style="font-size:2.5rem;opacity:0.25;display:block;margin-bottom:1rem;color:var(--bbf-text-light);"></i>
+              <p style="font-size:var(--fs-md);color:var(--bbf-text-muted);">
+                No chapters found for <strong>"${searchQuery}"</strong>.
+              </p>
+            </div>
+          `;
+          return;
+        }
+
+        // ── Render chapter cards
+        grid.innerHTML = filtered.map((ch, i) => `
+          <div class="col-lg-4 col-md-6 reveal reveal-delay-${Math.min(i + 1, 8)}" role="listitem">
+            <div class="chapter-card">
+              <div class="chapter-card-header">
+                <div class="chapter-avatar" aria-hidden="true">${chapterInitials(ch.name)}</div>
+                <div>
+                  <div class="chapter-name">${ch.name}</div>
+                  <div class="chapter-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    ${ch.location}
+                  </div>
+                </div>
+              </div>
+
+              <div>${statusBadge(ch.status)}</div>
+
+              <div class="chapter-meta">
+                <div class="chapter-meta-item">
+                  <i class="fas fa-users"></i>
+                  ${ch.members > 0 ? ch.members + ' member' + (ch.members !== 1 ? 's' : '') : 'Founding stage'}
+                </div>
+                <div class="chapter-meta-item">
+                  <i class="fas fa-shield-halved"></i>
+                  BBF Chapter
+                </div>
+              </div>
+
+              <div class="chapter-coordinator">
+                <i class="fas fa-user-tie"></i>
+                <span>${ch.coordinator}</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        // Re-trigger scroll reveal for newly injected cards
+        setTimeout(() => {
+          grid.querySelectorAll('.reveal:not(.revealed)').forEach(el => el.classList.add('revealed'));
+        }, 50);
+      }
+
+      // ── Filter buttons
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => {
+            b.style.background = 'var(--bbf-off-white)';
+            b.style.color = 'var(--bbf-text-muted)';
+            b.style.borderColor = 'var(--bbf-light-grey)';
+          });
+          btn.style.background = 'var(--bbf-navy)';
+          btn.style.color = 'var(--bbf-white)';
+          btn.style.borderColor = 'var(--bbf-navy)';
+          activeStatus = btn.dataset.status;
+          renderChapters();
+        });
+      });
+
+      // ── Search
+      searchInput?.addEventListener('input', e => {
+        searchQuery = e.target.value.trim();
+        renderChapters();
+      });
+
+      // ── Initial render
+      renderChapters();
+
+      // ── Re-trigger scroll reveal for injected elements
+      setTimeout(() => {
+        const els = document.querySelectorAll('.reveal:not(.revealed),.reveal-left:not(.revealed),.reveal-right:not(.revealed)');
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        els.forEach(el => obs.observe(el));
+      }, 80);
+
+    });
+  </script>
+
+</body>
+</html>

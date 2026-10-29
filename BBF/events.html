@@ -1,0 +1,1140 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BBF Events — Fellowship gatherings, community service days, personal development workshops, and social activities organised by Brigade Brotherhood Fellowship." />
+  <meta name="keywords" content="BBF Events, Brigade Brotherhood Fellowship events, Boys Brigade fellowship activities, BBF gatherings" />
+  <meta name="author" content="Brigade Brotherhood Fellowship" />
+
+  <title>Events — Brigade Brotherhood Fellowship</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+
+  <!-- BBF Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════
+       EVENTS PAGE — scoped styles
+       Source: BBF Constitution, Article 19
+    ══════════════════════════════════════════════════════ */
+
+    /* ── Upcoming/Past tab bar ── */
+    .events-tab-bar {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--bbf-light-grey);
+      margin-bottom: 2.5rem;
+    }
+    .events-tab {
+      padding: 0.75rem 1.5rem;
+      font-family: var(--font-accent);
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bbf-text-muted);
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .events-tab:hover { color: var(--bbf-navy); }
+    .events-tab.active {
+      color: var(--bbf-navy);
+      border-bottom-color: var(--bbf-gold);
+    }
+    .tab-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 22px;
+      background: var(--bbf-light-grey);
+      color: var(--bbf-text-muted);
+      font-size: 0.65rem;
+      font-weight: 700;
+      border-radius: var(--radius-pill);
+      padding: 0 0.4rem;
+      transition: all var(--transition-fast);
+    }
+    .events-tab.active .tab-count {
+      background: var(--bbf-gold);
+      color: var(--bbf-navy);
+    }
+
+    /* ── Category filter pills ── */
+    .category-filter-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      align-items: center;
+    }
+    .cat-filter-btn {
+      padding: 0.4rem 1rem;
+      background: var(--bbf-off-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-accent);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bbf-text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .cat-filter-btn:hover { border-color: var(--bbf-navy); color: var(--bbf-navy); }
+    .cat-filter-btn.active {
+      background: var(--bbf-navy);
+      color: var(--bbf-white);
+      border-color: var(--bbf-navy);
+    }
+    .cat-filter-btn .cat-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Featured event hero card ── */
+    .event-hero-card {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: var(--bbf-navy);
+      position: relative;
+      min-height: 420px;
+      display: flex;
+      align-items: flex-end;
+      box-shadow: var(--shadow-xl);
+      margin-bottom: 2.5rem;
+      transition: transform var(--transition-base);
+    }
+    .event-hero-card:hover { transform: translateY(-4px); }
+    .event-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/images/placeholder-event.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.2;
+      transition: opacity var(--transition-slow);
+    }
+    .event-hero-card:hover .event-hero-bg { opacity: 0.28; }
+    .event-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(6,13,26,0.98) 0%,
+        rgba(10,22,40,0.85) 40%,
+        rgba(10,22,40,0.4) 75%,
+        transparent 100%
+      );
+    }
+    .event-hero-body {
+      position: relative;
+      z-index: 2;
+      padding: 2.5rem;
+      width: 100%;
+    }
+    .event-hero-featured-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.875rem;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-accent);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bbf-gold-light);
+      margin-bottom: 1rem;
+    }
+    .event-hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+      font-weight: 800;
+      color: var(--bbf-white);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .event-hero-desc {
+      font-size: var(--fs-sm);
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 1.5rem;
+    }
+    .event-hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+    .event-hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: var(--fs-sm);
+      color: rgba(255,255,255,0.7);
+      font-family: var(--font-accent);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .event-hero-meta-item i { color: var(--bbf-gold); font-size: 0.8rem; }
+
+    /* ── Standard event card ── */
+    .event-card {
+      background: var(--bbf-white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--bbf-light-grey);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .event-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-6px);
+      border-color: transparent;
+    }
+
+    /* Date strip at top */
+    .event-card-date-strip {
+      background: var(--bbf-navy);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .event-card-day {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--bbf-gold);
+      line-height: 1;
+    }
+    .event-card-month-year {
+      display: flex;
+      flex-direction: column;
+    }
+    .event-card-month {
+      font-family: var(--font-accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bbf-white);
+    }
+    .event-card-year {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.45);
+      font-family: var(--font-accent);
+      letter-spacing: 0.06em;
+    }
+    .event-card-date-divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(255,255,255,0.12);
+      flex-shrink: 0;
+    }
+
+    .event-card-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .event-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--bbf-navy);
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+    }
+    .event-card-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .event-card-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: var(--fs-xs);
+      color: var(--bbf-text-muted);
+    }
+    .event-card-meta-row i { color: var(--bbf-gold); font-size: 0.65rem; width: 12px; }
+    .event-card-desc {
+      font-size: var(--fs-sm);
+      color: var(--bbf-text-muted);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+    .event-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--bbf-light-grey);
+      margin-top: auto;
+    }
+
+    /* ── Past event card (greyscale treatment) ── */
+    .event-card.past-event .event-card-date-strip {
+      background: var(--bbf-navy-mid);
+      opacity: 0.8;
+    }
+    .event-card.past-event .event-card-day { color: var(--bbf-mid-grey); }
+    .event-card.past-event { opacity: 0.8; }
+    .event-card.past-event:hover { opacity: 1; }
+
+    /* ── Empty state ── */
+    .events-empty {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--bbf-off-white);
+      border-radius: var(--radius-lg);
+      border: 2px dashed var(--bbf-light-grey);
+    }
+    .events-empty i {
+      font-size: 2.5rem;
+      color: var(--bbf-mid-grey);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .events-empty p {
+      color: var(--bbf-text-muted);
+      font-size: var(--fs-md);
+      margin: 0;
+    }
+
+    /* ── Event type legend ── */
+    .event-type-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: var(--bbf-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-md);
+      margin-bottom: 2rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: var(--fs-xs);
+      color: var(--bbf-text-muted);
+    }
+
+    /* ── Calendar strip (month grouping) ── */
+    .calendar-month-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2.5rem 0 1.25rem;
+    }
+    .calendar-month-header:first-of-type { margin-top: 0; }
+    .cal-month-label {
+      font-family: var(--font-accent);
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bbf-navy);
+      white-space: nowrap;
+    }
+    .cal-month-line {
+      flex: 1;
+      height: 1px;
+      background: var(--bbf-light-grey);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .event-hero-card { min-height: 340px; }
+      .event-hero-body { padding: 1.75rem; }
+      .event-hero-title { font-size: 1.5rem; }
+      .events-tab-bar { flex-wrap: wrap; }
+    }
+    @media (max-width: 576px) {
+      .category-filter-wrap { gap: 0.4rem; }
+      .cat-filter-btn { padding: 0.35rem 0.75rem; font-size: 0.65rem; }
+      .event-hero-card { min-height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="bbf-preloader" style="position:fixed;inset:0;background:var(--bbf-navy);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:1rem;">
+    <div style="width:56px;height:56px;background:var(--gradient-gold);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:800;color:var(--bbf-navy);animation:preloaderPulse 1.2s ease-in-out infinite;">BBF</div>
+    <div style="font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.6);">Loading…</div>
+  </div>
+  <style>@keyframes preloaderPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:0.8}}</style>
+
+  <!-- ══════════════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════════════ -->
+  <nav id="bbf-navbar" class="nav-transparent" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="bbf-logo-wrap" aria-label="BBF Home">
+        <div class="bbf-logo-emblem" aria-hidden="true"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+        <li><a href="chapters.html">Chapters</a></li>
+        <li class="nav-dropdown">
+          <a href="#" aria-haspopup="true">Programs <i class="fas fa-chevron-down" style="font-size:0.6rem;margin-left:2px;"></i></a>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="events.html" role="menuitem" class="active"><i class="fas fa-calendar-alt" style="width:16px;color:var(--bbf-gold);"></i> Events</a>
+            <a href="activities.html" role="menuitem"><i class="fas fa-hands-helping" style="width:16px;color:var(--bbf-gold);"></i> Activities</a>
+            <a href="gallery.html" role="menuitem"><i class="fas fa-images" style="width:16px;color:var(--bbf-gold);"></i> Gallery</a>
+          </div>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="membership.html" class="btn-bbf-primary btn-sm-bbf btn-bbf-nav-cta">
+        <i class="fas fa-user-plus"></i> Join BBF
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="bbf-offcanvas">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- OFFCANVAS -->
+  <div id="offcanvas-overlay" class="offcanvas-overlay" aria-hidden="true"></div>
+  <aside id="bbf-offcanvas" class="bbf-offcanvas" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <div class="offcanvas-header">
+      <a href="index.html" class="bbf-logo-wrap">
+        <div class="bbf-logo-emblem" style="width:38px;height:38px;"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name" style="font-size:0.82rem;">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <button id="offcanvas-close" class="offcanvas-close" aria-label="Close navigation menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="offcanvas-nav" role="list">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About BBF</a></li>
+        <li><a href="leadership.html"><i class="fas fa-crown"></i> Leadership</a></li>
+        <li><a href="chapters.html"><i class="fas fa-map-location-dot"></i> Chapters</a></li>
+        <li><a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+        <li><a href="activities.html"><i class="fas fa-hands-helping"></i> Activities &amp; Projects</a></li>
+        <li><a href="news.html"><i class="fas fa-newspaper"></i> News &amp; Announcements</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="resources.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        <li style="margin-top:0.5rem;border-top:1px solid rgba(201,168,76,0.12);padding-top:0.75rem;">
+          <a href="login.html"><i class="fas fa-sign-in-alt"></i> Member Login</a>
+        </li>
+      </ul>
+    </div>
+    <div class="offcanvas-footer">
+      <a href="membership.html" class="btn-bbf-primary" style="width:100%;justify-content:center;">
+        <i class="fas fa-user-plus"></i> Join BBF Today
+      </a>
+    </div>
+  </aside>
+
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE HEADER
+  ══════════════════════════════════════════════════ -->
+  <header class="page-header" aria-label="Events page header">
+    <div class="page-header-bg" aria-hidden="true"></div>
+    <div class="page-header-decor" aria-hidden="true"></div>
+    <div class="container page-header-content">
+      <nav class="page-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep" aria-hidden="true"><i class="fas fa-chevron-right" style="font-size:0.55rem;"></i></span>
+        <span class="current" aria-current="page">Events</span>
+      </nav>
+      <h1 class="page-header-title reveal">BBF Events</h1>
+      <p class="page-header-subtitle reveal">
+        Fellowship gatherings, community service, personal development workshops,
+        and social activities — all bringing BBF members together.
+      </p>
+    </div>
+  </header>
+
+
+  <!-- ══════════════════════════════════════════════════
+       01. EVENTS TYPES INFO STRIP
+       Source: BBF Constitution, Article 19
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py-sm" style="background:var(--bbf-navy-mid);" aria-label="Types of BBF events">
+    <div class="container">
+      <div class="reveal d-flex flex-wrap align-items-center justify-content-between gap-3">
+        <div>
+          <div class="overline-white">Constitution, Article 19</div>
+          <p style="color:rgba(255,255,255,0.6);font-size:var(--fs-sm);margin-top:0.4rem;max-width:500px;line-height:1.6;">
+            BBF may organise fellowship gatherings, social events, community service,
+            educational programmes, skills development, sports, music, welfare initiatives,
+            networking activities, Christian programmes, and Brigade-support activities.
+          </p>
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+          <span class="event-category-tag tag-fellowship">Fellowship</span>
+          <span class="event-category-tag tag-community">Community Service</span>
+          <span class="event-category-tag tag-training">Training</span>
+          <span class="event-category-tag tag-outreach">Outreach</span>
+          <span class="event-category-tag" style="background:rgba(100,50,160,0.18);color:#C08AFF;border:1px solid rgba(100,50,160,0.3);">Social</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       02. MAIN EVENTS LISTING
+       TODO [BACKEND]: Replace BBF_EVENTS with GET /api/events
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-off-white);" aria-labelledby="events-listing-heading">
+    <div class="container">
+
+      <!-- Section header -->
+      <div class="section-header" style="margin-bottom:2rem;">
+        <div class="section-header-left reveal">
+          <div class="overline">Calendar</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="events-listing-heading">
+            All Events
+          </h2>
+        </div>
+        <div id="events-summary-wrap" class="reveal">
+          <!-- Populated by JS: event counts -->
+        </div>
+      </div>
+
+      <!-- Tab bar: Upcoming / Past -->
+      <div class="events-tab-bar reveal" role="tablist" aria-label="Filter events by status">
+        <button class="events-tab active" id="tab-upcoming" role="tab"
+                aria-selected="true" aria-controls="events-panel"
+                data-tab="upcoming">
+          <i class="fas fa-calendar-alt" style="font-size:0.8rem;"></i>
+          Upcoming
+          <span class="tab-count" id="upcoming-count">0</span>
+        </button>
+        <button class="events-tab" id="tab-past" role="tab"
+                aria-selected="false" aria-controls="events-panel"
+                data-tab="past">
+          <i class="fas fa-clock-rotate-left" style="font-size:0.8rem;"></i>
+          Past Events
+          <span class="tab-count" id="past-count">0</span>
+        </button>
+      </div>
+
+      <!-- Category filter pills -->
+      <div class="category-filter-wrap reveal" role="group" aria-label="Filter by event category" id="category-filter-wrap">
+        <!-- Populated by JS based on available categories -->
+      </div>
+
+      <!-- Events panel -->
+      <div id="events-panel" role="tabpanel" aria-labelledby="tab-upcoming">
+
+        <!-- Featured event hero (upcoming tab only) -->
+        <div id="featured-event-wrap">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Month-grouped event grid -->
+        <div id="events-grid" aria-live="polite" aria-label="Events list">
+          <!-- Populated by JS -->
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       03. SUBMIT / SUGGEST AN EVENT
+       Source: BBF Constitution, Articles 13.3, 10.1, 19
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-white);" aria-labelledby="suggest-heading">
+    <div class="container">
+      <div class="row align-items-center g-5">
+
+        <div class="col-lg-6 reveal-left">
+          <div class="overline">Organise with BBF</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="suggest-heading">
+            Want to Organise an Event?
+          </h2>
+          <p style="color:var(--bbf-text-muted);line-height:1.85;margin-top:1rem;">
+            BBF members and chapters can propose fellowship activities, community service
+            days, skills sessions, or social events. All activities must be consistent
+            with the objectives of BBF and approved through the appropriate channel.
+          </p>
+          <p style="color:var(--bbf-text-muted);line-height:1.85;margin-top:0.75rem;">
+            Contact the BBF Social/Event Coordinator or the Secretary to discuss your
+            proposal. Chapter-level events should go through your chapter coordinator.
+          </p>
+          <div class="mt-4 d-flex flex-wrap gap-3">
+            <a href="contact.html" class="btn-bbf-primary">
+              <i class="fas fa-envelope"></i> Contact Us
+            </a>
+            <a href="membership.html" class="btn-bbf-outline">
+              <i class="fas fa-user-plus"></i> Become a Member First
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal-right">
+          <div style="background:var(--bbf-off-white);border:1px solid var(--bbf-light-grey);
+            border-radius:var(--radius-lg);padding:2rem;box-shadow:var(--shadow-sm);">
+            <h4 style="font-size:1rem;font-weight:700;color:var(--bbf-navy);margin-bottom:1.25rem;">
+              <i class="fas fa-info-circle" style="color:var(--bbf-gold);margin-right:0.5rem;"></i>
+              What BBF Can Organise — Art. 19
+            </h4>
+            <div class="d-flex flex-column gap-2">
+              <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                <i class="fas fa-people-roof" style="color:var(--bbf-gold);font-size:0.7rem;margin-top:0.3rem;flex-shrink:0;width:14px;"></i>
+                Fellowship gatherings
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                <i class="fas fa-users" style="color:var(--bbf-gold);font-size:0.7rem;margin-top:0.3rem;flex-shrink:0;width:14px;"></i>
+                Social events and recreational activities
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                <i class="fas fa-hand-holding-heart" style="color:var(--bbf-gold);font-size:0.7rem;margin-top:0.3rem;flex-shrink:0;width:14px;"></i>
+                Community service activities
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                <i class="fas fa-graduation-cap" style="color:var(--bbf-gold);font-size:0.7rem;margin-top:0.3rem;flex-shrink:0;width:14px;"></i>
+                Educational and skills development programmes
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                <i class="fas fa-futbol" style="color:var(--bbf-gold);font-size:0.7rem;margin-top:0.3rem;flex-shrink:0;width:14px;"></i>
+                Sports and recreational activities
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                <i class="fas fa-music" style="color:var(--bbf-gold);font-size:0.7rem;margin-top:0.3rem;flex-shrink:0;width:14px;"></i>
+                Music and talent development programmes
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                <i class="fas fa-heart-pulse" style="color:var(--bbf-gold);font-size:0.7rem;margin-top:0.3rem;flex-shrink:0;width:14px;"></i>
+                Welfare and networking initiatives
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-sm);color:var(--bbf-text-muted);">
+                <i class="fas fa-cross" style="color:var(--bbf-gold);font-size:0.7rem;margin-top:0.3rem;flex-shrink:0;width:14px;"></i>
+                Christian and Brigade-support programmes
+              </div>
+            </div>
+            <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--bbf-light-grey);
+              font-size:var(--fs-xs);color:var(--bbf-text-light);line-height:1.6;">
+              <i class="fas fa-info-circle" style="color:var(--bbf-gold);margin-right:0.3rem;"></i>
+              All activities must promote positive relationships, responsible conduct, and the values of BBF.
+              — <em>BBF Constitution, Art. 19</em>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       04. CLOSING CTA
+  ══════════════════════════════════════════════════ -->
+  <section class="cta-section" aria-labelledby="events-cta-heading">
+    <div class="cta-top-line" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-1" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-2" aria-hidden="true"></div>
+    <div class="cta-content">
+      <div class="overline-white reveal">Don't Miss Out</div>
+      <div class="gold-divider-center reveal" style="margin-top:0.5rem;"></div>
+      <h2 class="cta-title reveal mt-3" id="events-cta-heading">
+        Be There When<br /><span class="gold-text">Brotherhood Happens.</span>
+      </h2>
+      <p class="cta-desc reveal">
+        BBF events are where friendships are built, faith is deepened, and the
+        brigade spirit comes alive. Register as a member to get event updates
+        and secure your place.
+      </p>
+      <div class="cta-btn-group reveal">
+        <a href="membership.html" class="btn-bbf-primary">
+          <i class="fas fa-user-plus"></i> Join BBF Today
+        </a>
+        <a href="contact.html" class="btn-bbf-outline-white">
+          <i class="fas fa-envelope"></i> Contact Us
+        </a>
+      </div>
+      <p class="cta-assurance reveal">
+        <i class="fas fa-shield-halved"></i> Members only &nbsp;·&nbsp;
+        <i class="fas fa-cross"></i> Christian fellowship &nbsp;·&nbsp;
+        <i class="fas fa-handshake"></i> Genuine brotherhood
+      </p>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="bbf-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="bbf-logo-wrap">
+            <div class="bbf-logo-emblem"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+            <div class="bbf-logo-text">
+              <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+              <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+            </div>
+          </a>
+          <p class="footer-brand-desc">
+            A fellowship platform for Boys' Brigade members — united by Faith, Fellowship,
+            Service, and Friendship. From the Brigade, we build Brotherhood; through
+            Fellowship, we grow together.
+          </p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="footer-social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Quick Links</h3>
+          <nav class="footer-links">
+            <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+            <a href="about.html"><i class="fas fa-chevron-right"></i> About BBF</a>
+            <a href="leadership.html"><i class="fas fa-chevron-right"></i> Leadership</a>
+            <a href="chapters.html"><i class="fas fa-chevron-right"></i> Chapters</a>
+            <a href="membership.html"><i class="fas fa-chevron-right"></i> Membership</a>
+            <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Fellowship</h3>
+          <nav class="footer-links">
+            <a href="events.html"><i class="fas fa-chevron-right"></i> Events</a>
+            <a href="news.html"><i class="fas fa-chevron-right"></i> News &amp; Announcements</a>
+            <a href="activities.html"><i class="fas fa-chevron-right"></i> Activities &amp; Projects</a>
+            <a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a>
+            <a href="resources.html"><i class="fas fa-chevron-right"></i> Resources</a>
+            <a href="login.html"><i class="fas fa-chevron-right"></i> Member Login</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Get in Touch</h3>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="footer-contact-text">bbfellowship26@gmail.com</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-globe"></i></div>
+            <div class="footer-contact-text">www.bbfellowship.org</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-phone"></i></div>
+            <div class="footer-contact-text">09066681922</div>
+          </div>
+          <div style="margin-top:1.5rem;">
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:0.75rem;">Get BBF updates in your inbox.</p>
+            <form id="newsletter-form" novalidate>
+              <div class="footer-newsletter-form">
+                <input type="email" id="newsletter-email" class="footer-newsletter-input" placeholder="Your email address" autocomplete="email" required />
+                <button type="submit" class="footer-newsletter-btn" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </form>
+            <span id="newsletter-msg" role="alert" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <p class="footer-copyright">&copy; <span id="footer-year">2026</span> Brigade Brotherhood Fellowship. All rights reserved.</p>
+          <nav class="footer-legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Cookie Policy</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:46px;height:46px;background:var(--gradient-gold);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--bbf-navy);font-size:1rem;box-shadow:var(--shadow-gold);cursor:pointer;z-index:900;opacity:0;pointer-events:none;transform:translateY(10px);transition:all var(--transition-base);">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- SCRIPTS -->
+  <script src="assets/js/data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    /* ══════════════════════════════════════════════════════
+       EVENTS PAGE — inline JS
+       Renders: featured hero card, month-grouped event grid,
+                tab switching (upcoming/past),
+                category filtering, results count.
+       All data from data.js BBF_EVENTS.
+       TODO [BACKEND]: Replace BBF_EVENTS with GET /api/events
+    ══════════════════════════════════════════════════════ */
+
+    /* ── Category config: tag class + dot colour ── */
+    const CATEGORY_CONFIG = {
+      'Fellowship':       { cls: 'tag-fellowship',  dot: '#4CC88A', icon: 'fa-people-roof'       },
+      'Community Service':{ cls: 'tag-community',   dot: '#4CC88A', icon: 'fa-hand-holding-heart' },
+      'Training':         { cls: 'tag-training',    dot: '#80AAFF', icon: 'fa-person-chalkboard'  },
+      'Outreach':         { cls: 'tag-outreach',    dot: '#F0A060', icon: 'fa-bullhorn'            },
+      'Social':           { cls: 'tag-social',      dot: '#C08AFF', icon: 'fa-users'              },
+      'Conference':       { cls: 'tag-conference',  dot: '#E2C06E', icon: 'fa-microphone-lines'   },
+    };
+
+    /* Add Social tag CSS if not already in style.css */
+    const socialStyle = document.createElement('style');
+    socialStyle.textContent = `.tag-social{background:rgba(100,50,160,0.18);color:#C08AFF;border:1px solid rgba(100,50,160,0.3);}`;
+    document.head.appendChild(socialStyle);
+
+    function getCatConfig(category) {
+      return CATEGORY_CONFIG[category] || { cls: 'tag-conference', dot: '#E2C06E', icon: 'fa-calendar' };
+    }
+
+    /* ── Date helpers ── */
+    function fmtDate(str) {
+      const d = new Date(str + 'T00:00:00');
+      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+    function fmtDateShort(str) {
+      return new Date(str + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+    function getDay(str)   { return new Date(str + 'T00:00:00').getDate(); }
+    function getMonth(str) { return new Date(str + 'T00:00:00').toLocaleDateString('en-GB', { month: 'short' }).toUpperCase(); }
+    function getYear(str)  { return new Date(str + 'T00:00:00').getFullYear(); }
+    function getMonthLabel(str) {
+      return new Date(str + 'T00:00:00').toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+    }
+    function truncateWords(str, n) {
+      const parts = str.split(' ');
+      return parts.length <= n ? str : parts.slice(0, n).join(' ') + '…';
+    }
+
+    /* ── Render featured hero card ── */
+    function renderFeaturedEvent(ev) {
+      if (!ev) return '';
+      const cfg = getCatConfig(ev.category);
+      return `
+        <div class="event-hero-card reveal">
+          <div class="event-hero-bg"></div>
+          <div class="event-hero-overlay"></div>
+          <div class="event-hero-body">
+            <div>
+              <div class="event-hero-featured-tag">
+                <i class="fas fa-star" style="font-size:0.6rem;"></i> Featured Event
+              </div>
+              <span class="event-category-tag ${cfg.cls}" style="margin-bottom:0.875rem;display:inline-block;">
+                ${ev.category}
+              </span>
+            </div>
+            <h3 class="event-hero-title">${ev.title}</h3>
+            <p class="event-hero-desc">${truncateWords(ev.description, 30)}</p>
+            <div class="event-hero-meta">
+              <div class="event-hero-meta-item">
+                <i class="fas fa-calendar-alt"></i>
+                ${fmtDate(ev.date)}${ev.endDate && ev.endDate !== ev.date ? ' — ' + fmtDateShort(ev.endDate) : ''}
+              </div>
+              <div class="event-hero-meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                ${ev.location}
+              </div>
+            </div>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="${ev.registrationLink}" class="btn-bbf-primary btn-sm-bbf">
+                <i class="fas fa-user-check"></i> Register Interest
+              </a>
+              <a href="contact.html" class="btn-bbf-outline-white btn-sm-bbf">
+                <i class="fas fa-envelope"></i> Ask a Question
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /* ── Render a standard event card ── */
+    function renderEventCard(ev, isPast) {
+      const cfg = getCatConfig(ev.category);
+      const multiDay = ev.endDate && ev.endDate !== ev.date;
+      return `
+        <div class="col-lg-4 col-md-6 reveal" role="listitem">
+          <div class="event-card${isPast ? ' past-event' : ''}">
+            <div class="event-card-date-strip">
+              <div class="event-card-day">${getDay(ev.date)}</div>
+              <div class="event-card-date-divider"></div>
+              <div class="event-card-month-year">
+                <span class="event-card-month">${getMonth(ev.date)}</span>
+                <span class="event-card-year">${getYear(ev.date)}</span>
+              </div>
+              ${multiDay ? `
+                <div class="event-card-date-divider"></div>
+                <div style="font-size:0.65rem;color:rgba(255,255,255,0.5);font-family:var(--font-accent);letter-spacing:0.06em;">
+                  to<br />${getDay(ev.endDate)} ${getMonth(ev.endDate)}
+                </div>` : ''}
+            </div>
+            <div class="event-card-body">
+              <span class="event-category-tag ${cfg.cls}" style="margin-bottom:0.875rem;display:inline-block;font-size:0.65rem;padding:0.2rem 0.75rem;">
+                <i class="fas ${cfg.icon}" style="font-size:0.6rem;margin-right:0.3rem;"></i>${ev.category}
+              </span>
+              <div class="event-card-title">${ev.title}</div>
+              <div class="event-card-meta">
+                <div class="event-card-meta-row">
+                  <i class="fas fa-calendar-alt"></i>
+                  ${fmtDate(ev.date)}
+                </div>
+                <div class="event-card-meta-row">
+                  <i class="fas fa-map-marker-alt"></i>
+                  ${ev.location}
+                </div>
+              </div>
+              <p class="event-card-desc">${truncateWords(ev.description, 22)}</p>
+              <div class="event-card-footer">
+                ${isPast
+                  ? `<span style="font-size:0.65rem;font-family:var(--font-accent);font-weight:600;
+                      letter-spacing:0.08em;text-transform:uppercase;color:var(--bbf-text-light);">
+                      <i class="fas fa-check" style="color:var(--bbf-gold);margin-right:0.3rem;"></i>Completed
+                    </span>`
+                  : `<a href="${ev.registrationLink}" class="btn-bbf-primary btn-sm-bbf" style="font-size:0.68rem;padding:0.55rem 1.1rem;">
+                      <i class="fas fa-user-check"></i> Register
+                    </a>`
+                }
+                <a href="contact.html" class="btn-icon" title="Ask about this event" aria-label="Ask about this event">
+                  <i class="fas fa-envelope" style="font-size:0.8rem;"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /* ── Group events by calendar month ── */
+    function groupByMonth(events) {
+      const groups = {};
+      events.forEach(ev => {
+        const label = getMonthLabel(ev.date);
+        if (!groups[label]) groups[label] = [];
+        groups[label].push(ev);
+      });
+      return groups;
+    }
+
+    /* ── Main render function ── */
+    let activeTab      = 'upcoming';
+    let activeCategory = 'all';
+
+    function renderEvents() {
+      const featuredWrap = document.getElementById('featured-event-wrap');
+      const eventsGrid   = document.getElementById('events-grid');
+      if (!eventsGrid) return;
+
+      // TODO [BACKEND]: Replace BBF_EVENTS with GET /api/events?status={activeTab}
+      const byStatus = BBF_EVENTS.filter(ev => ev.status === activeTab);
+
+      const filtered = activeCategory === 'all'
+        ? byStatus
+        : byStatus.filter(ev => ev.category === activeCategory);
+
+      const isPast = activeTab === 'past';
+
+      // ── Featured event (upcoming only, first featured item)
+      if (featuredWrap) {
+        if (!isPast) {
+          const featured = filtered.find(ev => ev.featured);
+          featuredWrap.innerHTML = featured ? renderFeaturedEvent(featured) : '';
+        } else {
+          featuredWrap.innerHTML = '';
+        }
+      }
+
+      // ── Empty state
+      if (filtered.length === 0) {
+        eventsGrid.innerHTML = `
+          <div class="events-empty">
+            <i class="fas fa-calendar-xmark"></i>
+            <p>${isPast
+              ? 'No past events to show' + (activeCategory !== 'all' ? ` in the <strong>${activeCategory}</strong> category` : '') + '.'
+              : 'No upcoming events' + (activeCategory !== 'all' ? ` in the <strong>${activeCategory}</strong> category` : '') + ' at this time. Check back soon.'
+            }</p>
+          </div>
+        `;
+        return;
+      }
+
+      // ── Render non-featured events (skip featured one already shown as hero)
+      const toRender = isPast ? filtered : filtered.filter(ev => !ev.featured || filtered.filter(e => e.featured).length === 0);
+      // If there's only one event and it's featured, still show it in the grid too
+      const gridEvents = (!isPast && filtered.some(ev => ev.featured) && filtered.length > 1)
+        ? filtered.filter(ev => !ev.featured)
+        : filtered;
+
+      if (gridEvents.length === 0) {
+        eventsGrid.innerHTML = '';
+        return;
+      }
+
+      // Group by month
+      const groups = groupByMonth(gridEvents);
+      let html = '';
+      Object.entries(groups).forEach(([month, events]) => {
+        html += `
+          <div class="calendar-month-header">
+            <span class="cal-month-label">${month}</span>
+            <div class="cal-month-line"></div>
+            <span style="font-size:var(--fs-xs);font-family:var(--font-accent);
+              letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-text-light);
+              white-space:nowrap;">${events.length} event${events.length !== 1 ? 's' : ''}</span>
+          </div>
+          <div class="row g-4">
+            ${events.map(ev => renderEventCard(ev, isPast)).join('')}
+          </div>
+        `;
+      });
+      eventsGrid.innerHTML = html;
+
+      // Re-trigger reveal
+      setTimeout(() => {
+        eventsGrid.querySelectorAll('.reveal:not(.revealed)').forEach(el => el.classList.add('revealed'));
+        if (featuredWrap) {
+          featuredWrap.querySelectorAll('.reveal:not(.revealed)').forEach(el => el.classList.add('revealed'));
+        }
+      }, 50);
+    }
+
+    /* ── Build category filter pills from available data ── */
+    function buildCategoryFilters() {
+      const wrap = document.getElementById('category-filter-wrap');
+      if (!wrap) return;
+      const categories = [...new Set(BBF_EVENTS.map(ev => ev.category))].sort();
+
+      wrap.innerHTML = `
+        <button class="cat-filter-btn active" data-cat="all">
+          <span class="cat-dot" style="background:var(--bbf-gold);"></span>
+          All Categories
+        </button>
+        ${categories.map(cat => {
+          const cfg = getCatConfig(cat);
+          return `
+            <button class="cat-filter-btn" data-cat="${cat}">
+              <span class="cat-dot" style="background:${cfg.dot};"></span>
+              ${cat}
+            </button>
+          `;
+        }).join('')}
+      `;
+
+      wrap.querySelectorAll('.cat-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          wrap.querySelectorAll('.cat-filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeCategory = btn.dataset.cat;
+          renderEvents();
+        });
+      });
+    }
+
+    /* ── Update tab counts ── */
+    function updateTabCounts() {
+      const upcomingEl = document.getElementById('upcoming-count');
+      const pastEl     = document.getElementById('past-count');
+      if (upcomingEl) upcomingEl.textContent = BBF_EVENTS.filter(e => e.status === 'upcoming').length;
+      if (pastEl)     pastEl.textContent     = BBF_EVENTS.filter(e => e.status === 'past').length;
+
+      const summaryWrap = document.getElementById('events-summary-wrap');
+      if (summaryWrap) {
+        summaryWrap.innerHTML = `
+          <div class="d-flex gap-2 flex-wrap">
+            <span class="badge-gold"><i class="fas fa-calendar-alt"></i> ${BBF_EVENTS.filter(e=>e.status==='upcoming').length} Upcoming</span>
+            <span class="badge-navy">${BBF_EVENTS.filter(e=>e.status==='past').length} Past</span>
+          </div>
+        `;
+      }
+    }
+
+    /* ── Tab switching ── */
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // TODO [BACKEND]: Tabs trigger GET /api/events?status=upcoming|past
+      document.querySelectorAll('.events-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.events-tab').forEach(t => {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+          activeTab = tab.dataset.tab;
+          activeCategory = 'all'; // reset category on tab switch
+          document.querySelectorAll('.cat-filter-btn').forEach(b => b.classList.remove('active'));
+          document.querySelector('.cat-filter-btn[data-cat="all"]')?.classList.add('active');
+          renderEvents();
+        });
+      });
+
+      buildCategoryFilters();
+      updateTabCounts();
+      renderEvents();
+
+      // Re-trigger scroll reveal for non-JS-injected elements
+      setTimeout(() => {
+        const els = document.querySelectorAll('.reveal:not(.revealed),.reveal-left:not(.revealed),.reveal-right:not(.revealed)');
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        els.forEach(el => obs.observe(el));
+      }, 80);
+
+    });
+  </script>
+
+</body>
+</html>

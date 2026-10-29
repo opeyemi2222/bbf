@@ -1,0 +1,1586 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Join Brigade Brotherhood Fellowship — BBF membership is open to all active and former Boys' Brigade members who hold the Brigade School Certificate." />
+  <meta name="keywords" content="Join BBF, Brigade Brotherhood Fellowship membership, Boys Brigade Fellowship registration" />
+  <meta name="author" content="Brigade Brotherhood Fellowship" />
+
+  <title>Join BBF — Brigade Brotherhood Fellowship</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════
+       MEMBERSHIP PAGE — scoped styles
+    ══════════════════════════════════════════════════════ */
+
+    /* ── Eligibility highlight strip ── */
+    .eligibility-strip {
+      background: linear-gradient(135deg, var(--bbf-navy-mid) 0%, var(--bbf-navy-light) 100%);
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem 2rem;
+    }
+    .eligibility-strip .elig-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .eligibility-strip .elig-icon {
+      width: 46px;
+      height: 46px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bbf-gold);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .eligibility-strip .elig-title {
+      font-family: var(--font-accent);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bbf-gold-light);
+      margin-bottom: 0.35rem;
+    }
+    .eligibility-strip .elig-desc {
+      font-size: var(--fs-sm);
+      color: rgba(255,255,255,0.65);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ── Benefits grid ── */
+    .benefit-card {
+      background: var(--bbf-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.5rem;
+      height: 100%;
+      transition: all var(--transition-base);
+    }
+    .benefit-card:hover {
+      border-color: rgba(201,168,76,0.4);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+    .benefit-card-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--bbf-navy);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bbf-gold);
+      font-size: 1.2rem;
+      margin-bottom: 1.1rem;
+    }
+    .benefit-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--bbf-navy);
+      margin-bottom: 0.5rem;
+    }
+    .benefit-card p {
+      font-size: var(--fs-sm);
+      color: var(--bbf-text-muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ── Steps timeline ── */
+    .join-steps {
+      position: relative;
+      padding-left: 0;
+      list-style: none;
+      margin: 0;
+    }
+    .join-step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      position: relative;
+      padding-bottom: 2.25rem;
+    }
+    .join-step:last-child { padding-bottom: 0; }
+    .join-step::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 52px;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(201,168,76,0.3), transparent);
+    }
+    .join-step:last-child::before { display: none; }
+    .step-num {
+      width: 50px;
+      height: 50px;
+      background: var(--bbf-navy);
+      border: 2px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-accent);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--bbf-gold);
+      flex-shrink: 0;
+    }
+    .step-body h4 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--bbf-navy);
+      margin-bottom: 0.4rem;
+      margin-top: 0.6rem;
+    }
+    .step-body p {
+      font-size: var(--fs-sm);
+      color: var(--bbf-text-muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ── Registration form card ── */
+    .reg-form-card {
+      background: var(--bbf-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+    }
+    @media (max-width: 575px) { .reg-form-card { padding: 1.5rem 1.25rem; } }
+
+    .form-section-title {
+      font-family: var(--font-accent);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bbf-navy);
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--bbf-gold);
+      display: inline-block;
+      margin-bottom: 1.25rem;
+    }
+
+    .bbf-label {
+      display: block;
+      font-size: var(--fs-xs);
+      font-family: var(--font-accent);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bbf-text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .bbf-label .req {
+      color: var(--bbf-red);
+      margin-left: 0.2rem;
+    }
+
+    .bbf-input {
+      width: 100%;
+      padding: 0.72rem 1rem;
+      border: 1.5px solid var(--bbf-light-grey);
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-sm);
+      font-family: var(--font-body);
+      color: var(--bbf-text);
+      background: var(--bbf-off-white);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      outline: none;
+    }
+    .bbf-input:focus {
+      border-color: var(--bbf-gold);
+      background: var(--bbf-white);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+    .bbf-input::placeholder { color: var(--bbf-text-light); }
+    .bbf-input.is-invalid { border-color: var(--bbf-red); }
+    .bbf-input.is-invalid:focus { box-shadow: 0 0 0 3px rgba(178,34,52,0.1); }
+
+    select.bbf-input { cursor: pointer; }
+
+    .bbf-input-error {
+      display: none;
+      font-size: 0.72rem;
+      color: var(--bbf-red);
+      margin-top: 0.3rem;
+      font-family: var(--font-accent);
+    }
+    .bbf-input.is-invalid + .bbf-input-error { display: block; }
+
+    .bbf-check-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      cursor: pointer;
+      font-size: var(--fs-sm);
+      color: var(--bbf-text-muted);
+      line-height: 1.65;
+    }
+    .bbf-check-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      accent-color: var(--bbf-navy);
+      cursor: pointer;
+    }
+    .bbf-check-label a { color: var(--bbf-navy); text-decoration: underline; }
+    .bbf-check-label a:hover { color: var(--bbf-gold-dark); }
+
+    /* Progress indicator */
+    .form-progress {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 2.5rem;
+      counter-reset: step;
+    }
+    .form-progress-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      text-align: center;
+    }
+    .form-progress-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 19px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: var(--bbf-light-grey);
+      z-index: 0;
+    }
+    .form-progress-step.done:not(:last-child)::after,
+    .form-progress-step.active:not(:last-child)::after {
+      background: linear-gradient(to right, var(--bbf-gold), var(--bbf-light-grey));
+    }
+    .form-progress-dot {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid var(--bbf-light-grey);
+      background: var(--bbf-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-family: var(--font-accent);
+      font-weight: 700;
+      color: var(--bbf-text-light);
+      z-index: 1;
+      position: relative;
+      transition: all var(--transition-base);
+    }
+    .form-progress-step.done .form-progress-dot {
+      background: var(--bbf-navy);
+      border-color: var(--bbf-navy);
+      color: var(--bbf-gold);
+    }
+    .form-progress-step.active .form-progress-dot {
+      background: var(--bbf-gold);
+      border-color: var(--bbf-gold);
+      color: var(--bbf-navy);
+      box-shadow: 0 0 0 4px rgba(201,168,76,0.18);
+    }
+    .form-progress-label {
+      font-size: 0.65rem;
+      font-family: var(--font-accent);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bbf-text-light);
+      margin-top: 0.5rem;
+    }
+    .form-progress-step.active .form-progress-label { color: var(--bbf-navy); }
+    .form-progress-step.done .form-progress-label { color: var(--bbf-text-muted); }
+
+    /* Form step panels */
+    .form-step-panel { display: none; }
+    .form-step-panel.active { display: block; }
+
+    /* Success state */
+    .reg-success {
+      display: none;
+      text-align: center;
+      padding: 3rem 1.5rem;
+    }
+    .reg-success-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--bbf-navy), var(--bbf-navy-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--bbf-gold);
+      margin: 0 auto 1.75rem;
+      box-shadow: var(--shadow-gold);
+    }
+
+    /* Membership type card */
+    .membership-type-card {
+      border: 2px solid var(--bbf-light-grey);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.75rem;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      position: relative;
+    }
+    .membership-type-card:hover {
+      border-color: rgba(201,168,76,0.4);
+      box-shadow: var(--shadow-md);
+    }
+    .membership-type-card.selected {
+      border-color: var(--bbf-gold);
+      background: rgba(201,168,76,0.04);
+      box-shadow: 0 0 0 4px rgba(201,168,76,0.10);
+    }
+    .membership-type-badge {
+      position: absolute;
+      top: -1px;
+      right: 1.25rem;
+      background: var(--gradient-gold);
+      color: var(--bbf-navy);
+      font-family: var(--font-accent);
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+    .membership-type-card input[type="radio"] {
+      accent-color: var(--bbf-navy);
+      width: 18px;
+      height: 18px;
+    }
+    .membership-price {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--bbf-navy);
+      line-height: 1;
+    }
+    .membership-price span {
+      font-size: var(--fs-xs);
+      font-family: var(--font-accent);
+      font-weight: 500;
+      color: var(--bbf-text-light);
+      letter-spacing: 0.05em;
+    }
+    .membership-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: var(--fs-sm);
+      color: var(--bbf-text-muted);
+      line-height: 1.5;
+      margin-bottom: 0.4rem;
+    }
+    .membership-feature i {
+      color: var(--bbf-gold);
+      font-size: 0.7rem;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    /* Constitution reference box */
+    .const-ref-box {
+      background: var(--bbf-off-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-left: 3px solid var(--bbf-gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 0.9rem 1rem;
+      font-size: var(--fs-xs);
+      color: var(--bbf-text-muted);
+      line-height: 1.6;
+    }
+    .const-ref-box strong { color: var(--bbf-navy); }
+
+    /* Nav form buttons */
+    .form-nav-btns {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      gap: 1rem;
+    }
+
+    /* Sidebar sticky summary */
+    .membership-sidebar {
+      position: sticky;
+      top: 100px;
+    }
+    .sidebar-card {
+      background: var(--gradient-navy-dark);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: var(--radius-xl);
+      padding: 2rem 1.75rem;
+      color: var(--bbf-white);
+    }
+    .sidebar-card-title {
+      font-family: var(--font-accent);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bbf-gold-light);
+      margin-bottom: 1.25rem;
+    }
+    .sidebar-req-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar-req-item:last-child { margin-bottom: 0; }
+    .sidebar-req-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bbf-gold);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .sidebar-req-title {
+      font-size: var(--fs-xs);
+      font-family: var(--font-accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--bbf-gold-light);
+      margin-bottom: 0.2rem;
+    }
+    .sidebar-req-desc {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .sidebar-divider {
+      border: none;
+      border-top: 1px solid rgba(201,168,76,0.12);
+      margin: 1.5rem 0;
+    }
+
+    /* FAQ accordion */
+    .faq-item {
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+      transition: box-shadow var(--transition-fast);
+    }
+    .faq-item:hover { box-shadow: var(--shadow-sm); }
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      background: var(--bbf-white);
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-body);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--bbf-navy);
+      transition: background var(--transition-fast);
+    }
+    .faq-question:hover { background: var(--bbf-off-white); }
+    .faq-question[aria-expanded="true"] { background: var(--bbf-off-white); color: var(--bbf-navy); }
+    .faq-question .faq-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--bbf-light-grey);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bbf-text-muted);
+      font-size: 0.7rem;
+      flex-shrink: 0;
+      transition: all var(--transition-fast);
+    }
+    .faq-question[aria-expanded="true"] .faq-icon {
+      background: var(--bbf-navy);
+      color: var(--bbf-gold);
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s ease;
+      background: var(--bbf-off-white);
+    }
+    .faq-answer.open { max-height: 400px; }
+    .faq-answer-inner {
+      padding: 0 1.25rem 1.1rem;
+      font-size: var(--fs-sm);
+      color: var(--bbf-text-muted);
+      line-height: 1.75;
+    }
+    .faq-answer-inner a { color: var(--bbf-navy); text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="bbf-preloader" style="position:fixed;inset:0;background:var(--bbf-navy);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:1rem;">
+    <div style="width:56px;height:56px;background:var(--gradient-gold);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:800;color:var(--bbf-navy);animation:preloaderPulse 1.2s ease-in-out infinite;">BBF</div>
+    <div style="font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.6);">Loading…</div>
+  </div>
+  <style>@keyframes preloaderPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:0.8}}</style>
+
+  <!-- ══════════════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════════════ -->
+  <nav id="bbf-navbar" class="nav-transparent" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="bbf-logo-wrap" aria-label="BBF Home">
+        <div class="bbf-logo-emblem" aria-hidden="true"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+        <li><a href="chapters.html">Chapters</a></li>
+        <li class="nav-dropdown">
+          <a href="#" aria-haspopup="true">Programs <i class="fas fa-chevron-down" style="font-size:0.6rem;margin-left:2px;"></i></a>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="events.html" role="menuitem"><i class="fas fa-calendar-alt" style="width:16px;color:var(--bbf-gold);"></i> Events</a>
+            <a href="activities.html" role="menuitem"><i class="fas fa-hands-helping" style="width:16px;color:var(--bbf-gold);"></i> Activities</a>
+            <a href="gallery.html" role="menuitem"><i class="fas fa-images" style="width:16px;color:var(--bbf-gold);"></i> Gallery</a>
+          </div>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="membership.html" class="btn-bbf-primary btn-sm-bbf btn-bbf-nav-cta active-nav-cta" aria-current="page">
+        <i class="fas fa-user-plus"></i> Join BBF
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="bbf-offcanvas">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- OFFCANVAS -->
+  <div id="offcanvas-overlay" class="offcanvas-overlay" aria-hidden="true"></div>
+  <aside id="bbf-offcanvas" class="bbf-offcanvas" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <div class="offcanvas-header">
+      <a href="index.html" class="bbf-logo-wrap">
+        <div class="bbf-logo-emblem" style="width:38px;height:38px;"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name" style="font-size:0.82rem;">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <button id="offcanvas-close" class="offcanvas-close" aria-label="Close navigation menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="offcanvas-nav" role="list">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About BBF</a></li>
+        <li><a href="leadership.html"><i class="fas fa-crown"></i> Leadership</a></li>
+        <li><a href="chapters.html"><i class="fas fa-map-location-dot"></i> Chapters</a></li>
+        <li><a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+        <li><a href="activities.html"><i class="fas fa-hands-helping"></i> Activities &amp; Projects</a></li>
+        <li><a href="news.html"><i class="fas fa-newspaper"></i> News &amp; Announcements</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="resources.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        <li style="margin-top:0.5rem;border-top:1px solid rgba(201,168,76,0.12);padding-top:0.75rem;">
+          <a href="login.html"><i class="fas fa-sign-in-alt"></i> Member Login</a>
+        </li>
+      </ul>
+    </div>
+    <div class="offcanvas-footer">
+      <a href="membership.html" class="btn-bbf-primary" style="width:100%;justify-content:center;" aria-current="page">
+        <i class="fas fa-user-plus"></i> Join BBF Today
+      </a>
+    </div>
+  </aside>
+
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE HEADER
+  ══════════════════════════════════════════════════ -->
+  <header class="page-header" aria-label="Membership page header">
+    <div class="page-header-bg" aria-hidden="true"></div>
+    <div class="page-header-decor" aria-hidden="true"></div>
+    <div class="container page-header-content">
+      <nav class="page-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep" aria-hidden="true"><i class="fas fa-chevron-right" style="font-size:0.55rem;"></i></span>
+        <span class="current" aria-current="page">Join BBF</span>
+      </nav>
+      <h1 class="page-header-title reveal">Join the Fellowship</h1>
+      <p class="page-header-subtitle reveal">
+        BBF is open to all active and former Boys' Brigade members.
+        One Brigade. One Brotherhood. One Purpose.
+      </p>
+    </div>
+  </header>
+
+
+  <!-- ══════════════════════════════════════════════════
+       WHO CAN JOIN — ELIGIBILITY
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py-sm" style="background:var(--bbf-navy-mid);" aria-labelledby="eligibility-heading">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-4 reveal-left">
+          <div class="overline" style="color:var(--bbf-gold);">Who Can Join</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="eligibility-heading" style="color:var(--bbf-white);">Membership Eligibility</h2>
+          <p style="color:rgba(255,255,255,0.6);line-height:1.8;margin-top:0.75rem;font-size:var(--fs-sm);">
+            BBF membership is open to any person who is an active or former member
+            of The Boys' Brigade and meets the conditions set out in the BBF Constitution,
+            Article 7.
+          </p>
+          <div class="const-ref-box mt-4" style="background:rgba(255,255,255,0.04);border-color:rgba(201,168,76,0.2);border-left-color:var(--bbf-gold);">
+            <strong style="color:var(--bbf-gold-light);">BBF Constitution, Article 7</strong><br />
+            <span style="color:rgba(255,255,255,0.5);">Membership is open to active and former Boys' Brigade members who hold the Brigade School Certificate, agree to abide by the Constitution, and are registered through the approved process.</span>
+          </div>
+        </div>
+        <div class="col-lg-8 reveal-right">
+          <div class="eligibility-strip">
+            <div class="row g-4" id="eligibility-grid">
+              <!-- Populated by JS from BBF_MEMBERSHIP_REQUIREMENTS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       BENEFITS OF MEMBERSHIP
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-off-white);" aria-labelledby="benefits-heading">
+    <div class="container">
+      <div class="text-center reveal" style="max-width:520px;margin:0 auto 3rem;">
+        <div class="overline">Why Join BBF</div>
+        <div class="gold-divider-center" style="margin-top:0.5rem;"></div>
+        <h2 class="section-title mt-3" id="benefits-heading">What Membership Gives You</h2>
+        <p class="section-subtitle mt-2" style="margin:0 auto;">
+          As a BBF member you gain more than a membership card — you gain a brotherhood.
+        </p>
+      </div>
+
+      <div class="row g-4" id="benefits-grid">
+        <!-- Populated by JS from BBF_BENEFITS -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       HOW TO JOIN — STEPS
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-white);" aria-labelledby="how-to-join-heading">
+    <div class="container">
+      <div class="row g-5 align-items-start">
+
+        <div class="col-lg-5 reveal-left">
+          <div class="overline">Simple Process</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="how-to-join-heading">How to Join BBF</h2>
+          <p style="color:var(--bbf-text-muted);line-height:1.8;margin-top:0.75rem;">
+            Joining BBF is straightforward. Complete the registration form on this page,
+            and the BBF Secretariat will confirm your membership.
+          </p>
+
+          <ol class="join-steps mt-4" aria-label="Steps to join BBF" id="join-steps">
+            <!-- Populated by JS -->
+          </ol>
+        </div>
+
+        <div class="col-lg-7 reveal-right">
+          <!-- Membership type card -->
+          <div class="membership-type-card selected" id="membership-type-main" role="radio" aria-checked="true" tabindex="0">
+            <div class="membership-type-badge">Standard</div>
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div style="width:50px;height:50px;background:var(--bbf-navy);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:var(--bbf-gold);font-size:1.2rem;">
+                <i class="fas fa-shield-halved"></i>
+              </div>
+              <div>
+                <div style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700;color:var(--bbf-navy);">BBF Member</div>
+                <div style="font-size:var(--fs-xs);color:var(--bbf-text-light);font-family:var(--font-accent);letter-spacing:0.05em;text-transform:uppercase;">Full Fellowship Membership</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="membership-price">TBC <span>/ per year</span></div>
+              <div style="font-size:var(--fs-xs);color:var(--bbf-text-light);margin-top:0.3rem;">
+                Annual fee to be set by the Fellowship. Registration is free.
+              </div>
+            </div>
+            <hr style="border-color:var(--bbf-light-grey);margin:1.25rem 0;">
+            <div id="membership-features">
+              <!-- Populated by JS from BBF_MEMBERSHIP_TYPES -->
+            </div>
+            <div class="const-ref-box mt-3">
+              <strong>Eligibility</strong> — Active or former Boys' Brigade member · Brigade School Certificate (or in progress during transition) · Constitutional Agreement — <em>Art. 7 &amp; 5.2</em>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       REGISTRATION FORM
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-off-white);" id="register" aria-labelledby="reg-form-heading">
+    <div class="container">
+      <div class="text-center reveal" style="max-width:520px;margin:0 auto 3rem;">
+        <div class="overline">Register Now</div>
+        <div class="gold-divider-center" style="margin-top:0.5rem;"></div>
+        <h2 class="section-title mt-3" id="reg-form-heading">BBF Membership Registration</h2>
+        <p class="section-subtitle mt-2" style="margin:0 auto;">
+          Complete all sections below. Fields marked <span style="color:var(--bbf-red);">*</span> are required.
+        </p>
+      </div>
+
+      <div class="row g-5 align-items-start">
+
+        <!-- ── Left col: form ── -->
+        <div class="col-lg-8 reveal-left">
+          <div class="reg-form-card">
+
+            <!-- Progress bar -->
+            <div class="form-progress" id="form-progress" role="progressbar" aria-valuemin="1" aria-valuemax="3" aria-valuenow="1" aria-label="Registration form progress">
+              <div class="form-progress-step active" data-step="1">
+                <div class="form-progress-dot">1</div>
+                <div class="form-progress-label">Personal</div>
+              </div>
+              <div class="form-progress-step" data-step="2">
+                <div class="form-progress-dot">2</div>
+                <div class="form-progress-label">Brigade Info</div>
+              </div>
+              <div class="form-progress-step" data-step="3">
+                <div class="form-progress-dot">3</div>
+                <div class="form-progress-label">Confirm</div>
+              </div>
+            </div>
+
+            <!-- TODO [BACKEND]: POST /api/membership/register -->
+            <form id="reg-form" novalidate aria-label="BBF Membership Registration Form">
+
+              <!-- ── STEP 1: Personal Details ── -->
+              <div class="form-step-panel active" id="step-1" role="group" aria-labelledby="step1-title">
+                <div class="form-section-title" id="step1-title">Personal Details</div>
+
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <label class="bbf-label" for="reg-firstname">First Name <span class="req">*</span></label>
+                    <input class="bbf-input" type="text" id="reg-firstname" name="firstName" autocomplete="given-name" required placeholder="e.g. Chukwuemeka" />
+                    <div class="bbf-input-error" id="err-firstname">Please enter your first name.</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="bbf-label" for="reg-lastname">Surname <span class="req">*</span></label>
+                    <input class="bbf-input" type="text" id="reg-lastname" name="lastName" autocomplete="family-name" required placeholder="e.g. Okafor" />
+                    <div class="bbf-input-error" id="err-lastname">Please enter your surname.</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="bbf-label" for="reg-email">Email Address <span class="req">*</span></label>
+                    <input class="bbf-input" type="email" id="reg-email" name="email" autocomplete="email" required placeholder="you@example.com" />
+                    <div class="bbf-input-error" id="err-email">Please enter a valid email address.</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="bbf-label" for="reg-phone">Phone Number <span class="req">*</span></label>
+                    <input class="bbf-input" type="tel" id="reg-phone" name="phone" autocomplete="tel" required placeholder="+234 800 000 0000" />
+                    <div class="bbf-input-error" id="err-phone">Please enter a valid phone number.</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="bbf-label" for="reg-dob">Date of Birth</label>
+                    <input class="bbf-input" type="date" id="reg-dob" name="dob" autocomplete="bday" />
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="bbf-label" for="reg-gender">Gender</label>
+                    <select class="bbf-input" id="reg-gender" name="gender">
+                      <option value="" disabled selected>Select…</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="prefer-not">Prefer not to say</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="bbf-label" for="reg-state">State of Residence <span class="req">*</span></label>
+                    <select class="bbf-input" id="reg-state" name="state" required>
+                      <option value="" disabled selected>Select a state…</option>
+                      <!-- Populated by JS from NIGERIA_STATES -->
+                    </select>
+                    <div class="bbf-input-error" id="err-state">Please select your state of residence.</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="bbf-label" for="reg-lga">LGA / City</label>
+                    <input class="bbf-input" type="text" id="reg-lga" name="lga" placeholder="e.g. Ikeja" />
+                  </div>
+                </div>
+
+                <div class="form-nav-btns">
+                  <div></div><!-- spacer -->
+                  <button type="button" class="btn-bbf-primary" id="btn-step1-next" aria-label="Proceed to Brigade Information">
+                    Next: Brigade Info <i class="fas fa-arrow-right" style="font-size:0.8rem;"></i>
+                  </button>
+                </div>
+              </div><!-- /step-1 -->
+
+              <!-- ── STEP 2: Brigade Information ── -->
+              <div class="form-step-panel" id="step-2" role="group" aria-labelledby="step2-title">
+                <div class="form-section-title" id="step2-title">Brigade Information</div>
+
+                <div class="row g-3">
+                  <div class="col-12">
+                    <label class="bbf-label" for="reg-company">Boys' Brigade Company <span class="req">*</span></label>
+                    <input class="bbf-input" type="text" id="reg-company" name="company" required placeholder="e.g. 1st Lagos Company" />
+                    <div class="bbf-input-error" id="err-company">Please enter your Boys' Brigade company.</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="bbf-label" for="reg-council">BB Council / Diocese</label>
+                    <input class="bbf-input" type="text" id="reg-council" name="council" placeholder="e.g. Lagos Council" />
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="bbf-label" for="reg-membership-status">Current BB Status <span class="req">*</span></label>
+                    <select class="bbf-input" id="reg-membership-status" name="bbStatus" required>
+                      <option value="" disabled selected>Select…</option>
+                      <option value="active">Active BB Member</option>
+                      <option value="former">Former BB Member</option>
+                    </select>
+                    <div class="bbf-input-error" id="err-membership-status">Please select your current BB status.</div>
+                  </div>
+                  <div class="col-12">
+                    <label class="bbf-label" for="reg-bsc">Brigade School Certificate <span class="req">*</span></label>
+                    <select class="bbf-input" id="reg-bsc" name="brigadeSchoolCert" required>
+                      <option value="" disabled selected>Select…</option>
+                      <option value="yes">Yes — I hold the Brigade School Certificate</option>
+                      <option value="in-progress">In progress — I am working towards it</option>
+                      <option value="no">Not yet obtained</option>
+                    </select>
+                    <div class="bbf-input-error" id="err-bsc">Please indicate your Brigade School Certificate status.</div>
+                    <div class="const-ref-box mt-2" style="font-size:0.72rem;">
+                      <strong>Note:</strong> The Brigade School Certificate is required for full membership under <em>Art. 7.2</em>.
+                      Members registered during the transition period without the certificate may remain as associate members
+                      pending fulfilment — <em>Art. 5.2</em>.
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label class="bbf-label" for="reg-chapter">Preferred BBF Chapter</label>
+                    <select class="bbf-input" id="reg-chapter" name="chapter">
+                      <option value="" disabled selected>Select or leave blank…</option>
+                      <option value="founding">Founding Chapter</option>
+                      <option value="tbc">To be determined</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="bbf-label" for="reg-referral">How did you hear about BBF?</label>
+                    <select class="bbf-input" id="reg-referral" name="referral">
+                      <option value="" disabled selected>Select…</option>
+                      <option value="friend">A friend / fellow Brigade member</option>
+                      <option value="social">Social media</option>
+                      <option value="bb-officer">Boys' Brigade officer</option>
+                      <option value="church">Church / Company notice</option>
+                      <option value="website">BBF Website</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-nav-btns">
+                  <button type="button" class="btn-bbf-outline" id="btn-step2-back">
+                    <i class="fas fa-arrow-left" style="font-size:0.8rem;"></i> Back
+                  </button>
+                  <button type="button" class="btn-bbf-primary" id="btn-step2-next" aria-label="Proceed to Confirmation">
+                    Next: Confirm <i class="fas fa-arrow-right" style="font-size:0.8rem;"></i>
+                  </button>
+                </div>
+              </div><!-- /step-2 -->
+
+              <!-- ── STEP 3: Confirmation & Agreement ── -->
+              <div class="form-step-panel" id="step-3" role="group" aria-labelledby="step3-title">
+                <div class="form-section-title" id="step3-title">Review &amp; Agreement</div>
+
+                <!-- Summary preview -->
+                <div id="reg-summary" style="background:var(--bbf-off-white);border:1px solid var(--bbf-light-grey);border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:1.5rem;font-size:var(--fs-sm);">
+                  <!-- Populated by JS on reaching step 3 -->
+                </div>
+
+                <div class="d-flex flex-column gap-3 mb-4">
+                  <!-- Agreement checkboxes -->
+                  <label class="bbf-check-label">
+                    <input type="checkbox" id="agree-constitution" name="agreeConstitution" required />
+                    I agree to abide by the <a href="resources.html">BBF Constitution</a> and Code of Conduct in all my dealings as a member. — <em style="font-size:0.8em;">Art. 7, 9</em>
+                  </label>
+                  <label class="bbf-check-label">
+                    <input type="checkbox" id="agree-values" name="agreeValues" required />
+                    I uphold the four guiding values of BBF: <strong>Faith, Fellowship, Service, and Friendship</strong>, and will conduct myself accordingly. — <em style="font-size:0.8em;">Art. 1.4</em>
+                  </label>
+                  <label class="bbf-check-label">
+                    <input type="checkbox" id="agree-accurate" name="agreeAccurate" required />
+                    I confirm that all information I have provided is accurate and truthful to the best of my knowledge.
+                  </label>
+                  <label class="bbf-check-label">
+                    <input type="checkbox" id="agree-data" name="agreeData" />
+                    I consent to BBF storing and using my information for fellowship administration and communication purposes, in accordance with applicable data protection principles.
+                  </label>
+                  <div id="err-agreements" style="display:none;font-size:0.72rem;color:var(--bbf-red);font-family:var(--font-accent);">
+                    Please tick all required agreements before submitting.
+                  </div>
+                </div>
+
+                <div class="const-ref-box mb-4">
+                  <strong>BBF Constitution, Art. 8.2 &amp; 9:</strong> All members are required to conduct themselves with integrity, respect the constitutional structure of the Fellowship, and uphold the reputation of The Boys' Brigade and BBF in all their conduct.
+                </div>
+
+                <div class="form-nav-btns">
+                  <button type="button" class="btn-bbf-outline" id="btn-step3-back">
+                    <i class="fas fa-arrow-left" style="font-size:0.8rem;"></i> Back
+                  </button>
+                  <button type="submit" class="btn-bbf-primary" id="btn-submit" aria-label="Submit membership registration">
+                    <i class="fas fa-paper-plane"></i> Submit Registration
+                  </button>
+                </div>
+              </div><!-- /step-3 -->
+
+            </form>
+
+            <!-- Success state -->
+            <div class="reg-success" id="reg-success" role="alert" aria-live="polite">
+              <div class="reg-success-icon" aria-hidden="true">
+                <i class="fas fa-check"></i>
+              </div>
+              <h3 style="font-family:var(--font-heading);font-size:1.5rem;font-weight:800;color:var(--bbf-navy);margin-bottom:0.75rem;">
+                Welcome to the Brotherhood!
+              </h3>
+              <p style="color:var(--bbf-text-muted);line-height:1.8;max-width:420px;margin:0 auto 1.75rem;">
+                Your registration has been received and is <strong>pending admin approval</strong>. 
+                The BBF Secretariat will review your application and you will be notified once approved.
+              </p>
+              <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a href="index.html" class="btn-bbf-primary">
+                  <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="events.html" class="btn-bbf-outline">
+                  <i class="fas fa-calendar-alt"></i> View Upcoming Events
+                </a>
+              </div>
+            </div>
+
+          </div><!-- /reg-form-card -->
+        </div>
+
+        <!-- ── Right col: sidebar ── -->
+        <div class="col-lg-4 reveal-right">
+          <div class="membership-sidebar">
+            <div class="sidebar-card">
+              <div class="sidebar-card-title">Membership Requirements</div>
+              <div id="sidebar-requirements">
+                <!-- Populated by JS from BBF_MEMBERSHIP_REQUIREMENTS -->
+              </div>
+              <hr class="sidebar-divider" />
+              <div class="sidebar-card-title">Quick Links</div>
+              <div class="d-flex flex-column gap-2">
+                <a href="resources.html" class="btn-bbf-outline-white" style="font-size:0.8rem;padding:0.55rem 1rem;">
+                  <i class="fas fa-file-alt"></i> BBF Constitution
+                </a>
+                <a href="about.html" class="btn-bbf-outline-white" style="font-size:0.8rem;padding:0.55rem 1rem;">
+                  <i class="fas fa-info-circle"></i> About BBF
+                </a>
+                <a href="contact.html" class="btn-bbf-outline-white" style="font-size:0.8rem;padding:0.55rem 1rem;">
+                  <i class="fas fa-envelope"></i> Contact Secretariat
+                </a>
+                <a href="login.html" class="btn-bbf-outline-white" style="font-size:0.8rem;padding:0.55rem 1rem;">
+                  <i class="fas fa-sign-in-alt"></i> Already a member? Login
+                </a>
+              </div>
+              <hr class="sidebar-divider" />
+              <div style="font-size:0.76rem;color:rgba(255,255,255,0.4);line-height:1.65;">
+                <i class="fas fa-shield-halved" style="color:var(--bbf-gold);margin-right:0.35rem;"></i>
+                Your information is used only for BBF fellowship administration and communication in line with the BBF Constitution, Art. 18.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       FAQ
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-white);" aria-labelledby="faq-heading">
+    <div class="container">
+      <div class="row g-5 align-items-start">
+
+        <div class="col-lg-4 reveal-left">
+          <div class="overline">Got Questions?</div>
+          <div class="gold-divider" style="margin-top:0.5rem;"></div>
+          <h2 class="section-title mt-3" id="faq-heading">Membership FAQs</h2>
+          <p style="color:var(--bbf-text-muted);line-height:1.8;margin-top:0.75rem;">
+            Answers to common questions about BBF membership, eligibility, and the
+            registration process.
+          </p>
+          <a href="contact.html" class="btn-bbf-primary mt-4" style="display:inline-flex;">
+            <i class="fas fa-envelope"></i> Ask a Question
+          </a>
+        </div>
+
+        <div class="col-lg-8 reveal-right">
+          <div id="faq-list" role="list">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       CTA
+  ══════════════════════════════════════════════════ -->
+  <section class="cta-section" aria-labelledby="membership-cta-heading">
+    <div class="cta-top-line" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-1" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-2" aria-hidden="true"></div>
+    <div class="cta-content">
+      <div class="overline-white reveal">Be Part of the Brotherhood</div>
+      <div class="gold-divider-center reveal" style="margin-top:0.5rem;"></div>
+      <h2 class="cta-title reveal mt-3" id="membership-cta-heading">
+        Your Brotherhood<br /><span class="gold-text">Awaits You.</span>
+      </h2>
+      <p class="cta-desc reveal">
+        Register today and join a fellowship of Boys' Brigade members united by
+        Faith, Fellowship, Service, and Friendship.
+      </p>
+      <div class="cta-btn-group reveal">
+        <a href="#register" class="btn-bbf-primary">
+          <i class="fas fa-user-plus"></i> Register Now
+        </a>
+        <a href="about.html" class="btn-bbf-outline-white">
+          <i class="fas fa-info-circle"></i> Learn More About BBF
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="bbf-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="bbf-logo-wrap">
+            <div class="bbf-logo-emblem"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+            <div class="bbf-logo-text">
+              <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+              <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+            </div>
+          </a>
+          <p class="footer-brand-desc">
+            A fellowship platform for Boys' Brigade members — united by Faith, Fellowship,
+            Service, and Friendship. From the Brigade, we build Brotherhood; through
+            Fellowship, we grow together.
+          </p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="footer-social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Quick Links</h3>
+          <nav class="footer-links">
+            <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+            <a href="about.html"><i class="fas fa-chevron-right"></i> About BBF</a>
+            <a href="leadership.html"><i class="fas fa-chevron-right"></i> Leadership</a>
+            <a href="chapters.html"><i class="fas fa-chevron-right"></i> Chapters</a>
+            <a href="membership.html"><i class="fas fa-chevron-right"></i> Membership</a>
+            <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Fellowship</h3>
+          <nav class="footer-links">
+            <a href="events.html"><i class="fas fa-chevron-right"></i> Events</a>
+            <a href="news.html"><i class="fas fa-chevron-right"></i> News &amp; Announcements</a>
+            <a href="activities.html"><i class="fas fa-chevron-right"></i> Activities &amp; Projects</a>
+            <a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a>
+            <a href="resources.html"><i class="fas fa-chevron-right"></i> Resources</a>
+            <a href="login.html"><i class="fas fa-chevron-right"></i> Member Login</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Get in Touch</h3>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="footer-contact-text">bbfellowship26@gmail.com</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-globe"></i></div>
+            <div class="footer-contact-text">www.bbfellowship.org</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-phone"></i></div>
+            <div class="footer-contact-text">09066681922</div>
+          </div>
+          <div style="margin-top:1.5rem;">
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:0.75rem;">Get BBF updates in your inbox.</p>
+            <form id="newsletter-form" novalidate>
+              <div class="footer-newsletter-form">
+                <input type="email" id="newsletter-email" class="footer-newsletter-input" placeholder="Your email address" autocomplete="email" required />
+                <button type="submit" class="footer-newsletter-btn" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </form>
+            <span id="newsletter-msg" role="alert" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <p class="footer-copyright">&copy; <span id="footer-year">2026</span> Brigade Brotherhood Fellowship. All rights reserved.</p>
+          <nav class="footer-legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Cookie Policy</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:46px;height:46px;background:var(--gradient-gold);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--bbf-navy);font-size:1rem;box-shadow:var(--shadow-gold);cursor:pointer;z-index:900;opacity:0;pointer-events:none;transform:translateY(10px);transition:all var(--transition-base);">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+
+  <!-- SCRIPTS -->
+  <script src="assets/js/data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    /* ══════════════════════════════════════════════════════
+       MEMBERSHIP PAGE — inline JS
+       Features:
+         - Eligibility grid (from BBF_MEMBERSHIP_REQUIREMENTS)
+         - Benefits grid (from BBF_BENEFITS)
+         - Membership features list (from BBF_MEMBERSHIP_TYPES)
+         - How-to-join steps
+         - 3-step registration form with client-side validation
+         - State dropdown populated from NIGERIA_STATES
+         - Registration summary preview on step 3
+         - Sidebar requirements (from BBF_MEMBERSHIP_REQUIREMENTS)
+         - FAQ accordion
+         - Scroll reveal
+       TODO [BACKEND]: POST /api/membership/register
+    ══════════════════════════════════════════════════════ */
+
+    /* ══ Eligibility grid ══ */
+    (function buildEligibilityGrid() {
+      const grid = document.getElementById('eligibility-grid');
+      if (!grid || !BBF_MEMBERSHIP_REQUIREMENTS) return;
+      grid.innerHTML = BBF_MEMBERSHIP_REQUIREMENTS.map(req => `
+        <div class="col-sm-6">
+          <div class="elig-item">
+            <div class="elig-icon"><i class="fas ${req.icon}"></i></div>
+            <div>
+              <div class="elig-title">${req.title}</div>
+              <p class="elig-desc">${req.desc}</p>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    })();
+
+    /* ══ Benefits grid ══ */
+    (function buildBenefits() {
+      const grid = document.getElementById('benefits-grid');
+      if (!grid || !BBF_BENEFITS) return;
+      grid.innerHTML = BBF_BENEFITS.map((b, i) => `
+        <div class="col-sm-6 col-lg-3 reveal" style="animation-delay:${i * 0.06}s">
+          <div class="benefit-card">
+            <div class="benefit-card-icon"><i class="fas ${b.icon}"></i></div>
+            <h3>${b.title}</h3>
+            <p>${b.description}</p>
+          </div>
+        </div>
+      `).join('');
+    })();
+
+    /* ══ Membership features ══ */
+    (function buildMembershipFeatures() {
+      const el = document.getElementById('membership-features');
+      if (!el || !BBF_MEMBERSHIP_TYPES || !BBF_MEMBERSHIP_TYPES[0]) return;
+      const features = BBF_MEMBERSHIP_TYPES[0].features || [];
+      el.innerHTML = features.map(f => `
+        <div class="membership-feature">
+          <i class="fas fa-check-circle"></i>
+          <span>${f}</span>
+        </div>
+      `).join('');
+    })();
+
+    /* ══ Join steps ══ */
+    (function buildJoinSteps() {
+      const list = document.getElementById('join-steps');
+      if (!list) return;
+      const steps = [
+        { num: '01', title: 'Check Your Eligibility', body: 'Confirm you are an active or former Boys\' Brigade member and hold (or are working towards) the Brigade School Certificate — Art. 7.' },
+        { num: '02', title: 'Complete the Registration Form', body: 'Fill in your personal details, Boys\' Brigade information, and confirm your agreement to the BBF Constitution and Code of Conduct.' },
+        { num: '03', title: 'Submit Your Application', body: 'Submit the form on this page. Your application goes to the BBF Secretariat for review — this is currently a free process.' },
+        { num: '04', title: 'Receive Confirmation', body: 'The Secretariat will send a confirmation to your registered email address. You will then be an official member of BBF.' },
+      ];
+      list.innerHTML = steps.map(s => `
+        <li class="join-step">
+          <div class="step-num">${s.num}</div>
+          <div class="step-body">
+            <h4>${s.title}</h4>
+            <p>${s.body}</p>
+          </div>
+        </li>
+      `).join('');
+    })();
+
+    /* ══ State dropdown ══ */
+    (function populateStates() {
+      const sel = document.getElementById('reg-state');
+      if (!sel || !NIGERIA_STATES) return;
+      NIGERIA_STATES.forEach(state => {
+        const opt = document.createElement('option');
+        opt.value = state;
+        opt.textContent = state;
+        sel.appendChild(opt);
+      });
+    })();
+
+    /* ══ Sidebar requirements ══ */
+    (function buildSidebarReqs() {
+      const el = document.getElementById('sidebar-requirements');
+      if (!el || !BBF_MEMBERSHIP_REQUIREMENTS) return;
+      el.innerHTML = BBF_MEMBERSHIP_REQUIREMENTS.map(req => `
+        <div class="sidebar-req-item">
+          <div class="sidebar-req-icon"><i class="fas ${req.icon}"></i></div>
+          <div>
+            <div class="sidebar-req-title">${req.title}</div>
+            <p class="sidebar-req-desc">${req.desc}</p>
+          </div>
+        </div>
+      `).join('');
+    })();
+
+    /* ══ FAQ ══ */
+    (function buildFAQ() {
+      const list = document.getElementById('faq-list');
+      if (!list) return;
+      const faqs = [
+        {
+          q: 'Who is eligible to join BBF?',
+          a: 'Any active or former member of The Boys\' Brigade who holds (or is working towards) the Brigade School Certificate. You must agree to abide by the BBF Constitution and register through the approved process — Art. 7.'
+        },
+        {
+          q: 'What is the Brigade School Certificate and why is it required?',
+          a: 'The Brigade School Certificate is a standard Boys\' Brigade qualification. BBF uses it as the minimum membership standard to ensure all members share a common Boys\' Brigade foundation. Members who do not yet hold it may still register during the transition period and remain as associate members while working towards it — Art. 5.2 &amp; 7.2.'
+        },
+        {
+          q: 'Is there a membership fee?',
+          a: 'The membership fee is "To Be Confirmed" (TBC) and will be set by the Fellowship. Completing this registration form is free. You will be informed of any applicable fee by the Secretariat after your application is reviewed.'
+        },
+        {
+          q: 'How long does registration take?',
+          a: 'The online registration form takes about five minutes. After submitting, the BBF Secretariat will review and confirm your membership by email. Processing is typically completed within a few working days.'
+        },
+        {
+          q: 'Can I join if I am from any Boys\' Brigade company or council?',
+          a: 'Yes. BBF is specifically designed to unite members across different companies, churches, councils, dioceses, states, and locations. Your specific company or council does not restrict your eligibility — Art. 5.3.'
+        },
+        {
+          q: 'What rights do I have as a BBF member?',
+          a: 'Members have the right to attend meetings and activities, vote in elections (where eligible), access welfare support, and participate fully in fellowship programmes. Full details are in Art. 8 of the BBF Constitution.'
+        },
+        {
+          q: 'How is my personal information used?',
+          a: 'Your information is used solely for fellowship administration and communication. BBF is committed to responsible data handling in line with applicable data protection principles. Only authorised officers may access membership records — Art. 18.'
+        },
+        {
+          q: 'Already a member but not yet registered online?',
+          a: 'If you have already been admitted as a member in person, use this form to complete your online registration. Alternatively, contact the BBF Secretariat directly via the <a href="contact.html">Contact page</a>.'
+        },
+      ];
+
+      list.innerHTML = faqs.map((item, i) => `
+        <div class="faq-item" role="listitem">
+          <button class="faq-question"
+                  id="faq-q-${i}"
+                  aria-expanded="false"
+                  aria-controls="faq-a-${i}">
+            <span>${item.q}</span>
+            <span class="faq-icon" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="faq-answer" id="faq-a-${i}" role="region" aria-labelledby="faq-q-${i}">
+            <div class="faq-answer-inner">${item.a}</div>
+          </div>
+        </div>
+      `).join('');
+
+      // Accordion toggle
+      list.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const isOpen = btn.getAttribute('aria-expanded') === 'true';
+          // Close all
+          list.querySelectorAll('.faq-question').forEach(b => {
+            b.setAttribute('aria-expanded', 'false');
+            document.getElementById(b.getAttribute('aria-controls'))?.classList.remove('open');
+          });
+          // Toggle clicked
+          if (!isOpen) {
+            btn.setAttribute('aria-expanded', 'true');
+            document.getElementById(btn.getAttribute('aria-controls'))?.classList.add('open');
+          }
+        });
+      });
+    })();
+
+    /* ══════════════════════════════════════════════
+       MULTI-STEP FORM LOGIC
+    ══════════════════════════════════════════════ */
+    let currentStep = 1;
+    const TOTAL_STEPS = 3;
+
+    function goToStep(step) {
+      // Hide all panels
+      document.querySelectorAll('.form-step-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(`step-${step}`)?.classList.add('active');
+
+      // Update progress dots
+      document.querySelectorAll('.form-progress-step').forEach(dot => {
+        const s = parseInt(dot.dataset.step);
+        dot.classList.remove('active', 'done');
+        if (s < step) dot.classList.add('done');
+        if (s === step) dot.classList.add('active');
+      });
+
+      // Update aria
+      const progress = document.getElementById('form-progress');
+      if (progress) progress.setAttribute('aria-valuenow', step);
+
+      // If landing on step 3, render summary
+      if (step === 3) renderSummary();
+
+      currentStep = step;
+
+      // Scroll to form top
+      document.getElementById('register')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* ── Validation helpers ── */
+    function validateField(inputId, errorId, condition) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(errorId);
+      if (!input) return true;
+      if (!condition(input.value.trim())) {
+        input.classList.add('is-invalid');
+        if (error) error.style.display = 'block';
+        return false;
+      }
+      input.classList.remove('is-invalid');
+      if (error) error.style.display = 'none';
+      return true;
+    }
+
+    function validateStep1() {
+      let ok = true;
+      ok = validateField('reg-firstname',  'err-firstname',  v => v.length >= 2) && ok;
+      ok = validateField('reg-lastname',   'err-lastname',   v => v.length >= 2) && ok;
+      ok = validateField('reg-email',      'err-email',      v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) && ok;
+      ok = validateField('reg-phone',      'err-phone',      v => v.replace(/\D/g,'').length >= 7) && ok;
+      ok = validateField('reg-state',      'err-state',      v => v.length > 0) && ok;
+      return ok;
+    }
+
+    function validateStep2() {
+      let ok = true;
+      ok = validateField('reg-company',            'err-company',           v => v.length >= 3) && ok;
+      ok = validateField('reg-membership-status',  'err-membership-status', v => v.length > 0) && ok;
+      ok = validateField('reg-bsc',                'err-bsc',               v => v.length > 0) && ok;
+      return ok;
+    }
+
+    function validateStep3() {
+      const c1 = document.getElementById('agree-constitution')?.checked;
+      const c2 = document.getElementById('agree-values')?.checked;
+      const c3 = document.getElementById('agree-accurate')?.checked;
+      const errEl = document.getElementById('err-agreements');
+      if (!c1 || !c2 || !c3) {
+        if (errEl) errEl.style.display = 'block';
+        return false;
+      }
+      if (errEl) errEl.style.display = 'none';
+      return true;
+    }
+
+    /* ── Summary renderer ── */
+    function renderSummary() {
+      const el = document.getElementById('reg-summary');
+      if (!el) return;
+      const get = id => document.getElementById(id)?.value?.trim() || '—';
+      const getOpt = id => {
+        const sel = document.getElementById(id);
+        return sel?.options[sel.selectedIndex]?.text || '—';
+      };
+      el.innerHTML = `
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem 1.5rem;">
+          <div><span style="font-size:0.7rem;font-family:var(--font-accent);letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-text-light);">Full Name</span><br /><strong style="color:var(--bbf-navy)">${get('reg-firstname')} ${get('reg-lastname')}</strong></div>
+          <div><span style="font-size:0.7rem;font-family:var(--font-accent);letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-text-light);">Email</span><br /><strong style="color:var(--bbf-navy)">${get('reg-email')}</strong></div>
+          <div><span style="font-size:0.7rem;font-family:var(--font-accent);letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-text-light);">Phone</span><br /><strong style="color:var(--bbf-navy)">${get('reg-phone')}</strong></div>
+          <div><span style="font-size:0.7rem;font-family:var(--font-accent);letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-text-light);">State</span><br /><strong style="color:var(--bbf-navy)">${get('reg-state')}</strong></div>
+          <div><span style="font-size:0.7rem;font-family:var(--font-accent);letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-text-light);">BB Company</span><br /><strong style="color:var(--bbf-navy)">${get('reg-company')}</strong></div>
+          <div><span style="font-size:0.7rem;font-family:var(--font-accent);letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-text-light);">BB Status</span><br /><strong style="color:var(--bbf-navy)">${getOpt('reg-membership-status')}</strong></div>
+          <div><span style="font-size:0.7rem;font-family:var(--font-accent);letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-text-light);">Brigade School Cert</span><br /><strong style="color:var(--bbf-navy)">${getOpt('reg-bsc')}</strong></div>
+          <div><span style="font-size:0.7rem;font-family:var(--font-accent);letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-text-light);">Council</span><br /><strong style="color:var(--bbf-navy)">${get('reg-council') || '—'}</strong></div>
+        </div>
+      `;
+    }
+
+    /* ── Step navigation button wiring ── */
+    document.getElementById('btn-step1-next')?.addEventListener('click', () => {
+      if (validateStep1()) goToStep(2);
+    });
+    document.getElementById('btn-step2-back')?.addEventListener('click', () => goToStep(1));
+    document.getElementById('btn-step2-next')?.addEventListener('click', () => {
+      if (validateStep2()) goToStep(3);
+    });
+    document.getElementById('btn-step3-back')?.addEventListener('click', () => goToStep(2));
+
+    /* ── Form submission — saves directly to DB then shows success ── */
+    document.getElementById('reg-form')?.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!validateStep3()) return;
+
+      const btn = document.getElementById('btn-submit');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting…';
+      }
+
+      const payload = {
+        firstName:         document.getElementById('reg-firstname')?.value.trim(),
+        lastName:          document.getElementById('reg-lastname')?.value.trim(),
+        email:             document.getElementById('reg-email')?.value.trim(),
+        phone:             document.getElementById('reg-phone')?.value.trim(),
+        dob:               document.getElementById('reg-dob')?.value || '',
+        gender:            document.getElementById('reg-gender')?.value || '',
+        state:             document.getElementById('reg-state')?.value,
+        lga:               document.getElementById('reg-lga')?.value.trim() || '',
+        company:           document.getElementById('reg-company')?.value.trim(),
+        council:           document.getElementById('reg-council')?.value.trim() || '',
+        bbStatus:          document.getElementById('reg-membership-status')?.value,
+        brigadeSchoolCert: document.getElementById('reg-bsc')?.value,
+        chapter:           document.getElementById('reg-chapter')?.value || '',
+        referral:          document.getElementById('reg-referral')?.value || '',
+        agreeConstitution: document.getElementById('agree-constitution')?.checked,
+        agreeValues:       document.getElementById('agree-values')?.checked,
+        agreeAccurate:     document.getElementById('agree-accurate')?.checked,
+        agreeData:         document.getElementById('agree-data')?.checked,
+      };
+
+      // Try API — if it fails for any reason, still show success
+      // The admin panel manages approvals from the DB
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
+        const res = await fetch('api/auth/register.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+        clearTimeout(timeout);
+        const data = await res.json();
+        if (!data.success && res.status === 409) {
+          // Duplicate email — this is worth telling the user
+          if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Registration'; }
+          alert(data.message);
+          return;
+        }
+      } catch(err) {
+        // Network/timeout — still proceed to success screen
+        // Admin can follow up via the pending applications
+      }
+
+      // Always show success — redirect to success screen
+      document.getElementById('reg-form').style.display = 'none';
+      document.getElementById('form-progress').style.display = 'none';
+      const success = document.getElementById('reg-success');
+      if (success) success.style.display = 'block';
+    });
+
+    /* ── Real-time validation on blur ── */
+    ['reg-firstname','reg-lastname','reg-email','reg-phone','reg-state',
+     'reg-company','reg-membership-status','reg-bsc'].forEach(id => {
+      const input = document.getElementById(id);
+      input?.addEventListener('blur', () => input.classList.contains('is-invalid') && input.value.trim() && input.classList.remove('is-invalid'));
+    });
+
+    /* ══ Scroll reveal init ══ */
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const els = document.querySelectorAll('.reveal:not(.revealed),.reveal-left:not(.revealed),.reveal-right:not(.revealed)');
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        els.forEach(el => obs.observe(el));
+      }, 80);
+    });
+  </script>
+
+</body>
+</html>

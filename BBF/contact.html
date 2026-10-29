@@ -1,0 +1,1209 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Brigade Brotherhood Fellowship — reach the BBF secretariat, ask questions, request documents, or get in touch with your nearest chapter." />
+  <meta name="keywords" content="Contact BBF, Brigade Brotherhood Fellowship contact, Boys Brigade Fellowship enquiry" />
+  <meta name="author" content="Brigade Brotherhood Fellowship" />
+
+  <title>Contact Us — Brigade Brotherhood Fellowship</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════
+       CONTACT PAGE — scoped styles
+    ══════════════════════════════════════════════════════ */
+
+    /* ── Contact info card ── */
+    .contact-info-card {
+      background: var(--gradient-navy-dark);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-info-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient-gold);
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .contact-info-item:last-of-type { border-bottom: none; }
+    .contact-info-icon {
+      width: 44px; height: 44px;
+      background: rgba(201,168,76,0.10);
+      border: 1px solid rgba(201,168,76,0.20);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--bbf-gold);
+      flex-shrink: 0;
+      transition: all var(--transition-base);
+    }
+    .contact-info-item:hover .contact-info-icon {
+      background: var(--bbf-gold);
+      color: var(--bbf-navy);
+      border-color: var(--bbf-gold);
+    }
+    .contact-info-label {
+      font-family: var(--font-accent);
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--bbf-gold); margin-bottom: 0.25rem;
+    }
+    .contact-info-value {
+      font-size: var(--fs-sm);
+      color: rgba(255,255,255,0.78);
+      line-height: 1.55;
+    }
+    .contact-info-value a {
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+    .contact-info-value a:hover { color: var(--bbf-gold-light); }
+
+    /* Social links in info card */
+    .contact-social-strip {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 1.75rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .contact-social-btn {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.55);
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+    .contact-social-btn:hover {
+      background: var(--bbf-gold);
+      border-color: var(--bbf-gold);
+      color: var(--bbf-navy);
+      transform: translateY(-2px);
+    }
+
+    /* ── Contact form ── */
+    .contact-form-card {
+      background: var(--bbf-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Form field group */
+    .form-group-bbf { margin-bottom: 1.25rem; }
+    .form-label-bbf {
+      display: block;
+      font-family: var(--font-accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bbf-navy);
+      margin-bottom: 0.5rem;
+    }
+    .form-label-bbf .required {
+      color: var(--bbf-red);
+      margin-left: 2px;
+    }
+    .form-input-bbf,
+    .form-select-bbf,
+    .form-textarea-bbf {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--bbf-light-grey);
+      border-radius: var(--radius-md);
+      font-size: var(--fs-sm);
+      font-family: var(--font-body);
+      color: var(--bbf-text);
+      background: var(--bbf-off-white);
+      outline: none;
+      transition: all var(--transition-fast);
+      appearance: none;
+    }
+    .form-input-bbf:focus,
+    .form-select-bbf:focus,
+    .form-textarea-bbf:focus {
+      border-color: var(--bbf-gold);
+      background: var(--bbf-white);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+    .form-input-bbf.error,
+    .form-select-bbf.error,
+    .form-textarea-bbf.error {
+      border-color: var(--bbf-red);
+      background: rgba(178,34,52,0.03);
+    }
+    .form-input-bbf.valid,
+    .form-select-bbf.valid,
+    .form-textarea-bbf.valid {
+      border-color: #2DA66A;
+    }
+    .form-textarea-bbf {
+      resize: vertical;
+      min-height: 130px;
+    }
+    .form-select-bbf {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A92A0' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+    .form-error-msg {
+      display: none;
+      font-size: var(--fs-xs);
+      color: var(--bbf-red);
+      margin-top: 0.35rem;
+      font-family: var(--font-body);
+    }
+    .form-error-msg.show { display: block; }
+
+    /* Character counter */
+    .form-char-count {
+      font-size: var(--fs-xs);
+      color: var(--bbf-text-light);
+      text-align: right;
+      margin-top: 0.3rem;
+      font-family: var(--font-accent);
+      letter-spacing: 0.04em;
+    }
+    .form-char-count.near-limit { color: var(--bbf-gold-dark); }
+    .form-char-count.at-limit    { color: var(--bbf-red); }
+
+    /* Submit button state */
+    .contact-submit-btn {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--gradient-gold);
+      color: var(--bbf-navy);
+      border: none;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-accent);
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .contact-submit-btn:hover:not(:disabled) {
+      opacity: 0.92;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(201,168,76,0.35);
+    }
+    .contact-submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ── Success / error message ── */
+    .form-result-box {
+      display: none;
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      margin-top: 1.25rem;
+      text-align: center;
+    }
+    .form-result-box.success {
+      background: rgba(26,92,58,0.08);
+      border: 1px solid rgba(45,166,106,0.3);
+    }
+    .form-result-box.error-result {
+      background: rgba(178,34,52,0.06);
+      border: 1px solid rgba(178,34,52,0.25);
+    }
+    .form-result-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .form-result-box.success .form-result-icon { color: #2DA66A; }
+    .form-result-box.error-result .form-result-icon { color: var(--bbf-red); }
+    .form-result-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .form-result-box.success .form-result-title { color: #1A5C3A; }
+    .form-result-box.error-result .form-result-title { color: var(--bbf-red); }
+    .form-result-desc {
+      font-size: var(--fs-sm);
+      line-height: 1.65;
+    }
+    .form-result-box.success .form-result-desc { color: var(--bbf-text-muted); }
+    .form-result-box.error-result .form-result-desc { color: var(--bbf-text-muted); }
+
+    /* ── Who to contact cards ── */
+    .contact-who-card {
+      background: var(--bbf-off-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      transition: all var(--transition-base);
+      height: 100%;
+    }
+    .contact-who-card:hover {
+      background: var(--bbf-white);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+      border-color: rgba(201,168,76,0.25);
+    }
+    .contact-who-icon {
+      width: 46px; height: 46px;
+      background: var(--bbf-navy);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: var(--bbf-gold);
+      margin-bottom: 1rem;
+      transition: all var(--transition-base);
+    }
+    .contact-who-card:hover .contact-who-icon {
+      background: var(--gradient-gold);
+      color: var(--bbf-navy);
+    }
+    .contact-who-title {
+      font-family: var(--font-accent);
+      font-size: var(--fs-sm); font-weight: 700;
+      letter-spacing: 0.05em; color: var(--bbf-navy);
+      margin-bottom: 0.4rem;
+    }
+    .contact-who-desc {
+      font-size: var(--fs-sm);
+      color: var(--bbf-text-muted);
+      line-height: 1.65; margin-bottom: 0.875rem;
+    }
+    .contact-who-email {
+      font-size: var(--fs-xs);
+      font-family: var(--font-accent);
+      font-weight: 600;
+      color: var(--bbf-gold-dark);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      display: flex; align-items: center; gap: 0.35rem;
+      transition: color var(--transition-fast);
+    }
+    .contact-who-email:hover { color: var(--bbf-gold); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .contact-info-card { padding: 2rem; }
+      .contact-form-card { padding: 2rem; }
+    }
+    @media (max-width: 576px) {
+      .contact-info-card { padding: 1.5rem; }
+      .contact-form-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="bbf-preloader" style="position:fixed;inset:0;background:var(--bbf-navy);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:1rem;">
+    <div style="width:56px;height:56px;background:var(--gradient-gold);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:800;color:var(--bbf-navy);animation:preloaderPulse 1.2s ease-in-out infinite;">BBF</div>
+    <div style="font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.6);">Loading…</div>
+  </div>
+  <style>@keyframes preloaderPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:0.8}}</style>
+
+  <!-- NAVBAR -->
+  <nav id="bbf-navbar" class="nav-transparent" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="bbf-logo-wrap" aria-label="BBF Home">
+        <div class="bbf-logo-emblem" aria-hidden="true"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+        <li><a href="chapters.html">Chapters</a></li>
+        <li class="nav-dropdown">
+          <a href="#" aria-haspopup="true">Programs <i class="fas fa-chevron-down" style="font-size:0.6rem;margin-left:2px;"></i></a>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="events.html" role="menuitem"><i class="fas fa-calendar-alt" style="width:16px;color:var(--bbf-gold);"></i> Events</a>
+            <a href="activities.html" role="menuitem"><i class="fas fa-hands-helping" style="width:16px;color:var(--bbf-gold);"></i> Activities</a>
+            <a href="gallery.html" role="menuitem"><i class="fas fa-images" style="width:16px;color:var(--bbf-gold);"></i> Gallery</a>
+          </div>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <a href="membership.html" class="btn-bbf-primary btn-sm-bbf btn-bbf-nav-cta">
+        <i class="fas fa-user-plus"></i> Join BBF
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="bbf-offcanvas">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- OFFCANVAS -->
+  <div id="offcanvas-overlay" class="offcanvas-overlay" aria-hidden="true"></div>
+  <aside id="bbf-offcanvas" class="bbf-offcanvas" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <div class="offcanvas-header">
+      <a href="index.html" class="bbf-logo-wrap">
+        <div class="bbf-logo-emblem" style="width:38px;height:38px;"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name" style="font-size:0.82rem;">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <button id="offcanvas-close" class="offcanvas-close" aria-label="Close navigation menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="offcanvas-nav" role="list">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About BBF</a></li>
+        <li><a href="leadership.html"><i class="fas fa-crown"></i> Leadership</a></li>
+        <li><a href="chapters.html"><i class="fas fa-map-location-dot"></i> Chapters</a></li>
+        <li><a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+        <li><a href="activities.html"><i class="fas fa-hands-helping"></i> Activities &amp; Projects</a></li>
+        <li><a href="news.html"><i class="fas fa-newspaper"></i> News &amp; Announcements</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="resources.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        <li style="margin-top:0.5rem;border-top:1px solid rgba(201,168,76,0.12);padding-top:0.75rem;">
+          <a href="login.html"><i class="fas fa-sign-in-alt"></i> Member Login</a>
+        </li>
+      </ul>
+    </div>
+    <div class="offcanvas-footer">
+      <a href="membership.html" class="btn-bbf-primary" style="width:100%;justify-content:center;">
+        <i class="fas fa-user-plus"></i> Join BBF Today
+      </a>
+    </div>
+  </aside>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header" aria-label="Contact page header">
+    <div class="page-header-bg" aria-hidden="true"></div>
+    <div class="page-header-decor" aria-hidden="true"></div>
+    <div class="container page-header-content">
+      <nav class="page-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep" aria-hidden="true"><i class="fas fa-chevron-right" style="font-size:0.55rem;"></i></span>
+        <span class="current" aria-current="page">Contact Us</span>
+      </nav>
+      <h1 class="page-header-title reveal">Get in Touch</h1>
+      <p class="page-header-subtitle reveal">
+        Questions, enquiries, document requests, activity ideas, or anything
+        else — the BBF secretariat is ready to hear from you.
+      </p>
+    </div>
+  </header>
+
+
+  <!-- ══════════════════════════════════════════════════
+       01. CONTACT INFO + FORM
+       TODO [BACKEND]: Form submit → POST /api/contact
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py bg-off-white" aria-labelledby="contact-form-heading">
+    <div class="container">
+      <div class="row g-5 align-items-start">
+
+        <!-- ── Left: Contact Info ── -->
+        <div class="col-lg-4 reveal-left">
+          <div class="contact-info-card">
+
+            <div class="overline-white" style="margin-bottom:0.5rem;">BBF Secretariat</div>
+            <div class="gold-divider" style="margin-bottom:1.75rem;"></div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <div class="contact-info-label">General Email</div>
+                <div class="contact-info-value">
+                  <a href="mailto:bbfellowship26@gmail.com">bbfellowship26@gmail.com</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-file-alt"></i></div>
+              <div>
+                <div class="contact-info-label">Secretary</div>
+                <div class="contact-info-value">
+                  <a href="mailto:secretary@bbfellowship.org">secretary@bbfellowship.org</a>
+                  <div style="font-size:var(--fs-xs);color:rgba(255,255,255,0.4);margin-top:0.2rem;">
+                    For membership, records &amp; documents
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-calendar-alt"></i></div>
+              <div>
+                <div class="contact-info-label">Events &amp; Activities</div>
+                <div class="contact-info-value">
+                  <a href="mailto:events@bbfellowship.org">events@bbfellowship.org</a>
+                  <div style="font-size:var(--fs-xs);color:rgba(255,255,255,0.4);margin-top:0.2rem;">
+                    Social/Event Coordinator
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-bullhorn"></i></div>
+              <div>
+                <div class="contact-info-label">Media &amp; Publicity</div>
+                <div class="contact-info-value">
+                  <a href="mailto:media@bbfellowship.org">media@bbfellowship.org</a>
+                  <div style="font-size:var(--fs-xs);color:rgba(255,255,255,0.4);margin-top:0.2rem;">
+                    Photo submissions, press &amp; announcements
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-heart-pulse"></i></div>
+              <div>
+                <div class="contact-info-label">Welfare</div>
+                <div class="contact-info-value">
+                  <a href="mailto:welfare@bbfellowship.org">welfare@bbfellowship.org</a>
+                  <div style="font-size:var(--fs-xs);color:rgba(255,255,255,0.4);margin-top:0.2rem;">
+                    Member welfare &amp; support matters
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-globe"></i></div>
+              <div>
+                <div class="contact-info-label">Website</div>
+                <div class="contact-info-value">
+                  <a href="https://www.bbfellowship.org" target="_blank" rel="noopener">www.bbfellowship.org</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-phone"></i></div>
+              <div>
+                <div class="contact-info-label">Phone</div>
+                <div class="contact-info-value">
+                  <a href="tel:+2349066681922">09066681922</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social -->
+            <div class="contact-social-strip" role="list" aria-label="BBF social media">
+              <a href="#" class="contact-social-btn" aria-label="Facebook" role="listitem"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="contact-social-btn" aria-label="Twitter" role="listitem"><i class="fab fa-x-twitter"></i></a>
+              <a href="#" class="contact-social-btn" aria-label="Instagram" role="listitem"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="contact-social-btn" aria-label="YouTube" role="listitem"><i class="fab fa-youtube"></i></a>
+              <a href="#" class="contact-social-btn" aria-label="WhatsApp" role="listitem"><i class="fab fa-whatsapp"></i></a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── Right: Contact Form ── -->
+        <div class="col-lg-8 reveal-right">
+          <div class="contact-form-card">
+
+            <div class="mb-4">
+              <div class="overline">Send a Message</div>
+              <div class="gold-divider" style="margin-top:0.5rem;"></div>
+              <h2 class="section-title mt-3" id="contact-form-heading" style="font-size:1.6rem;">
+                We'd Love to Hear from You
+              </h2>
+              <p style="color:var(--bbf-text-muted);font-size:var(--fs-sm);margin-top:0.5rem;line-height:1.65;">
+                Use this form for general enquiries, document requests, activity suggestions,
+                or anything else. Fields marked <span style="color:var(--bbf-red);">*</span> are required.
+              </p>
+            </div>
+
+            <!-- TODO [BACKEND]: Replace simulate_submit() with a real POST /api/contact
+                 Payload: { name, email, phone, state, subject, enquiryType, message }
+                 On success: show .form-result-box.success
+                 On failure: show .form-result-box.error-result with error message -->
+            <form id="contact-form" novalidate aria-label="BBF contact form">
+
+              <div class="row g-3">
+
+                <!-- Full name -->
+                <div class="col-md-6">
+                  <div class="form-group-bbf">
+                    <label class="form-label-bbf" for="cf-name">
+                      Full Name <span class="required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="cf-name"
+                      class="form-input-bbf"
+                      placeholder="Your full name"
+                      autocomplete="name"
+                      maxlength="100"
+                      required
+                    />
+                    <div class="form-error-msg" id="cf-name-err">Please enter your full name.</div>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="col-md-6">
+                  <div class="form-group-bbf">
+                    <label class="form-label-bbf" for="cf-email">
+                      Email Address <span class="required">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="cf-email"
+                      class="form-input-bbf"
+                      placeholder="your@email.com"
+                      autocomplete="email"
+                      maxlength="100"
+                      required
+                    />
+                    <div class="form-error-msg" id="cf-email-err">Please enter a valid email address.</div>
+                  </div>
+                </div>
+
+                <!-- Phone (optional) -->
+                <div class="col-md-6">
+                  <div class="form-group-bbf">
+                    <label class="form-label-bbf" for="cf-phone">Phone Number</label>
+                    <input
+                      type="tel"
+                      id="cf-phone"
+                      class="form-input-bbf"
+                      placeholder="+234 800 000 0000"
+                      autocomplete="tel"
+                      maxlength="20"
+                    />
+                  </div>
+                </div>
+
+                <!-- State / Location -->
+                <div class="col-md-6">
+                  <div class="form-group-bbf">
+                    <label class="form-label-bbf" for="cf-state">State / Location</label>
+                    <select id="cf-state" class="form-select-bbf">
+                      <option value="">Select your state…</option>
+                      <!-- Populated by JS from NIGERIA_STATES -->
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Enquiry type -->
+                <div class="col-md-6">
+                  <div class="form-group-bbf">
+                    <label class="form-label-bbf" for="cf-type">
+                      Enquiry Type <span class="required">*</span>
+                    </label>
+                    <select id="cf-type" class="form-select-bbf" required>
+                      <option value="">Select enquiry type…</option>
+                      <option value="general">General Enquiry</option>
+                      <option value="membership">Membership Question</option>
+                      <option value="document">Document Request</option>
+                      <option value="chapter">Chapter / Starting a Chapter</option>
+                      <option value="activity">Activity / Event Suggestion</option>
+                      <option value="welfare">Welfare Matter</option>
+                      <option value="media">Media / Photo Submission</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <div class="form-error-msg" id="cf-type-err">Please select an enquiry type.</div>
+                  </div>
+                </div>
+
+                <!-- Subject -->
+                <div class="col-md-6">
+                  <div class="form-group-bbf">
+                    <label class="form-label-bbf" for="cf-subject">
+                      Subject <span class="required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="cf-subject"
+                      class="form-input-bbf"
+                      placeholder="Brief subject line"
+                      maxlength="120"
+                      required
+                    />
+                    <div class="form-error-msg" id="cf-subject-err">Please enter a subject.</div>
+                  </div>
+                </div>
+
+                <!-- Message -->
+                <div class="col-12">
+                  <div class="form-group-bbf">
+                    <label class="form-label-bbf" for="cf-message">
+                      Message <span class="required">*</span>
+                    </label>
+                    <textarea
+                      id="cf-message"
+                      class="form-textarea-bbf"
+                      placeholder="Write your message here…"
+                      maxlength="1000"
+                      required
+                    ></textarea>
+                    <div class="form-char-count" id="cf-message-count">0 / 1000</div>
+                    <div class="form-error-msg" id="cf-message-err">Please enter your message (minimum 20 characters).</div>
+                  </div>
+                </div>
+
+                <!-- Privacy notice -->
+                <div class="col-12">
+                  <div style="display:flex;align-items:flex-start;gap:0.75rem;
+                    padding:1rem;background:var(--bbf-off-white);
+                    border-radius:var(--radius-md);border:1px solid var(--bbf-light-grey);">
+                    <i class="fas fa-lock" style="color:var(--bbf-gold);margin-top:2px;flex-shrink:0;"></i>
+                    <p style="font-size:var(--fs-xs);color:var(--bbf-text-muted);line-height:1.6;margin:0;">
+                      Your information is used only to respond to your enquiry and will be handled
+                      in accordance with BBF's privacy policy. BBF will not share your personal
+                      information with third parties without your consent.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="col-12">
+                  <button type="submit" class="contact-submit-btn" id="cf-submit">
+                    <i class="fas fa-paper-plane"></i>
+                    Send Message
+                  </button>
+                </div>
+
+              </div><!-- /.row -->
+
+            </form>
+
+            <!-- Result messages -->
+            <div class="form-result-box success" id="cf-success">
+              <i class="fas fa-check-circle form-result-icon"></i>
+              <div class="form-result-title">Message Sent!</div>
+              <p class="form-result-desc">
+                Thank you for getting in touch. A member of the BBF secretariat will
+                review your message and respond as soon as possible.
+              </p>
+              <button onclick="resetContactForm()"
+                class="btn-bbf-outline btn-sm-bbf mt-3">
+                <i class="fas fa-reply"></i> Send Another Message
+              </button>
+            </div>
+
+            <div class="form-result-box error-result" id="cf-error">
+              <i class="fas fa-triangle-exclamation form-result-icon"></i>
+              <div class="form-result-title">Submission Failed</div>
+              <p class="form-result-desc">
+                Something went wrong. Please try again or email us directly at
+                <a href="mailto:bbfellowship26@gmail.com" style="color:var(--bbf-red);">bbfellowship26@gmail.com</a>.
+              </p>
+            </div>
+
+          </div><!-- /.contact-form-card -->
+        </div>
+
+      </div><!-- /.row -->
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       02. WHO TO CONTACT
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-white);" aria-labelledby="who-contact-heading">
+    <div class="container">
+
+      <div class="text-center reveal" style="max-width:500px;margin:0 auto 3rem;">
+        <div class="overline">Right Person, Right Query</div>
+        <div class="gold-divider-center" style="margin-top:0.5rem;"></div>
+        <h2 class="section-title mt-3" id="who-contact-heading">
+          Who Should I Contact?
+        </h2>
+        <p class="section-subtitle mt-2" style="margin:0 auto;">
+          Different enquiries go to different officers. Here's a quick guide.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-lg-4 col-md-6 reveal reveal-delay-1">
+          <div class="contact-who-card">
+            <div class="contact-who-icon"><i class="fas fa-user-gear"></i></div>
+            <div class="contact-who-title">General Enquiries &amp; Coordinator</div>
+            <p class="contact-who-desc">General questions about BBF, the fellowship's purpose, or matters requiring the Coordinator/President's attention.</p>
+            <a href="mailto:coordinator@bbfellowship.org" class="contact-who-email">
+              <i class="fas fa-envelope" style="font-size:0.6rem;"></i>
+              coordinator@bbfellowship.org
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 reveal reveal-delay-2">
+          <div class="contact-who-card">
+            <div class="contact-who-icon"><i class="fas fa-file-alt"></i></div>
+            <div class="contact-who-title">Membership, Records &amp; Documents</div>
+            <p class="contact-who-desc">Membership registration, constitution requests, records enquiries, meeting minutes, and administrative matters.</p>
+            <a href="mailto:secretary@bbfellowship.org" class="contact-who-email">
+              <i class="fas fa-envelope" style="font-size:0.6rem;"></i>
+              secretary@bbfellowship.org
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 reveal reveal-delay-3">
+          <div class="contact-who-card">
+            <div class="contact-who-icon"><i class="fas fa-coins"></i></div>
+            <div class="contact-who-title">Financial Matters</div>
+            <p class="contact-who-desc">Membership dues, payment queries, financial records, and any matters relating to BBF funds or expenditure.</p>
+            <a href="mailto:treasurer@bbfellowship.org" class="contact-who-email">
+              <i class="fas fa-envelope" style="font-size:0.6rem;"></i>
+              treasurer@bbfellowship.org
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 reveal reveal-delay-4">
+          <div class="contact-who-card">
+            <div class="contact-who-icon"><i class="fas fa-calendar-plus"></i></div>
+            <div class="contact-who-title">Events &amp; Activity Suggestions</div>
+            <p class="contact-who-desc">Upcoming event information, activity proposals, fellowship planning, and social programme enquiries.</p>
+            <a href="mailto:events@bbfellowship.org" class="contact-who-email">
+              <i class="fas fa-envelope" style="font-size:0.6rem;"></i>
+              events@bbfellowship.org
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 reveal reveal-delay-5">
+          <div class="contact-who-card">
+            <div class="contact-who-icon"><i class="fas fa-heart-pulse"></i></div>
+            <div class="contact-who-title">Welfare &amp; Member Support</div>
+            <p class="contact-who-desc">Member welfare needs, pastoral support matters, and requests for fellowship assistance during difficult times.</p>
+            <a href="mailto:welfare@bbfellowship.org" class="contact-who-email">
+              <i class="fas fa-envelope" style="font-size:0.6rem;"></i>
+              welfare@bbfellowship.org
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 reveal reveal-delay-6">
+          <div class="contact-who-card">
+            <div class="contact-who-icon"><i class="fas fa-camera"></i></div>
+            <div class="contact-who-title">Media, Photos &amp; Publicity</div>
+            <p class="contact-who-desc">Photo submissions for the gallery, media enquiries, official statements, and publicity-related requests.</p>
+            <a href="mailto:media@bbfellowship.org" class="contact-who-email">
+              <i class="fas fa-envelope" style="font-size:0.6rem;"></i>
+              media@bbfellowship.org
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       03. FAQ STRIP
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py-sm" style="background:var(--bbf-navy-mid);" aria-labelledby="faq-heading">
+    <div class="container">
+      <div class="text-center reveal" style="max-width:480px;margin:0 auto 2.5rem;">
+        <div class="overline-white">Common Questions</div>
+        <h3 class="section-title-light mt-2" id="faq-heading" style="font-size:1.5rem;">
+          Frequently Asked
+        </h3>
+      </div>
+      <div class="row g-3" id="faq-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA -->
+  <section class="cta-section" aria-labelledby="contact-cta-heading">
+    <div class="cta-top-line" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-1" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-2" aria-hidden="true"></div>
+    <div class="cta-content">
+      <div class="overline-white reveal">Ready to Join?</div>
+      <div class="gold-divider-center reveal" style="margin-top:0.5rem;"></div>
+      <h2 class="cta-title reveal mt-3" id="contact-cta-heading">
+        Questions Answered?<br /><span class="gold-text">Now Take the Step.</span>
+      </h2>
+      <p class="cta-desc reveal">
+        Join Brigade Brotherhood Fellowship and become part of a brotherhood
+        that serves, grows, and stays together.
+      </p>
+      <div class="cta-btn-group reveal">
+        <a href="membership.html" class="btn-bbf-primary">
+          <i class="fas fa-user-plus"></i> Join BBF Today
+        </a>
+        <a href="about.html" class="btn-bbf-outline-white">
+          <i class="fas fa-info-circle"></i> Learn More
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bbf-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="bbf-logo-wrap">
+            <div class="bbf-logo-emblem"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+            <div class="bbf-logo-text">
+              <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+              <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+            </div>
+          </a>
+          <p class="footer-brand-desc">A fellowship platform for Boys' Brigade members — united by Faith, Fellowship, Service, and Friendship. From the Brigade, we build Brotherhood; through Fellowship, we grow together.</p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="footer-social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Quick Links</h3>
+          <nav class="footer-links">
+            <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+            <a href="about.html"><i class="fas fa-chevron-right"></i> About BBF</a>
+            <a href="leadership.html"><i class="fas fa-chevron-right"></i> Leadership</a>
+            <a href="chapters.html"><i class="fas fa-chevron-right"></i> Chapters</a>
+            <a href="membership.html"><i class="fas fa-chevron-right"></i> Membership</a>
+            <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Fellowship</h3>
+          <nav class="footer-links">
+            <a href="events.html"><i class="fas fa-chevron-right"></i> Events</a>
+            <a href="news.html"><i class="fas fa-chevron-right"></i> News &amp; Announcements</a>
+            <a href="activities.html"><i class="fas fa-chevron-right"></i> Activities &amp; Projects</a>
+            <a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a>
+            <a href="resources.html"><i class="fas fa-chevron-right"></i> Resources</a>
+            <a href="login.html"><i class="fas fa-chevron-right"></i> Member Login</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Get in Touch</h3>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="footer-contact-text">bbfellowship26@gmail.com</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-globe"></i></div>
+            <div class="footer-contact-text">www.bbfellowship.org</div>
+          </div>
+          <div style="margin-top:1.5rem;">
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:0.75rem;">Get BBF updates in your inbox.</p>
+            <form id="newsletter-form" novalidate>
+              <div class="footer-newsletter-form">
+                <input type="email" id="newsletter-email" class="footer-newsletter-input" placeholder="Your email address" autocomplete="email" required />
+                <button type="submit" class="footer-newsletter-btn" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </form>
+            <span id="newsletter-msg" role="alert" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <p class="footer-copyright">&copy; <span id="footer-year">2026</span> Brigade Brotherhood Fellowship. All rights reserved.</p>
+          <nav class="footer-legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Cookie Policy</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:46px;height:46px;background:var(--gradient-gold);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--bbf-navy);font-size:1rem;box-shadow:var(--shadow-gold);cursor:pointer;z-index:900;opacity:0;pointer-events:none;transform:translateY(10px);transition:all var(--transition-base);">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="assets/js/data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    /* ══════════════════════════════════════════════════════
+       CONTACT PAGE — inline JS
+       Features:
+         - Populate state select from NIGERIA_STATES (data.js)
+         - Full client-side validation with per-field error messages
+         - Character counter on message textarea
+         - Simulated form submission with success/error states
+         - Reset form function
+         - FAQ grid render
+       TODO [BACKEND]: Replace simulate_submit() with POST /api/contact
+    ══════════════════════════════════════════════════════ */
+
+    /* ── FAQs ── */
+    const FAQS = [
+      {
+        q: 'Who can join BBF?',
+        a: 'Any active or former Boys\' Brigade member who holds (or is working towards) the Brigade School Certificate and agrees to abide by the BBF Constitution.',
+      },
+      {
+        q: 'Does BBF replace my Boys\' Brigade company?',
+        a: 'No. BBF does not replace or compete with any Boys\' Brigade company, council, diocese, or church structure. Membership of BBF does not exempt any member from their Brigade responsibilities.',
+      },
+      {
+        q: 'How do I get a copy of the BBF Constitution?',
+        a: 'Request a copy via this contact form or by emailing secretary@bbfellowship.org directly.',
+      },
+      {
+        q: 'How do I start a chapter in my area?',
+        a: 'Register as a BBF member, identify interested Boys\' Brigade members in your area, then contact the BBF Secretary with your proposal. See the Chapters page for the full step-by-step process.',
+      },
+      {
+        q: 'How long does it take to get a response?',
+        a: 'The secretariat aims to respond to all enquiries within 5 working days. For urgent matters, include "URGENT" in your subject line.',
+      },
+      {
+        q: 'Can I suggest an activity or event?',
+        a: 'Yes. Use the contact form and select "Activity / Event Suggestion" as the enquiry type, or contact the BBF Social/Event Coordinator directly.',
+      },
+    ];
+
+    /* ── Validation helpers ── */
+    function showError(fieldId, errId) {
+      document.getElementById(fieldId)?.classList.add('error');
+      document.getElementById(fieldId)?.classList.remove('valid');
+      const err = document.getElementById(errId);
+      if (err) err.classList.add('show');
+    }
+    function clearError(fieldId, errId) {
+      document.getElementById(fieldId)?.classList.remove('error');
+      document.getElementById(fieldId)?.classList.add('valid');
+      const err = document.getElementById(errId);
+      if (err) err.classList.remove('show');
+    }
+    function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+
+    /* ── Validate all fields; return true if all pass ── */
+    function validateForm() {
+      let valid = true;
+
+      const name = document.getElementById('cf-name')?.value.trim();
+      if (!name || name.length < 2) { showError('cf-name', 'cf-name-err'); valid = false; }
+      else clearError('cf-name', 'cf-name-err');
+
+      const email = document.getElementById('cf-email')?.value.trim();
+      if (!email || !isValidEmail(email)) { showError('cf-email', 'cf-email-err'); valid = false; }
+      else clearError('cf-email', 'cf-email-err');
+
+      const type = document.getElementById('cf-type')?.value;
+      if (!type) { showError('cf-type', 'cf-type-err'); valid = false; }
+      else clearError('cf-type', 'cf-type-err');
+
+      const subject = document.getElementById('cf-subject')?.value.trim();
+      if (!subject || subject.length < 3) { showError('cf-subject', 'cf-subject-err'); valid = false; }
+      else clearError('cf-subject', 'cf-subject-err');
+
+      const message = document.getElementById('cf-message')?.value.trim();
+      if (!message || message.length < 20) { showError('cf-message', 'cf-message-err'); valid = false; }
+      else clearError('cf-message', 'cf-message-err');
+
+      return valid;
+    }
+
+    /* ── Simulate form submit ── */
+    // POST /api/contact.php — real API call
+    async function simulate_submit() {
+      const name       = document.getElementById('cf-name')?.value.trim()    || '';
+      const email      = document.getElementById('cf-email')?.value.trim()   || '';
+      const phone      = document.getElementById('cf-phone')?.value.trim()   || '';
+      const state      = document.getElementById('cf-state')?.value          || '';
+      const subject    = document.getElementById('cf-subject')?.value.trim() || '';
+      const enquiryType= document.getElementById('cf-type')?.value           || '';
+      const message    = document.getElementById('cf-message')?.value.trim() || '';
+
+      const res = await fetch('api/contact.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, state, subject, enquiryType, message })
+      });
+      return res.json();
+    }
+
+    function showSuccess() {
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('cf-success').style.display = 'block';
+      document.getElementById('cf-error').style.display = 'none';
+    }
+    function showErrorMsg() {
+      document.getElementById('cf-error').style.display = 'block';
+    }
+
+    /* ── Reset form ── */
+    function resetContactForm() {
+      const form = document.getElementById('contact-form');
+      if (form) { form.reset(); form.style.display = 'block'; }
+      document.getElementById('cf-success').style.display = 'none';
+      document.getElementById('cf-error').style.display = 'none';
+      document.getElementById('cf-message-count').textContent = '0 / 1000';
+      // Clear all valid/error classes
+      document.querySelectorAll('.form-input-bbf, .form-select-bbf, .form-textarea-bbf').forEach(el => {
+        el.classList.remove('valid', 'error');
+      });
+      document.querySelectorAll('.form-error-msg').forEach(el => el.classList.remove('show'));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* ── Populate state select from NIGERIA_STATES (data.js) ── */
+      const stateSelect = document.getElementById('cf-state');
+      if (stateSelect && typeof NIGERIA_STATES !== 'undefined') {
+        NIGERIA_STATES.forEach(state => {
+          const opt = document.createElement('option');
+          opt.value = state;
+          opt.textContent = state;
+          stateSelect.appendChild(opt);
+        });
+      }
+
+      /* ── Character counter ── */
+      const msgField = document.getElementById('cf-message');
+      const msgCount = document.getElementById('cf-message-count');
+      msgField?.addEventListener('input', () => {
+        const len = msgField.value.length;
+        const max = 1000;
+        if (msgCount) {
+          msgCount.textContent = `${len} / ${max}`;
+          msgCount.classList.remove('near-limit', 'at-limit');
+          if (len >= max) msgCount.classList.add('at-limit');
+          else if (len >= max * 0.85) msgCount.classList.add('near-limit');
+        }
+        // Live clear error once user has typed enough
+        if (len >= 20) clearError('cf-message', 'cf-message-err');
+      });
+
+      /* ── Live validation on blur ── */
+      document.getElementById('cf-name')?.addEventListener('blur', () => {
+        const val = document.getElementById('cf-name').value.trim();
+        val.length >= 2 ? clearError('cf-name', 'cf-name-err') : showError('cf-name', 'cf-name-err');
+      });
+      document.getElementById('cf-email')?.addEventListener('blur', () => {
+        const val = document.getElementById('cf-email').value.trim();
+        isValidEmail(val) ? clearError('cf-email', 'cf-email-err') : showError('cf-email', 'cf-email-err');
+      });
+      document.getElementById('cf-type')?.addEventListener('change', () => {
+        document.getElementById('cf-type').value
+          ? clearError('cf-type', 'cf-type-err')
+          : showError('cf-type', 'cf-type-err');
+      });
+      document.getElementById('cf-subject')?.addEventListener('blur', () => {
+        const val = document.getElementById('cf-subject').value.trim();
+        val.length >= 3 ? clearError('cf-subject', 'cf-subject-err') : showError('cf-subject', 'cf-subject-err');
+      });
+
+      /* ── Form submit ── */
+      document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!validateForm()) {
+          // Scroll to first error
+          const firstErr = document.querySelector('.form-input-bbf.error, .form-select-bbf.error, .form-textarea-bbf.error');
+          firstErr?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+
+        const submitBtn = document.getElementById('cf-submit');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+        }
+
+        try {
+          const result = await simulate_submit();
+          if (result.success) showSuccess();
+          else showErrorMsg();
+        } catch {
+          showErrorMsg();
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+          }
+        }
+      });
+
+      /* ── FAQ grid ── */
+      const faqGrid = document.getElementById('faq-grid');
+      if (faqGrid) {
+        faqGrid.innerHTML = FAQS.map((faq, i) => `
+          <div class="col-lg-4 col-md-6 reveal reveal-delay-${Math.min(i + 1, 6)}">
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.08);
+              border-radius:var(--radius-md);padding:1.5rem;height:100%;
+              transition:all var(--transition-base);"
+              onmouseover="this.style.background='rgba(255,255,255,0.07)';this.style.borderColor='rgba(201,168,76,0.2)'"
+              onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(201,168,76,0.08)'">
+              <div style="font-family:var(--font-accent);font-size:var(--fs-sm);font-weight:700;
+                color:var(--bbf-white);margin-bottom:0.75rem;letter-spacing:0.03em;">
+                <i class="fas fa-question-circle" style="color:var(--bbf-gold);margin-right:0.5rem;font-size:0.85rem;"></i>
+                ${faq.q}
+              </div>
+              <p style="font-size:var(--fs-sm);color:rgba(255,255,255,0.55);line-height:1.65;margin:0;">
+                ${faq.a}
+              </p>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      /* ── Scroll reveal ── */
+      setTimeout(() => {
+        const els = document.querySelectorAll('.reveal:not(.revealed),.reveal-left:not(.revealed),.reveal-right:not(.revealed)');
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        els.forEach(el => obs.observe(el));
+      }, 80);
+
+    });
+  </script>
+
+</body>
+</html>

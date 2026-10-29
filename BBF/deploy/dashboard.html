@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BBF Member Dashboard — Your Brigade Brotherhood Fellowship member portal." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <title>Dashboard — Brigade Brotherhood Fellowship</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="bbf-preloader" style="position:fixed;inset:0;background:var(--bbf-navy);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:1rem;">
+    <div style="width:56px;height:56px;background:var(--gradient-gold);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:800;color:var(--bbf-navy);animation:preloaderPulse 1.2s ease-in-out infinite;">BBF</div>
+    <div style="font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.6);">Loading…</div>
+  </div>
+  <style>@keyframes preloaderPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:0.8}}</style>
+
+  <div class="dash-shell" id="dash-shell">
+
+    <!-- Mobile sidebar overlay -->
+    <div class="dash-sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ══════════════════════════════════════════════
+         SIDEBAR
+    ══════════════════════════════════════════════ -->
+    <aside class="dash-sidebar" id="dash-sidebar" role="navigation" aria-label="Dashboard navigation">
+
+      <!-- Logo -->
+      <a href="index.html" class="dash-sidebar-logo" aria-label="BBF — back to main site">
+        <div class="dash-sidebar-emblem" aria-hidden="true"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" style="width:100%;height:100%;object-fit:contain;display:block;" /></div>
+        <div class="dash-sidebar-logo-text">
+          <span class="dash-sidebar-logo-name">Brigade Brotherhood</span>
+          <span class="dash-sidebar-logo-sub">Member Portal</span>
+        </div>
+      </a>
+
+      <!-- Member mini-card -->
+      <div class="dash-sidebar-member" aria-label="Signed in member">
+        <div class="dash-member-avatar" id="sidebar-avatar" aria-hidden="true">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="dash-member-info">
+          <div class="dash-member-name" id="sidebar-name">—</div>
+          <div class="dash-member-id" id="sidebar-id">—</div>
+          <div class="dash-member-status" id="sidebar-status">Active</div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="dash-nav" aria-label="Dashboard sections">
+
+        <div class="dash-nav-section-label">Main</div>
+        <button class="dash-nav-item active" data-section="overview" aria-current="page">
+          <i class="fas fa-gauge" aria-hidden="true"></i>
+          Overview
+        </button>
+        <button class="dash-nav-item" data-section="events">
+          <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+          Events
+        </button>
+        <button class="dash-nav-item" data-section="notifications">
+          <i class="fas fa-bell" aria-hidden="true"></i>
+          Notifications
+          <span class="dash-nav-badge" id="notif-badge" aria-label="unread notifications"></span>
+        </button>
+        <button class="dash-nav-item" data-section="news">
+          <i class="fas fa-newspaper" aria-hidden="true"></i>
+          News Feed
+        </button>
+
+        <div class="dash-nav-section-label">Account</div>
+        <button class="dash-nav-item" data-section="profile">
+          <i class="fas fa-id-card" aria-hidden="true"></i>
+          My Profile
+        </button>
+        <button class="dash-nav-item" data-section="idcard">
+          <i class="fas fa-address-card" aria-hidden="true"></i>
+          My ID Card
+        </button>
+        <button class="dash-nav-item" data-section="settings">
+          <i class="fas fa-gear" aria-hidden="true"></i>
+          Settings
+        </button>
+
+        <div class="dash-nav-section-label">Site</div>
+        <a class="dash-nav-item" href="index.html" target="_blank" rel="noopener">
+          <i class="fas fa-globe" aria-hidden="true"></i>
+          BBF Website
+        </a>
+        <a class="dash-nav-item" href="resources.html" target="_blank" rel="noopener">
+          <i class="fas fa-folder-open" aria-hidden="true"></i>
+          Resources
+        </a>
+        <a class="dash-nav-item" href="contact.html" target="_blank" rel="noopener">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          Contact
+        </a>
+
+      </nav>
+
+      <!-- Logout -->
+      <div class="dash-sidebar-footer">
+        <button class="dash-logout-btn" id="logout-btn" aria-label="Sign out of BBF member portal">
+          <i class="fas fa-right-from-bracket" aria-hidden="true"></i>
+          Sign Out
+        </button>
+      </div>
+
+    </aside>
+
+
+    <!-- ══════════════════════════════════════════════
+         MAIN AREA
+    ══════════════════════════════════════════════ -->
+    <div class="dash-main" role="main">
+
+      <!-- Top bar -->
+      <header class="dash-topbar" aria-label="Dashboard toolbar">
+        <button class="dash-sidebar-toggle" id="sidebar-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="dash-sidebar">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1 class="dash-topbar-title" id="topbar-title">Overview</h1>
+        <div class="dash-topbar-actions">
+          <button class="dash-topbar-btn" id="topbar-notif-btn" aria-label="View notifications" title="Notifications" data-section="notifications">
+            <i class="fas fa-bell" aria-hidden="true"></i>
+            <span class="dash-topbar-notif-dot" id="topbar-notif-dot" style="display:none;" aria-hidden="true"></span>
+          </button>
+          <a class="dash-topbar-btn" href="index.html" target="_blank" rel="noopener" aria-label="Open BBF website in new tab" title="BBF Website">
+            <i class="fas fa-globe" aria-hidden="true"></i>
+          </a>
+          <button class="dash-topbar-btn" id="topbar-profile-btn" aria-label="View my profile" title="My Profile" data-section="profile">
+            <i class="fas fa-user" aria-hidden="true"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Sections wrapper -->
+      <div class="dash-content">
+
+        <!-- ══════════════════
+             SECTION: OVERVIEW
+        ══════════════════ -->
+        <section class="dash-section active" id="section-overview" aria-labelledby="overview-heading">
+
+          <!-- Welcome banner -->
+          <div class="dash-welcome-banner" id="welcome-banner" aria-label="Welcome banner">
+            <div class="dash-welcome-text">
+              <div class="dash-welcome-greeting" id="welcome-greeting">Good day</div>
+              <div class="dash-welcome-name" id="welcome-name">Member</div>
+              <div class="dash-welcome-sub" id="welcome-sub">Brigade Brotherhood Fellowship · Member Portal</div>
+            </div>
+            <div class="dash-welcome-actions">
+              <a href="events.html" class="btn-bbf-outline-white" style="font-size:0.75rem;padding:0.55rem 1.1rem;">
+                <i class="fas fa-calendar-alt"></i> Events
+              </a>
+              <button class="btn-bbf-primary" style="font-size:0.75rem;padding:0.55rem 1.1rem;" data-section="profile" id="view-profile-btn">
+                <i class="fas fa-id-card"></i> My Profile
+              </button>
+            </div>
+          </div>
+
+          <!-- Stat cards -->
+          <div class="dash-stats-row" id="overview-stats" aria-label="Membership statistics">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Two-column: events + right sidebar -->
+          <div class="dash-two-col">
+
+            <!-- Upcoming events list -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h2 class="dash-card-title"><i class="fas fa-calendar-alt" style="color:var(--bbf-gold);margin-right:0.4rem;"></i>Upcoming Events</h2>
+                <a href="events.html" class="dash-card-link" target="_blank" rel="noopener">View all <i class="fas fa-arrow-right" style="font-size:0.65rem;"></i></a>
+              </div>
+              <div class="dash-card-body no-pad" id="overview-events-list" role="list" aria-label="Upcoming BBF events">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Right: notifications + quick links -->
+            <div style="display:flex;flex-direction:column;gap:1.25rem;">
+
+              <!-- Recent notifications -->
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <h2 class="dash-card-title"><i class="fas fa-bell" style="color:var(--bbf-gold);margin-right:0.4rem;"></i>Notifications</h2>
+                  <button class="dash-card-link" data-section="notifications" style="background:none;border:none;cursor:pointer;">See all</button>
+                </div>
+                <div class="dash-card-body no-pad" id="overview-notifs" role="list" aria-label="Recent notifications">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+
+              <!-- Quick links -->
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <h2 class="dash-card-title"><i class="fas fa-bolt" style="color:var(--bbf-gold);margin-right:0.4rem;"></i>Quick Access</h2>
+                </div>
+                <div class="dash-card-body">
+                  <div class="dash-quick-grid" role="list" aria-label="Quick access links">
+                    <a href="membership.html" class="dash-quick-item" role="listitem">
+                      <i class="fas fa-id-badge"></i>
+                      <span>Membership</span>
+                    </a>
+                    <button class="dash-quick-item" role="listitem" data-section="idcard" style="border:none;cursor:pointer;">
+                      <i class="fas fa-address-card"></i>
+                      <span>ID Card</span>
+                    </button>
+                    <a href="events.html" class="dash-quick-item" role="listitem" target="_blank" rel="noopener">
+                      <i class="fas fa-calendar-check"></i>
+                      <span>Events</span>
+                    </a>
+                    <a href="news.html" class="dash-quick-item" role="listitem" target="_blank" rel="noopener">
+                      <i class="fas fa-newspaper"></i>
+                      <span>News</span>
+                    </a>
+                    <a href="gallery.html" class="dash-quick-item" role="listitem" target="_blank" rel="noopener">
+                      <i class="fas fa-images"></i>
+                      <span>Gallery</span>
+                    </a>
+                    <a href="resources.html" class="dash-quick-item" role="listitem" target="_blank" rel="noopener">
+                      <i class="fas fa-folder-open"></i>
+                      <span>Resources</span>
+                    </a>
+                    <a href="contact.html" class="dash-quick-item" role="listitem" target="_blank" rel="noopener">
+                      <i class="fas fa-envelope"></i>
+                      <span>Contact</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /right col -->
+
+          </div><!-- /dash-two-col -->
+
+        </section><!-- /overview -->
+
+
+        <!-- ══════════════════
+             SECTION: EVENTS
+        ══════════════════ -->
+        <section class="dash-section" id="section-events" aria-labelledby="events-heading">
+          <div class="dash-section-heading">
+            <h2 id="events-heading">Events</h2>
+            <p>Upcoming and recent BBF events. <a href="events.html" target="_blank" rel="noopener" style="color:var(--bbf-navy);font-weight:600;">View the full events page <i class="fas fa-external-link-alt" style="font-size:0.7rem;"></i></a></p>
+          </div>
+          <div id="section-events-list" role="list" aria-label="All BBF events">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+
+        <!-- ══════════════════
+             SECTION: NOTIFICATIONS
+        ══════════════════ -->
+        <section class="dash-section" id="section-notifications" aria-labelledby="notifs-heading">
+          <div class="dash-section-heading">
+            <h2 id="notifs-heading">Notifications</h2>
+            <p>Your fellowship updates and alerts.</p>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">All Notifications</h3>
+              <button class="dash-card-link" id="mark-all-read-btn" style="background:none;border:none;cursor:pointer;">
+                Mark all as read
+              </button>
+            </div>
+            <div class="dash-card-body no-pad" id="all-notifs-list" role="list" aria-label="All notifications">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ══════════════════
+             SECTION: NEWS FEED
+        ══════════════════ -->
+        <section class="dash-section" id="section-news" aria-labelledby="news-heading">
+          <div class="dash-section-heading">
+            <h2 id="news-heading">News Feed</h2>
+            <p>Latest BBF announcements and updates. <a href="news.html" target="_blank" rel="noopener" style="color:var(--bbf-navy);font-weight:600;">Full news page <i class="fas fa-external-link-alt" style="font-size:0.7rem;"></i></a></p>
+          </div>
+          <div id="news-feed-list">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+
+        <!-- ══════════════════
+             SECTION: MY PROFILE
+        ══════════════════ -->
+        <section class="dash-section" id="section-profile" aria-labelledby="profile-heading">
+          <div class="dash-section-heading" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+            <div>
+              <h2 id="profile-heading">My Profile</h2>
+              <p>Your BBF membership details.</p>
+            </div>
+            <button class="btn-bbf-primary" data-section="idcard" style="font-size:0.78rem;padding:0.55rem 1.1rem;flex-shrink:0;">
+              <i class="fas fa-address-card"></i> Get ID Card
+            </button>
+          </div>
+          <div class="dash-profile-grid">
+
+            <!-- Profile card -->
+            <div class="dash-profile-card">
+              <div class="dash-profile-card-top">
+                <div class="dash-profile-avatar" id="profile-avatar" aria-hidden="true">
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="dash-profile-name" id="profile-name">—</div>
+                <div class="dash-profile-id" id="profile-member-id">—</div>
+                <div style="margin-top:0.75rem;">
+                  <span class="dash-status-badge active-status" id="profile-status-badge">Active</span>
+                </div>
+              </div>
+              <div class="dash-profile-card-body" id="profile-details">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Profile info panel -->
+            <div style="display:flex;flex-direction:column;gap:1.25rem;">
+
+              <!-- Brigade info -->
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <h3 class="dash-card-title"><i class="fas fa-shield-halved" style="color:var(--bbf-gold);margin-right:0.4rem;"></i>Brigade Information</h3>
+                </div>
+                <div class="dash-card-body">
+                  <div class="row g-3" id="brigade-info-grid">
+                    <!-- Populated by JS -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Membership card -->
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <h3 class="dash-card-title"><i class="fas fa-id-card" style="color:var(--bbf-gold);margin-right:0.4rem;"></i>Membership Details</h3>
+                </div>
+                <div class="dash-card-body">
+                  <div class="row g-3" id="membership-details-grid">
+                    <!-- Populated by JS -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Constitution reminder -->
+              <div style="background:var(--bbf-off-white);border:1px solid var(--bbf-light-grey);border-left:3px solid var(--bbf-gold);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:1rem 1.25rem;">
+                <div style="font-family:var(--font-accent);font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--bbf-navy);margin-bottom:0.4rem;">
+                  <i class="fas fa-book-open" style="color:var(--bbf-gold);margin-right:0.35rem;"></i>
+                  Member Responsibilities
+                </div>
+                <p style="font-size:var(--fs-xs);color:var(--bbf-text-muted);line-height:1.7;margin:0;">
+                  As a BBF member you are expected to uphold the four guiding values —
+                  <strong>Faith, Fellowship, Service, and Friendship</strong> — and to conduct yourself
+                  in accordance with the BBF Constitution and Code of Conduct at all times.
+                  — <em>Art. 8 &amp; 9</em>
+                </p>
+                <a href="resources.html" target="_blank" rel="noopener"
+                   style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.75rem;font-size:var(--fs-xs);font-family:var(--font-accent);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-navy);text-decoration:underline;">
+                  Read the Constitution <i class="fas fa-external-link-alt" style="font-size:0.6rem;"></i>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </section><!-- /profile -->
+
+
+        <!-- ══════════════════
+             SECTION: MY ID CARD
+        ══════════════════ -->
+        <section class="dash-section" id="section-idcard" aria-labelledby="idcard-heading">
+          <div class="dash-section-heading">
+            <h2 id="idcard-heading">My ID Card</h2>
+            <p>Your official BBF digital membership ID card. Download and save it to your device.</p>
+          </div>
+
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;flex-wrap:wrap;">
+
+            <!-- Card preview -->
+            <div>
+              <canvas id="id-card-canvas"
+                      width="640" height="380"
+                      aria-label="BBF Member ID Card preview"
+                      style="display:block;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,0.35);max-width:100%;"></canvas>
+
+              <div style="display:flex;gap:0.75rem;margin-top:1.25rem;flex-wrap:wrap;">
+                <button class="btn-bbf-primary" id="download-id-btn" style="font-size:0.82rem;">
+                  <i class="fas fa-download"></i> Download ID Card (PNG)
+                </button>
+                <button class="btn-bbf-outline" id="refresh-id-btn" style="font-size:0.82rem;">
+                  <i class="fas fa-rotate-right"></i> Refresh
+                </button>
+              </div>
+              <p style="font-size:0.72rem;color:var(--bbf-text-light);margin-top:0.75rem;line-height:1.6;">
+                <i class="fas fa-info-circle" style="color:var(--bbf-gold);margin-right:0.3rem;"></i>
+                This is a digital ID card. Physical cards will be issued by the BBF Secretariat upon request.
+              </p>
+            </div>
+
+            <!-- Instructions -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title"><i class="fas fa-circle-info" style="color:var(--bbf-gold);margin-right:0.4rem;"></i>About Your ID Card</h3>
+              </div>
+              <div class="dash-card-body">
+                <div style="display:flex;flex-direction:column;gap:1rem;">
+                  <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+                    <div style="width:32px;height:32px;background:var(--bbf-navy);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--bbf-gold);font-size:0.8rem;flex-shrink:0;"><i class="fas fa-id-badge"></i></div>
+                    <div><div style="font-size:var(--fs-sm);font-weight:600;color:var(--bbf-navy);margin-bottom:0.2rem;">Digital Membership Card</div><div style="font-size:var(--fs-xs);color:var(--bbf-text-muted);line-height:1.6;">Your BBF ID card contains your name, member ID, company, and membership status.</div></div>
+                  </div>
+                  <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+                    <div style="width:32px;height:32px;background:var(--bbf-navy);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--bbf-gold);font-size:0.8rem;flex-shrink:0;"><i class="fas fa-download"></i></div>
+                    <div><div style="font-size:var(--fs-sm);font-weight:600;color:var(--bbf-navy);margin-bottom:0.2rem;">Download as PNG</div><div style="font-size:var(--fs-xs);color:var(--bbf-text-muted);line-height:1.6;">Click "Download ID Card" to save it as a high-quality PNG image to your device.</div></div>
+                  </div>
+                  <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+                    <div style="width:32px;height:32px;background:var(--bbf-navy);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--bbf-gold);font-size:0.8rem;flex-shrink:0;"><i class="fas fa-mobile-screen"></i></div>
+                    <div><div style="font-size:var(--fs-sm);font-weight:600;color:var(--bbf-navy);margin-bottom:0.2rem;">Save to Phone</div><div style="font-size:var(--fs-xs);color:var(--bbf-text-muted);line-height:1.6;">Save the card to your phone's gallery and use it as proof of BBF membership at events.</div></div>
+                  </div>
+                  <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+                    <div style="width:32px;height:32px;background:var(--bbf-navy);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--bbf-gold);font-size:0.8rem;flex-shrink:0;"><i class="fas fa-shield-halved"></i></div>
+                    <div><div style="font-size:var(--fs-sm);font-weight:600;color:var(--bbf-navy);margin-bottom:0.2rem;">Official Use</div><div style="font-size:var(--fs-xs);color:var(--bbf-text-muted);line-height:1.6;">This card is valid only for active BBF members. It may be verified by BBF officers at events and gatherings.</div></div>
+                  </div>
+                  <div style="background:var(--bbf-off-white);border:1px solid var(--bbf-light-grey);border-left:3px solid var(--bbf-gold);border-radius:0 6px 6px 0;padding:0.75rem 1rem;font-size:var(--fs-xs);color:var(--bbf-text-muted);line-height:1.65;">
+                    <strong style="color:var(--bbf-navy);">Note:</strong> The card is generated from your registered profile details. Update your profile in Settings if any information is incorrect.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section><!-- /idcard -->
+
+
+        <!-- ══════════════════
+             SECTION: SETTINGS
+        ══════════════════ -->
+        <section class="dash-section" id="section-settings" aria-labelledby="settings-heading">
+          <div class="dash-section-heading">
+            <h2 id="settings-heading">Settings</h2>
+            <p>Manage your account and notification preferences.</p>
+          </div>
+
+          <div class="dash-two-col" style="grid-template-columns:1fr 340px;">
+
+            <!-- Left: edit profile form -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title"><i class="fas fa-user-pen" style="color:var(--bbf-gold);margin-right:0.4rem;"></i>Update Profile</h3>
+              </div>
+              <div class="dash-card-body">
+                <!-- TODO [BACKEND]: PATCH /api/member/profile -->
+                <form id="settings-form" novalidate aria-label="Update profile form">
+                  <div class="row g-3">
+                    <div class="col-sm-6">
+                      <div class="dash-settings-field">
+                        <label class="dash-settings-label" for="set-firstname">First Name</label>
+                        <input class="dash-settings-input" type="text" id="set-firstname" name="firstName" autocomplete="given-name" />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="dash-settings-field">
+                        <label class="dash-settings-label" for="set-lastname">Surname</label>
+                        <input class="dash-settings-input" type="text" id="set-lastname" name="lastName" autocomplete="family-name" />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="dash-settings-field">
+                        <label class="dash-settings-label" for="set-email">Email Address</label>
+                        <input class="dash-settings-input" type="email" id="set-email" name="email" autocomplete="email" />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="dash-settings-field">
+                        <label class="dash-settings-label" for="set-phone">Phone Number</label>
+                        <input class="dash-settings-input" type="tel" id="set-phone" name="phone" autocomplete="tel" />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="dash-settings-field">
+                        <label class="dash-settings-label" for="set-location">Location</label>
+                        <input class="dash-settings-input" type="text" id="set-location" name="location" />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="dash-settings-field">
+                        <label class="dash-settings-label" for="set-company">BB Company</label>
+                        <input class="dash-settings-input" type="text" id="set-company" name="company" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="display:flex;gap:0.75rem;margin-top:1.5rem;flex-wrap:wrap;">
+                    <button type="submit" class="btn-bbf-primary" style="font-size:0.8rem;padding:0.6rem 1.25rem;">
+                      <i class="fas fa-floppy-disk"></i> Save Changes
+                    </button>
+                    <button type="button" class="btn-bbf-outline" id="settings-reset-btn" style="font-size:0.8rem;padding:0.6rem 1.25rem;">
+                      Discard
+                    </button>
+                  </div>
+                  <div id="settings-msg" role="alert" aria-live="polite" style="display:none;margin-top:0.75rem;padding:0.65rem 1rem;border-radius:var(--radius-sm);font-size:var(--fs-xs);font-family:var(--font-accent);"></div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Right: change password + preferences -->
+            <div style="display:flex;flex-direction:column;gap:1.25rem;">
+
+              <!-- Change password -->
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <h3 class="dash-card-title"><i class="fas fa-lock" style="color:var(--bbf-gold);margin-right:0.4rem;"></i>Change Password</h3>
+                </div>
+                <div class="dash-card-body">
+                  <!-- TODO [BACKEND]: POST /api/auth/change-password -->
+                  <form id="pw-change-form" novalidate aria-label="Change password form">
+                    <div class="dash-settings-field">
+                      <label class="dash-settings-label" for="pw-current">Current Password</label>
+                      <input class="dash-settings-input" type="password" id="pw-current" name="currentPassword" autocomplete="current-password" placeholder="••••••••" />
+                    </div>
+                    <div class="dash-settings-field">
+                      <label class="dash-settings-label" for="pw-new">New Password</label>
+                      <input class="dash-settings-input" type="password" id="pw-new" name="newPassword" autocomplete="new-password" placeholder="Min. 8 characters" />
+                    </div>
+                    <div class="dash-settings-field">
+                      <label class="dash-settings-label" for="pw-confirm">Confirm New Password</label>
+                      <input class="dash-settings-input" type="password" id="pw-confirm" name="confirmPassword" autocomplete="new-password" placeholder="Repeat new password" />
+                    </div>
+                    <div id="pw-change-msg" role="alert" aria-live="polite" style="display:none;margin-bottom:0.75rem;padding:0.65rem 1rem;border-radius:var(--radius-sm);font-size:var(--fs-xs);font-family:var(--font-accent);"></div>
+                    <button type="submit" class="btn-bbf-primary" style="width:100%;font-size:0.8rem;padding:0.65rem 1rem;">
+                      <i class="fas fa-lock"></i> Update Password
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+              <!-- Notification preferences -->
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <h3 class="dash-card-title"><i class="fas fa-bell" style="color:var(--bbf-gold);margin-right:0.4rem;"></i>Notifications</h3>
+                </div>
+                <div class="dash-card-body">
+                  <div style="display:flex;flex-direction:column;gap:0.85rem;" id="notif-prefs">
+                    <!-- Populated by JS -->
+                  </div>
+                  <p style="font-size:0.72rem;color:var(--bbf-text-light);margin-top:1rem;line-height:1.6;">
+                    <!-- TODO [BACKEND]: PATCH /api/member/preferences -->
+                    Notification preferences saved locally. Backend integration required for persistence.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section><!-- /settings -->
+
+      </div><!-- /dash-content -->
+    </div><!-- /dash-main -->
+
+  </div><!-- /dash-shell -->
+
+
+  <!-- SCRIPTS -->
+  <script src="assets/js/data.js"></script>
+
+  <script>
+    /* ══════════════════════════════════════════════════════
+       DASHBOARD — inline JS
+       Features:
+         - Auth guard (redirects to login if no session)
+         - Loads member from sessionStorage or BBF_MOCK_MEMBER
+         - Sidebar section navigation
+         - Mobile sidebar toggle
+         - Welcome banner with time-based greeting
+         - Stat cards
+         - Upcoming events list (from BBF_EVENTS)
+         - Notifications list with unread badge & mark-all-read
+         - News feed (from BBF_NEWS)
+         - Profile section
+         - Settings form (mock save)
+         - Change password form (mock)
+         - Notification preferences
+         - Logout
+       TODO [BACKEND]:
+         GET  /api/member/profile
+         GET  /api/events?status=upcoming
+         GET  /api/news?limit=5
+         GET  /api/member/notifications
+         PATCH /api/member/profile
+         POST  /api/auth/change-password
+         PATCH /api/member/preferences
+         POST  /api/auth/logout
+    ══════════════════════════════════════════════════════ */
+
+    /* ── Auth guard ── */
+    // Verify session with real API
+    (async function authCheck() {
+      try {
+        const res = await fetch('api/auth/me.php', { credentials: 'include' });
+        const data = await res.json();
+        if (data.success) {
+          // Update session storage with fresh data from server
+          sessionStorage.setItem('bbf_logged_in', 'true');
+          sessionStorage.setItem('bbf_member', JSON.stringify(data.data));
+        } else {
+          // Not authenticated — redirect to login
+          sessionStorage.removeItem('bbf_logged_in');
+          sessionStorage.removeItem('bbf_member');
+          window.location.href = 'login.html';
+        }
+      } catch(e) {
+        // Server unreachable — fall back to sessionStorage (demo mode)
+        const storedSession = sessionStorage.getItem('bbf_logged_in');
+        if (!storedSession) {
+          sessionStorage.setItem('bbf_logged_in', 'true');
+          sessionStorage.setItem('bbf_member', JSON.stringify(BBF_MOCK_MEMBER));
+        }
+      }
+    })();
+
+    /* ── Load member data ── */
+    let member;
+    try {
+      member = JSON.parse(sessionStorage.getItem('bbf_member')) || BBF_MOCK_MEMBER;
+    } catch(e) {
+      member = BBF_MOCK_MEMBER;
+    }
+
+    /* ──────────────────────────────
+       HELPERS
+    ────────────────────────────── */
+    function formatDate(dateStr) {
+      if (!dateStr) return '—';
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    function getDay(dateStr) {
+      return new Date(dateStr).getDate();
+    }
+
+    function getMon(dateStr) {
+      return new Date(dateStr).toLocaleDateString('en-GB', { month: 'short' }).toUpperCase();
+    }
+
+    function greeting() {
+      const h = new Date().getHours();
+      if (h < 12) return 'Good Morning';
+      if (h < 17) return 'Good Afternoon';
+      return 'Good Evening';
+    }
+
+    function firstName(fullName) {
+      return fullName?.split(' ')[0] || fullName || 'Member';
+    }
+
+    /* ──────────────────────────────
+       SIDEBAR POPULATION
+    ────────────────────────────── */
+    document.getElementById('sidebar-name').textContent = member.name || '—';
+    document.getElementById('sidebar-id').textContent   = member.id   || '—';
+    if (member.membershipStatus === 'Active') {
+      document.getElementById('sidebar-status').textContent = 'Active Member';
+    }
+
+    /* ──────────────────────────────
+       SECTION NAVIGATION
+    ────────────────────────────── */
+    const SECTION_TITLES = {
+      overview:      'Overview',
+      events:        'Events',
+      notifications: 'Notifications',
+      news:          'News Feed',
+      profile:       'My Profile',
+      idcard:        'My ID Card',
+      settings:      'Settings',
+    };
+
+    function activateSection(id) {
+      // Hide all sections
+      document.querySelectorAll('.dash-section').forEach(s => s.classList.remove('active'));
+      // Show target
+      const target = document.getElementById(`section-${id}`);
+      if (target) target.classList.add('active');
+
+      // Update nav items
+      document.querySelectorAll('.dash-nav-item[data-section]').forEach(btn => {
+        const isActive = btn.dataset.section === id;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-current', isActive ? 'page' : 'false');
+      });
+
+      // Update topbar title
+      const titleEl = document.getElementById('topbar-title');
+      if (titleEl) titleEl.textContent = SECTION_TITLES[id] || id;
+
+      // Close mobile sidebar
+      closeSidebar();
+    }
+
+    // Wire up all nav items & topbar buttons with data-section
+    document.querySelectorAll('[data-section]').forEach(el => {
+      el.addEventListener('click', () => activateSection(el.dataset.section));
+    });
+
+    /* ──────────────────────────────
+       MOBILE SIDEBAR
+    ────────────────────────────── */
+    const sidebar        = document.getElementById('dash-sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const sidebarToggle  = document.getElementById('sidebar-toggle');
+
+    function openSidebar() {
+      sidebar?.classList.add('open');
+      sidebarOverlay?.classList.add('show');
+      sidebarToggle?.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar() {
+      sidebar?.classList.remove('open');
+      sidebarOverlay?.classList.remove('show');
+      sidebarToggle?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    sidebarToggle?.addEventListener('click', () => {
+      sidebar?.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
+    sidebarOverlay?.addEventListener('click', closeSidebar);
+
+    /* ──────────────────────────────
+       WELCOME BANNER
+    ────────────────────────────── */
+    document.getElementById('welcome-greeting').textContent = greeting();
+    document.getElementById('welcome-name').textContent     = `Welcome back, ${firstName(member.name)}!`;
+    document.getElementById('welcome-sub').textContent      = `${member.company || 'Brigade Brotherhood Fellowship'} · Member since ${formatDate(member.memberSince)}`;
+
+    /* ──────────────────────────────
+       STAT CARDS
+    ────────────────────────────── */
+    const upcomingCount = (BBF_EVENTS || []).filter(e => e.status === 'upcoming').length;
+    const unreadNotifs  = (member.notifications || []).filter(n => !n.read).length;
+    const newsCount     = (BBF_NEWS || []).length;
+
+    const statsData = [
+      { icon: 'fa-shield-halved',    iconClass: 'navy',  value: member.membershipStatus || 'Active', label: 'Membership Status' },
+      { icon: 'fa-calendar-check',   iconClass: 'gold',  value: upcomingCount,                       label: 'Upcoming Events'   },
+      { icon: 'fa-bell',             iconClass: 'red',   value: unreadNotifs,                        label: 'Unread Notifications' },
+      { icon: 'fa-newspaper',        iconClass: 'green', value: newsCount,                           label: 'News Items'        },
+    ];
+
+    const statsRow = document.getElementById('overview-stats');
+    if (statsRow) {
+      statsRow.innerHTML = statsData.map(s => `
+        <div class="dash-stat-card">
+          <div class="dash-stat-icon ${s.iconClass}"><i class="fas ${s.icon}" aria-hidden="true"></i></div>
+          <div>
+            <div class="dash-stat-value">${s.value}</div>
+            <div class="dash-stat-label">${s.label}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ──────────────────────────────
+       NOTIFICATIONS — badge & list
+    ────────────────────────────── */
+    let notifications = (member.notifications || []).slice().reverse(); // newest first
+
+    function countUnread() {
+      return notifications.filter(n => !n.read).length;
+    }
+
+    function renderNotifBadge() {
+      const count = countUnread();
+      const badge    = document.getElementById('notif-badge');
+      const topDot   = document.getElementById('topbar-notif-dot');
+      if (badge) {
+        badge.textContent = count > 0 ? count : '';
+        badge.style.display = count > 0 ? '' : 'none';
+        badge.setAttribute('aria-label', `${count} unread notifications`);
+      }
+      if (topDot) topDot.style.display = count > 0 ? '' : 'none';
+    }
+
+    function buildNotifItem(n) {
+      return `
+        <div class="dash-notif-item ${n.read ? '' : 'unread'}"
+             role="listitem"
+             data-notif-id="${n.id}"
+             aria-label="${n.read ? '' : 'Unread: '}${n.message}">
+          <span class="dash-notif-dot" aria-hidden="true"></span>
+          <span class="dash-notif-msg">${n.message}</span>
+          <span class="dash-notif-date">${formatDate(n.date)}</span>
+        </div>
+      `;
+    }
+
+    function renderAllNotifs() {
+      const el = document.getElementById('all-notifs-list');
+      if (!el) return;
+      if (!notifications.length) {
+        el.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--bbf-text-light);font-size:var(--fs-sm);">No notifications yet.</div>';
+        return;
+      }
+      el.innerHTML = notifications.map(buildNotifItem).join('');
+
+      // Click to mark as read
+      el.querySelectorAll('.dash-notif-item[data-notif-id]').forEach(item => {
+        item.addEventListener('click', () => {
+          const id = parseInt(item.dataset.notifId);
+          const notif = notifications.find(n => n.id === id);
+          if (notif && !notif.read) {
+            notif.read = true;
+            item.classList.remove('unread');
+            item.querySelector('.dash-notif-dot').style.opacity = '0';
+            renderNotifBadge();
+          }
+        });
+      });
+    }
+
+    function renderOverviewNotifs() {
+      const el = document.getElementById('overview-notifs');
+      if (!el) return;
+      const preview = notifications.slice(0, 3);
+      if (!preview.length) {
+        el.innerHTML = '<div style="padding:1.25rem;text-align:center;color:var(--bbf-text-light);font-size:var(--fs-sm);">No notifications.</div>';
+        return;
+      }
+      el.innerHTML = preview.map(buildNotifItem).join('');
+    }
+
+    renderNotifBadge();
+    renderAllNotifs();
+    renderOverviewNotifs();
+
+    document.getElementById('mark-all-read-btn')?.addEventListener('click', () => {
+      notifications.forEach(n => n.read = true);
+      renderAllNotifs();
+      renderOverviewNotifs();
+      renderNotifBadge();
+    });
+
+    /* ──────────────────────────────
+       EVENTS — overview + full list
+    ────────────────────────────── */
+    function buildEventItem(ev, full = false) {
+      const d = ev.date || '';
+      return `
+        <a href="events.html" class="dash-event-item" role="listitem"
+           target="_blank" rel="noopener"
+           aria-label="${ev.title}, ${formatDate(d)}">
+          <div class="dash-event-date-badge">
+            <span class="day">${getDay(d)}</span>
+            <span class="mon">${getMon(d)}</span>
+          </div>
+          <div class="dash-event-info">
+            <div class="dash-event-title">${ev.title}</div>
+            <div class="dash-event-meta"><i class="fas fa-map-marker-alt" style="margin-right:0.3rem;"></i>${ev.location || 'TBC'}</div>
+            <span class="dash-event-cat">${ev.category}</span>
+          </div>
+          ${full ? `<div style="font-size:var(--fs-xs);color:var(--bbf-text-light);white-space:nowrap;margin-top:0.2rem;">${formatDate(d)}</div>` : ''}
+        </a>
+      `;
+    }
+
+    // Overview: upcoming only, max 4
+    const overviewEventsList = document.getElementById('overview-events-list');
+    const upcomingEvents     = (BBF_EVENTS || []).filter(e => e.status === 'upcoming').slice(0, 4);
+    if (overviewEventsList) {
+      overviewEventsList.innerHTML = upcomingEvents.length
+        ? upcomingEvents.map(e => buildEventItem(e)).join('')
+        : '<div style="padding:1.5rem;text-align:center;color:var(--bbf-text-light);font-size:var(--fs-sm);">No upcoming events yet. Check back soon.</div>';
+    }
+
+    // Full events section
+    const sectionEventsList = document.getElementById('section-events-list');
+    if (sectionEventsList) {
+      const all = BBF_EVENTS || [];
+      if (!all.length) {
+        sectionEventsList.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--bbf-text-light);">No events found.</div>';
+      } else {
+        // Group upcoming vs past
+        const upcoming = all.filter(e => e.status === 'upcoming');
+        const past     = all.filter(e => e.status !== 'upcoming');
+        let html = '';
+        if (upcoming.length) {
+          html += `
+            <div class="dash-card" style="margin-bottom:1.25rem;">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title"><i class="fas fa-calendar-check" style="color:var(--bbf-gold);margin-right:0.4rem;"></i>Upcoming</h3>
+              </div>
+              <div class="dash-card-body no-pad" role="list">
+                ${upcoming.map(e => buildEventItem(e, true)).join('')}
+              </div>
+            </div>`;
+        }
+        if (past.length) {
+          html += `
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title"><i class="fas fa-clock-rotate-left" style="color:var(--bbf-text-light);margin-right:0.4rem;"></i>Past Events</h3>
+              </div>
+              <div class="dash-card-body no-pad" role="list">
+                ${past.map(e => buildEventItem(e, true)).join('')}
+              </div>
+            </div>`;
+        }
+        sectionEventsList.innerHTML = html;
+      }
+    }
+
+    /* ──────────────────────────────
+       NEWS FEED
+    ────────────────────────────── */
+    const newsFeedList = document.getElementById('news-feed-list');
+    if (newsFeedList && BBF_NEWS && BBF_NEWS.length) {
+      newsFeedList.innerHTML = `
+        <div class="dash-card">
+          <div class="dash-card-body no-pad">
+            ${BBF_NEWS.map(item => `
+              <a href="news.html" target="_blank" rel="noopener"
+                 class="dash-event-item"
+                 role="listitem"
+                 aria-label="${item.title}">
+                <div class="dash-event-date-badge" style="background:var(--bbf-navy-light);">
+                  <span class="day" style="font-size:0.75rem;">${getMon(item.date)}</span>
+                  <span class="mon">${new Date(item.date).getFullYear()}</span>
+                </div>
+                <div class="dash-event-info">
+                  <div class="dash-event-title">${item.title}</div>
+                  <div class="dash-event-meta">${item.summary?.slice(0,90)}${item.summary?.length > 90 ? '…' : ''}</div>
+                  <span class="dash-event-cat">${item.category}</span>
+                </div>
+              </a>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    /* ──────────────────────────────
+       PROFILE SECTION
+    ────────────────────────────── */
+    document.getElementById('profile-name').textContent      = member.name || '—';
+    document.getElementById('profile-member-id').textContent = member.id   || '—';
+
+    const profileStatus = document.getElementById('profile-status-badge');
+    if (profileStatus) {
+      profileStatus.textContent = member.membershipStatus || 'Active';
+      profileStatus.className = `dash-status-badge ${member.membershipStatus === 'Active' ? 'active-status' : 'pending-status'}`;
+    }
+
+    // Profile card details
+    const profileDetails = document.getElementById('profile-details');
+    if (profileDetails) {
+      const items = [
+        { icon: 'fa-envelope',    label: 'Email',    val: member.email || '—' },
+        { icon: 'fa-phone',       label: 'Phone',    val: member.phone || '—' },
+        { icon: 'fa-map-pin',     label: 'Location', val: member.location || '—' },
+        { icon: 'fa-calendar',    label: 'Member since', val: formatDate(member.memberSince) },
+      ];
+      profileDetails.innerHTML = items.map(item => `
+        <div class="dash-profile-detail">
+          <i class="fas ${item.icon}" aria-hidden="true"></i>
+          <div>
+            <span class="dash-profile-detail-label">${item.label}</span>
+            <span class="dash-profile-detail-val">${item.val}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Brigade info grid
+    const brigadeGrid = document.getElementById('brigade-info-grid');
+    if (brigadeGrid) {
+      const items = [
+        { label: 'BB Company',   val: member.company || '—' },
+        { label: 'BB Council',   val: member.council || '—' },
+        { label: 'Brigade School Cert', val: member.brigadeSchoolCert ? 'Obtained ✓' : 'Pending' },
+      ];
+      brigadeGrid.innerHTML = items.map(item => `
+        <div class="col-sm-6">
+          <div style="background:var(--bbf-off-white);border:1px solid var(--bbf-light-grey);border-radius:var(--radius-sm);padding:0.75rem 1rem;">
+            <div style="font-size:0.65rem;font-family:var(--font-accent);letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-text-light);margin-bottom:0.25rem;">${item.label}</div>
+            <div style="font-size:var(--fs-sm);font-weight:600;color:var(--bbf-navy);">${item.val}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Membership details grid
+    const membershipGrid = document.getElementById('membership-details-grid');
+    if (membershipGrid) {
+      const items = [
+        { label: 'Member ID',          val: member.id || '—' },
+        { label: 'Status',             val: member.membershipStatus || '—' },
+        { label: 'Membership Since',   val: formatDate(member.memberSince) },
+        { label: 'Membership Type',    val: 'BBF Member' },
+      ];
+      membershipGrid.innerHTML = items.map(item => `
+        <div class="col-sm-6">
+          <div style="background:var(--bbf-off-white);border:1px solid var(--bbf-light-grey);border-radius:var(--radius-sm);padding:0.75rem 1rem;">
+            <div style="font-size:0.65rem;font-family:var(--font-accent);letter-spacing:0.06em;text-transform:uppercase;color:var(--bbf-text-light);margin-bottom:0.25rem;">${item.label}</div>
+            <div style="font-size:var(--fs-sm);font-weight:600;color:var(--bbf-navy);">${item.val}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ──────────────────────────────
+       SETTINGS — pre-fill form
+    ────────────────────────────── */
+    (function prefillSettings() {
+      const parts = (member.name || '').split(' ');
+      const el = id => document.getElementById(id);
+      if (el('set-firstname')) el('set-firstname').value = parts[0] || '';
+      if (el('set-lastname'))  el('set-lastname').value  = parts.slice(1).join(' ') || '';
+      if (el('set-email'))     el('set-email').value     = member.email    || '';
+      if (el('set-phone'))     el('set-phone').value     = member.phone    || '';
+      if (el('set-location'))  el('set-location').value  = member.location || '';
+      if (el('set-company'))   el('set-company').value   = member.company  || '';
+    })();
+
+    // Settings form submit
+    document.getElementById('settings-form')?.addEventListener('submit', e => {
+      e.preventDefault();
+      const msg = document.getElementById('settings-msg');
+      const fn = document.getElementById('set-firstname')?.value.trim() || '';
+      const ln = document.getElementById('set-lastname')?.value.trim()  || '';
+
+      const payload = {
+        firstName: fn, lastName: ln,
+        phone:    document.getElementById('set-phone')?.value.trim()    || '',
+        state:    document.getElementById('set-location')?.value.trim() || '',
+        company:  document.getElementById('set-company')?.value.trim()  || '',
+      };
+
+      fetch('api/member/profile.php', {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(r => r.json())
+      .then(res => {
+        if (res.success) {
+          if (fn) {
+            member.name = `${fn} ${ln}`.trim();
+            document.getElementById('sidebar-name').textContent  = member.name;
+            document.getElementById('welcome-name').textContent  = `Welcome back, ${firstName(member.name)}!`;
+            document.getElementById('profile-name').textContent  = member.name;
+            sessionStorage.setItem('bbf_member', JSON.stringify(member));
+          }
+          if (msg) {
+            msg.style.display = 'block';
+            msg.style.background = 'rgba(26,92,58,0.08)';
+            msg.style.border = '1px solid rgba(26,92,58,0.2)';
+            msg.style.color = '#16a34a';
+            msg.textContent = 'Profile updated successfully.';
+            setTimeout(() => { msg.style.display = 'none'; }, 3000);
+          }
+        } else {
+          if (msg) {
+            msg.style.display = 'block';
+            msg.style.background = 'rgba(178,34,52,0.08)';
+            msg.style.border = '1px solid rgba(178,34,52,0.2)';
+            msg.style.color = '#8b1a28';
+            msg.textContent = res.message || 'Update failed. Please try again.';
+          }
+        }
+      })
+      .catch(() => {
+        if (msg) {
+          msg.style.display = 'block';
+          msg.style.background = 'rgba(178,34,52,0.08)';
+          msg.style.border = '1px solid rgba(178,34,52,0.2)';
+          msg.style.color = '#8b1a28';
+          msg.textContent = 'Could not connect to server. Changes saved locally.';
+        }
+        // Still update local state
+        if (fn) { member.name = `${fn} ${ln}`.trim(); }
+        setTimeout(() => { msg.style.display = 'none'; }, 3000);
+      });
+    });
+
+    document.getElementById('settings-reset-btn')?.addEventListener('click', () => {
+      prefillSettings(); // re-call as a named function isn't hoisted here — inline reset
+      const parts = (member.name || '').split(' ');
+      document.getElementById('set-firstname').value = parts[0] || '';
+      document.getElementById('set-lastname').value  = parts.slice(1).join(' ') || '';
+      document.getElementById('set-email').value     = member.email    || '';
+      document.getElementById('set-phone').value     = member.phone    || '';
+      document.getElementById('set-location').value  = member.location || '';
+      document.getElementById('set-company').value   = member.company  || '';
+    });
+
+    // Change password form
+    document.getElementById('pw-change-form')?.addEventListener('submit', e => {
+      e.preventDefault();
+      const current  = document.getElementById('pw-current')?.value  || '';
+      const newPw    = document.getElementById('pw-new')?.value      || '';
+      const confirm  = document.getElementById('pw-confirm')?.value  || '';
+
+      if (!current) { showPwMsg('error', 'Please enter your current password.'); return; }
+      if (newPw.length < 8) { showPwMsg('error', 'New password must be at least 8 characters.'); return; }
+      if (newPw !== confirm) { showPwMsg('error', 'New passwords do not match.'); return; }
+
+      fetch('api/member/change-password.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentPassword: current, newPassword: newPw, confirmPassword: confirm })
+      })
+      .then(r => r.json())
+      .then(res => {
+        if (res.success) {
+          showPwMsg('success', 'Password changed successfully.');
+          document.getElementById('pw-change-form').reset();
+        } else {
+          showPwMsg('error', res.message || 'Password change failed. Please try again.');
+        }
+      })
+      .catch(() => showPwMsg('error', 'Could not connect to server. Please try again.'));
+    });
+
+    function showPwMsg(type, text) {
+      const msg = document.getElementById('pw-change-msg');
+      if (!msg) return;
+      msg.style.display = 'block';
+      msg.style.background = type === 'error' ? 'rgba(178,34,52,0.08)' : 'rgba(26,92,58,0.08)';
+      msg.style.border     = type === 'error' ? '1px solid rgba(178,34,52,0.25)' : '1px solid rgba(26,92,58,0.2)';
+      msg.style.color      = type === 'error' ? '#8b1a28' : '#16a34a';
+      msg.textContent      = text;
+    }
+
+    /* ──────────────────────────────
+       NOTIFICATION PREFERENCES
+    ────────────────────────────── */
+    const notifPrefs = [
+      { id: 'pref-events',   label: 'Event reminders',            defaultOn: true  },
+      { id: 'pref-news',     label: 'News & announcements',       defaultOn: true  },
+      { id: 'pref-welfare',  label: 'Welfare & support updates',  defaultOn: true  },
+      { id: 'pref-digest',   label: 'Weekly fellowship digest',   defaultOn: false },
+    ];
+    const prefContainer = document.getElementById('notif-prefs');
+    if (prefContainer) {
+      prefContainer.innerHTML = notifPrefs.map(p => `
+        <label style="display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:pointer;">
+          <span style="font-size:var(--fs-sm);color:var(--bbf-text-muted);">${p.label}</span>
+          <input type="checkbox" ${p.defaultOn ? 'checked' : ''}
+                 id="${p.id}"
+                 style="width:16px;height:16px;accent-color:var(--bbf-navy);cursor:pointer;flex-shrink:0;"
+                 aria-label="${p.label}" />
+        </label>
+      `).join('');
+    }
+
+    /* ──────────────────────────────
+       LOGOUT
+    ────────────────────────────── */
+    document.getElementById('logout-btn')?.addEventListener('click', () => {
+      fetch('api/auth/logout.php', { method: 'POST', credentials: 'include' })
+        .finally(() => {
+          sessionStorage.removeItem('bbf_logged_in');
+          sessionStorage.removeItem('bbf_member');
+          window.location.href = 'login.html';
+        });
+    });
+
+    /* ──────────────────────────────
+       ID CARD GENERATOR (Canvas)
+    ────────────────────────────── */
+
+    const ID_LOGO_IMG = new Image();
+    ID_LOGO_IMG.src = 'assets/images/BBF Image.jpeg';
+
+    function drawIDCard() {
+      const canvas = document.getElementById('id-card-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width;   // 640
+      const H = canvas.height;  // 380
+
+      // ── Background: navy gradient ──
+      const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+      bgGrad.addColorStop(0,   '#060d1a');
+      bgGrad.addColorStop(0.6, '#0a1628');
+      bgGrad.addColorStop(1,   '#102040');
+      ctx.fillStyle = bgGrad;
+      roundRect(ctx, 0, 0, W, H, 16);
+      ctx.fill();
+
+      // ── Gold border ──
+      const borderGrad = ctx.createLinearGradient(0, 0, W, H);
+      borderGrad.addColorStop(0,   '#a07a2a');
+      borderGrad.addColorStop(0.5, '#c9a84c');
+      borderGrad.addColorStop(1,   '#e2c06e');
+      ctx.strokeStyle = borderGrad;
+      ctx.lineWidth = 3;
+      roundRect(ctx, 1.5, 1.5, W - 3, H - 3, 15);
+      ctx.stroke();
+
+      // ── Gold accent bar (top) ──
+      const barGrad = ctx.createLinearGradient(0, 0, W, 0);
+      barGrad.addColorStop(0,   '#a07a2a');
+      barGrad.addColorStop(0.5, '#e2c06e');
+      barGrad.addColorStop(1,   '#a07a2a');
+      ctx.fillStyle = barGrad;
+      ctx.fillRect(0, 0, W, 6);
+
+      // ── Gold accent bar (bottom) ──
+      ctx.fillStyle = barGrad;
+      ctx.fillRect(0, H - 6, W, 6);
+
+      // ── Subtle diagonal watermark ──
+      ctx.save();
+      ctx.globalAlpha = 0.03;
+      ctx.font = 'bold 120px Oswald, Arial';
+      ctx.fillStyle = '#c9a84c';
+      ctx.translate(W / 2, H / 2);
+      ctx.rotate(-20 * Math.PI / 180);
+      ctx.textAlign = 'center';
+      ctx.fillText('BBF', 0, 40);
+      ctx.restore();
+
+      // ── Left column: Logo ──
+      const logoSize = 96;
+      const logoX = 36;
+      const logoY = H / 2 - logoSize / 2 - 10;
+      if (ID_LOGO_IMG.complete && ID_LOGO_IMG.naturalWidth > 0) {
+        // Draw circular clip for logo
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(logoX + logoSize / 2, logoY + logoSize / 2, logoSize / 2, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(ID_LOGO_IMG, logoX, logoY, logoSize, logoSize);
+        ctx.restore();
+        // Gold ring
+        ctx.strokeStyle = '#c9a84c';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(logoX + logoSize / 2, logoY + logoSize / 2, logoSize / 2 + 1, 0, Math.PI * 2);
+        ctx.stroke();
+      } else {
+        // Fallback: gold circle with BBF text
+        ctx.fillStyle = '#c9a84c';
+        ctx.beginPath();
+        ctx.arc(logoX + logoSize / 2, logoY + logoSize / 2, logoSize / 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#0a1628';
+        ctx.font = 'bold 28px Oswald, Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('BBF', logoX + logoSize / 2, logoY + logoSize / 2 + 10);
+      }
+
+      // ── Org name under logo ──
+      ctx.fillStyle = '#c9a84c';
+      ctx.font = '700 9px Oswald, Arial';
+      ctx.textAlign = 'center';
+      ctx.letterSpacing = '0.1em';
+      ctx.fillText('BRIGADE BROTHERHOOD', logoX + logoSize / 2, logoY + logoSize + 18);
+      ctx.fillText('FELLOWSHIP', logoX + logoSize / 2, logoY + logoSize + 31);
+
+      // ── Divider line ──
+      const divX = logoX + logoSize + 22;
+      const divGrad = ctx.createLinearGradient(divX, 30, divX, H - 30);
+      divGrad.addColorStop(0,   'rgba(201,168,76,0)');
+      divGrad.addColorStop(0.3, 'rgba(201,168,76,0.5)');
+      divGrad.addColorStop(0.7, 'rgba(201,168,76,0.5)');
+      divGrad.addColorStop(1,   'rgba(201,168,76,0)');
+      ctx.strokeStyle = divGrad;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(divX, 30);
+      ctx.lineTo(divX, H - 30);
+      ctx.stroke();
+
+      // ── Right column: Member info ──
+      const infoX = divX + 24;
+      let infoY = 62;
+
+      // "MEMBERSHIP CARD" label
+      ctx.fillStyle = '#c9a84c';
+      ctx.font = '600 10px Oswald, Arial';
+      ctx.textAlign = 'left';
+      ctx.fillText('OFFICIAL MEMBERSHIP CARD', infoX, infoY);
+      infoY += 6;
+
+      // Gold underline
+      ctx.fillStyle = '#c9a84c';
+      ctx.fillRect(infoX, infoY, 200, 1.5);
+      infoY += 22;
+
+      // Member name
+      const displayName = member.name || 'Member Name';
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 26px Playfair Display, Georgia, serif';
+      ctx.textAlign = 'left';
+      // Truncate if too long
+      let nameText = displayName;
+      while (ctx.measureText(nameText).width > W - infoX - 30 && nameText.length > 5) {
+        nameText = nameText.slice(0, -1);
+      }
+      if (nameText !== displayName) nameText += '…';
+      ctx.fillText(nameText, infoX, infoY);
+      infoY += 32;
+
+      // Member ID
+      ctx.fillStyle = '#c9a84c';
+      ctx.font = '700 13px Oswald, Arial';
+      ctx.fillText('MEMBER ID: ' + (member.id || '—'), infoX, infoY);
+      infoY += 28;
+
+      // Separator
+      ctx.fillStyle = 'rgba(255,255,255,0.08)';
+      ctx.fillRect(infoX, infoY, W - infoX - 24, 1);
+      infoY += 18;
+
+      // Field rows
+      const fields = [
+        { label: 'COMPANY',  val: member.company || '—' },
+        { label: 'COUNCIL',  val: member.council  || '—' },
+        { label: 'STATUS',   val: member.membershipStatus || 'Active' },
+        { label: 'SINCE',    val: formatDate(member.memberSince) },
+      ];
+
+      fields.forEach(f => {
+        ctx.fillStyle = 'rgba(201,168,76,0.7)';
+        ctx.font = '500 9.5px Oswald, Arial';
+        ctx.fillText(f.label, infoX, infoY);
+
+        ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        ctx.font = '500 12px Inter, Arial';
+        // Truncate long values
+        let val = f.val;
+        const maxW = W - infoX - 24;
+        while (ctx.measureText(val).width > maxW && val.length > 4) val = val.slice(0, -1);
+        if (val !== f.val) val += '…';
+        ctx.fillText(val, infoX + 75, infoY);
+        infoY += 22;
+      });
+
+      infoY += 6;
+
+      // Status pill
+      const status = member.membershipStatus || 'Active';
+      const pillW = 80, pillH = 20, pillX = infoX, pillY = infoY;
+      ctx.fillStyle = status === 'Active' ? 'rgba(34,197,94,0.2)' : 'rgba(214,158,46,0.2)';
+      roundRect(ctx, pillX, pillY, pillW, pillH, 10);
+      ctx.fill();
+      ctx.strokeStyle = status === 'Active' ? 'rgba(34,197,94,0.5)' : 'rgba(214,158,46,0.5)';
+      ctx.lineWidth = 1;
+      roundRect(ctx, pillX, pillY, pillW, pillH, 10);
+      ctx.stroke();
+      ctx.fillStyle = status === 'Active' ? '#22c55e' : '#eab308';
+      ctx.font = 'bold 9px Oswald, Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('● ' + status.toUpperCase(), pillX + pillW / 2, pillY + 13);
+
+      // ── QR placeholder (bottom right) ──
+      const qrSize = 62;
+      const qrX = W - qrSize - 24;
+      const qrY = H - qrSize - 24;
+
+      // QR box border
+      ctx.strokeStyle = 'rgba(201,168,76,0.4)';
+      ctx.lineWidth = 1;
+      roundRect(ctx, qrX - 4, qrY - 4, qrSize + 8, qrSize + 8, 4);
+      ctx.stroke();
+
+      // Draw a simple visual QR-like grid (placeholder)
+      drawQRPlaceholder(ctx, qrX, qrY, qrSize, member.id || 'BBF');
+
+      ctx.fillStyle = 'rgba(201,168,76,0.55)';
+      ctx.font = '500 7.5px Oswald, Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('VERIFY', qrX + qrSize / 2, qrY + qrSize + 14);
+
+      // ── Bottom strip ──
+      ctx.fillStyle = 'rgba(201,168,76,0.06)';
+      ctx.fillRect(0, H - 28, W, 28);
+      ctx.fillStyle = 'rgba(201,168,76,0.5)';
+      ctx.font = '500 8.5px Oswald, Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('ONE BRIGADE  •  ONE BROTHERHOOD  •  ONE PURPOSE', W / 2, H - 11);
+    }
+
+    // ── Rounded rect helper ──
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+
+    // ── QR-like decorative placeholder ──
+    function drawQRPlaceholder(ctx, x, y, size, seed) {
+      // Deterministic pseudo-random from member ID
+      let hash = 0;
+      for (let i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) & 0xffffffff;
+      const cellSize = size / 9;
+      // Corner squares
+      [[0,0],[6,0],[0,6]].forEach(([cx,cy]) => {
+        ctx.fillStyle = '#c9a84c';
+        ctx.fillRect(x + cx * cellSize, y + cy * cellSize, cellSize * 3, cellSize * 3);
+        ctx.fillStyle = '#0a1628';
+        ctx.fillRect(x + (cx + 0.5) * cellSize, y + (cy + 0.5) * cellSize, cellSize * 2, cellSize * 2);
+        ctx.fillStyle = '#c9a84c';
+        ctx.fillRect(x + (cx + 1) * cellSize, y + (cy + 1) * cellSize, cellSize, cellSize);
+      });
+      // Data cells (pseudo-random fill)
+      for (let row = 0; row < 9; row++) {
+        for (let col = 0; col < 9; col++) {
+          // Skip corner squares
+          if ((row < 3 && col < 3) || (row < 3 && col > 5) || (row > 5 && col < 3)) continue;
+          hash = (hash * 1664525 + 1013904223) & 0xffffffff;
+          if (hash & 1) {
+            ctx.fillStyle = 'rgba(201,168,76,0.75)';
+            ctx.fillRect(x + col * cellSize + 1, y + row * cellSize + 1, cellSize - 2, cellSize - 2);
+          }
+        }
+      }
+    }
+
+    // Draw on load & when section activates
+    ID_LOGO_IMG.onload  = () => drawIDCard();
+    ID_LOGO_IMG.onerror = () => drawIDCard(); // still draw without logo
+
+    // Redraw when section becomes visible
+    const _origActivate = activateSection;
+    activateSection = function(id) {
+      _origActivate(id);
+      if (id === 'idcard') setTimeout(drawIDCard, 80);
+    };
+
+    // Download button
+    document.getElementById('download-id-btn')?.addEventListener('click', () => {
+      drawIDCard();
+      const canvas = document.getElementById('id-card-canvas');
+      const link = document.createElement('a');
+      link.download = `BBF-ID-${(member.id || 'member').replace(/[^a-zA-Z0-9-]/g, '')}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+
+    // Refresh button
+    document.getElementById('refresh-id-btn')?.addEventListener('click', drawIDCard);
+
+    // Initial draw if already on idcard section
+    if (document.getElementById('section-idcard')?.classList.contains('active')) {
+      drawIDCard();
+    }
+
+  </script>
+
+</body>
+</html>

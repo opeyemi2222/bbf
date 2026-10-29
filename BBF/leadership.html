@@ -1,0 +1,1649 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="BBF Leadership — Meet the elected executive officers of Brigade Brotherhood Fellowship, their constitutional duties, and how the Fellowship is governed."
+    />
+    <meta
+      name="keywords"
+      content="BBF Leadership, Brigade Brotherhood Fellowship officers, BBF Coordinator, BBF Secretary, BBF Treasurer, Boys Brigade Fellowship leadership"
+    />
+    <meta name="author" content="Brigade Brotherhood Fellowship" />
+
+    <title>Leadership — Brigade Brotherhood Fellowship</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- Bootstrap 5 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
+
+    <!-- BBF Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+
+    <style>
+      /* ══════════════════════════════════════════════════════
+       LEADERSHIP PAGE — scoped styles
+       Source: BBF Constitution, Articles 10, 11, 12
+    ══════════════════════════════════════════════════════ */
+
+      /* ── Coordinator spotlight (Art. 11.1) ── */
+      .coordinator-card {
+        background: var(--bbf-navy-mid);
+        border: 1px solid rgba(201, 168, 76, 0.18);
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        position: relative;
+        box-shadow: var(--shadow-xl);
+      }
+      .coordinator-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--gradient-gold);
+        z-index: 2;
+      }
+      .coordinator-card-inner {
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        min-height: 480px;
+      }
+      .coordinator-photo-col {
+        background: var(--bbf-navy);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      /* Large decorative initials placeholder */
+      .coordinator-initials {
+        font-family: var(--font-heading);
+        font-size: 8rem;
+        font-weight: 800;
+        color: rgba(201, 168, 76, 0.12);
+        -webkit-user-select: none;
+        user-select: none;
+        line-height: 1;
+      }
+      .coordinator-photo-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to right,
+          transparent 50%,
+          var(--bbf-navy-mid) 100%
+        );
+      }
+      .coordinator-body {
+        padding: 3rem 3rem 3rem 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+      }
+      .coordinator-role-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 1.1rem;
+        background: rgba(201, 168, 76, 0.1);
+        border: 1px solid rgba(201, 168, 76, 0.3);
+        border-radius: var(--radius-pill);
+        font-family: var(--font-accent);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--bbf-gold-light);
+        margin-bottom: 1.25rem;
+        width: fit-content;
+      }
+      .coordinator-name {
+        font-family: var(--font-heading);
+        font-size: clamp(1.6rem, 2.5vw, 2.25rem);
+        font-weight: 800;
+        color: var(--bbf-white);
+        line-height: 1.15;
+        margin-bottom: 1.25rem;
+      }
+      .coordinator-bio {
+        font-size: var(--fs-base);
+        color: rgba(255, 255, 255, 0.65);
+        line-height: 1.85;
+        margin-bottom: 1.75rem;
+        max-width: 500px;
+      }
+      /* Duties list inside coordinator card */
+      .duties-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+      }
+      .duty-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        font-size: var(--fs-sm);
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.5;
+      }
+      .duty-item i {
+        color: var(--bbf-gold);
+        font-size: 0.65rem;
+        margin-top: 0.3rem;
+        flex-shrink: 0;
+      }
+
+      /* ── Officer cards (exec grid) ── */
+      .officer-card {
+        background: var(--bbf-white);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--bbf-light-grey);
+        box-shadow: var(--shadow-sm);
+        transition: all var(--transition-base);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+      }
+      .officer-card::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--gradient-gold);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform var(--transition-base);
+      }
+      .officer-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-lg);
+        border-color: transparent;
+      }
+      .officer-card:hover::after {
+        transform: scaleX(1);
+      }
+
+      .exec-committee-section {
+        background: var(--bbf-white);
+      }
+
+      .exec-divider {
+        margin-top: 0.5rem;
+      }
+
+      /* Avatar / photo area */
+      .officer-avatar-wrap {
+        height: 200px;
+        background: linear-gradient(
+          135deg,
+          var(--bbf-navy) 0%,
+          var(--bbf-navy-light) 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .officer-avatar-initials {
+        font-family: var(--font-heading);
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: rgba(201, 168, 76, 0.25);
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      /* Hover overlay with email link */
+      .officer-hover-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(10, 22, 40, 0.75);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity var(--transition-base);
+      }
+      .officer-card:hover .officer-hover-overlay {
+        opacity: 1;
+      }
+      .officer-email-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.7rem;
+        font-family: var(--font-accent);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--bbf-gold-light);
+        border: 1px solid rgba(201, 168, 76, 0.4);
+        padding: 0.5rem 1rem;
+        border-radius: var(--radius-pill);
+        background: rgba(201, 168, 76, 0.1);
+        transition: all var(--transition-fast);
+        text-decoration: none;
+      }
+      .officer-email-link:hover {
+        background: var(--bbf-gold);
+        color: var(--bbf-navy);
+        border-color: var(--bbf-gold);
+      }
+
+      .officer-body {
+        padding: 1.5rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .officer-role-tag {
+        display: inline-block;
+        padding: 0.28rem 0.8rem;
+        background: rgba(201, 168, 76, 0.08);
+        color: var(--bbf-gold-dark);
+        font-size: 0.65rem;
+        font-family: var(--font-accent);
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border-radius: var(--radius-pill);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        margin-bottom: 0.75rem;
+        width: fit-content;
+      }
+      .officer-name {
+        font-family: var(--font-heading);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--bbf-navy);
+        margin-bottom: 0.875rem;
+        line-height: 1.3;
+      }
+      .officer-bio {
+        font-size: var(--fs-sm);
+        color: var(--bbf-text-muted);
+        line-height: 1.65;
+        margin-bottom: 1rem;
+        flex: 1;
+      }
+      /* Mini duties inside officer card */
+      .officer-duties {
+        border-top: 1px solid var(--bbf-light-grey);
+        padding-top: 1rem;
+        margin-top: auto;
+      }
+      .officer-duties-label {
+        font-family: var(--font-accent);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--bbf-text-light);
+        margin-bottom: 0.5rem;
+      }
+      .officer-duty-pill {
+        display: inline-block;
+        font-size: 0.65rem;
+        color: var(--bbf-text-muted);
+        background: var(--bbf-off-white);
+        border: 1px solid var(--bbf-light-grey);
+        border-radius: var(--radius-pill);
+        padding: 0.2rem 0.65rem;
+        margin: 0.2rem 0.2rem 0 0;
+        transition: all var(--transition-fast);
+      }
+      .officer-card:hover .officer-duty-pill {
+        background: rgba(201, 168, 76, 0.08);
+        border-color: rgba(201, 168, 76, 0.2);
+        color: var(--bbf-gold-dark);
+      }
+
+      /* ── Governance structure cards ── */
+      .governance-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(201, 168, 76, 0.1);
+        border-radius: var(--radius-md);
+        padding: 1.75rem;
+        transition: all var(--transition-base);
+        height: 100%;
+      }
+      .governance-card:hover {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: rgba(201, 168, 76, 0.22);
+        transform: translateY(-4px);
+      }
+      .governance-icon {
+        width: 52px;
+        height: 52px;
+        background: rgba(201, 168, 76, 0.08);
+        border: 1px solid rgba(201, 168, 76, 0.18);
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        color: var(--bbf-gold);
+        margin-bottom: 1.25rem;
+        transition: all var(--transition-base);
+      }
+      .governance-card:hover .governance-icon {
+        background: var(--bbf-gold);
+        color: var(--bbf-navy);
+        border-color: var(--bbf-gold);
+      }
+      .governance-title {
+        font-family: var(--font-accent);
+        font-size: var(--fs-base);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: var(--bbf-white);
+        margin-bottom: 0.75rem;
+      }
+      .governance-desc {
+        font-size: var(--fs-sm);
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.65;
+        margin: 0;
+      }
+
+      .offcanvas-logo-name {
+        font-size: 0.82rem;
+      }
+
+      /* ── Election / eligibility info card ── */
+      .election-card {
+        background: var(--bbf-white);
+        border: 1px solid var(--bbf-light-grey);
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        box-shadow: var(--shadow-sm);
+      }
+      .election-req {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        font-size: var(--fs-sm);
+        color: var(--bbf-text-muted);
+        line-height: 1.6;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid var(--bbf-light-grey);
+      }
+      .election-req:last-child {
+        border-bottom: none;
+      }
+      .election-req i {
+        color: var(--bbf-gold);
+        font-size: 0.65rem;
+        margin-top: 0.35rem;
+        flex-shrink: 0;
+      }
+
+      /* ── Election card header ── */
+      .election-card-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+      .election-card-icon {
+        width: 44px;
+        height: 44px;
+        background: var(--bbf-navy);
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--bbf-gold);
+        font-size: 1rem;
+      }
+      .election-card-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--bbf-navy);
+        margin: 0;
+      }
+      .election-card-subtitle {
+        font-size: 0.65rem;
+        font-family: var(--font-accent);
+        color: var(--bbf-text-light);
+        font-weight: 600;
+        display: block;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-top: 2px;
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 992px) {
+        .coordinator-card-inner {
+          grid-template-columns: 280px 1fr;
+        }
+      }
+      @media (max-width: 768px) {
+        .coordinator-card-inner {
+          grid-template-columns: 1fr;
+        }
+        .coordinator-photo-col {
+          height: 240px;
+        }
+        .coordinator-photo-overlay {
+          background: linear-gradient(
+            to bottom,
+            transparent 30%,
+            var(--bbf-navy-mid) 100%
+          );
+        }
+        .coordinator-body {
+          padding: 2rem 1.5rem;
+        }
+      }
+      @media (max-width: 576px) {
+        .coordinator-name {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- PRELOADER -->
+    <div
+      id="bbf-preloader"
+      style="
+        position: fixed;
+        inset: 0;
+        background: var(--bbf-navy);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        flex-direction: column;
+        gap: 1rem;
+      "
+    >
+      <div
+        style="
+          width: 56px;
+          height: 56px;
+          background: var(--gradient-gold);
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: &quot;Oswald&quot;, sans-serif;
+          font-size: 1.4rem;
+          font-weight: 800;
+          color: var(--bbf-navy);
+          animation: preloaderPulse 1.2s ease-in-out infinite;
+        "
+      >
+        BBF
+      </div>
+      <div
+        style="
+          font-family: &quot;Oswald&quot;, sans-serif;
+          font-size: 0.65rem;
+          letter-spacing: 0.25em;
+          text-transform: uppercase;
+          color: rgba(201, 168, 76, 0.6);
+        "
+      >
+        Loading…
+      </div>
+    </div>
+    <style>
+      @keyframes preloaderPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.08);
+          opacity: 0.8;
+        }
+      }
+    </style>
+
+    <!-- ══════════════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════════════ -->
+    <nav id="bbf-navbar" class="nav-transparent" aria-label="Main navigation">
+      <div class="navbar-inner">
+        <a href="index.html" class="bbf-logo-wrap" aria-label="BBF Home">
+          <div class="bbf-logo-emblem" aria-hidden="true"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+          <div class="bbf-logo-text">
+            <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+            <span class="bbf-logo-slogan"
+              >One Brigade • One Brotherhood • One Purpose</span
+            >
+          </div>
+        </a>
+        <ul class="nav-links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="leadership.html" class="active">Leadership</a></li>
+          <li><a href="chapters.html">Chapters</a></li>
+          <li class="nav-dropdown">
+            <a href="#" aria-haspopup="true"
+              >Programs
+              <i
+                class="fas fa-chevron-down"
+                style="font-size: 0.6rem; margin-left: 2px"
+              ></i
+            ></a>
+            <div class="nav-dropdown-menu" role="menu">
+              <a href="events.html" role="menuitem"
+                ><i class="fas fa-calendar-alt nav-dropdown-icon"></i> Events</a
+              >
+              <a href="activities.html" role="menuitem"
+                ><i class="fas fa-hands-helping nav-dropdown-icon"></i>
+                Activities</a
+              >
+              <a href="gallery.html" role="menuitem"
+                ><i class="fas fa-images nav-dropdown-icon"></i> Gallery</a
+              >
+            </div>
+          </li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a
+          href="membership.html"
+          class="btn-bbf-primary btn-sm-bbf btn-bbf-nav-cta"
+        >
+          <i class="fas fa-user-plus"></i> Join BBF
+        </a>
+        <button
+          class="nav-toggle"
+          id="nav-toggle"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="bbf-offcanvas"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- OFFCANVAS -->
+    <div
+      id="offcanvas-overlay"
+      class="offcanvas-overlay"
+      aria-hidden="true"
+    ></div>
+    <aside
+      id="bbf-offcanvas"
+      class="bbf-offcanvas"
+      role="dialog"
+      aria-label="Mobile navigation"
+      aria-modal="true"
+    >
+      <div class="offcanvas-header">
+        <a href="index.html" class="bbf-logo-wrap">
+          <div
+            class="bbf-logo-emblem"
+            style="width: 38px; height: 38px; font-size: 0.9rem"
+          >
+            BBF
+          </div>
+          <div class="bbf-logo-text">
+            <span class="bbf-logo-name" style="font-size: 0.82rem"
+              >Brigade Brotherhood Fellowship</span
+            >
+            <span class="bbf-logo-slogan"
+              >One Brigade • One Brotherhood • One Purpose</span
+            >
+          </div>
+        </a>
+        <button
+          id="offcanvas-close"
+          class="offcanvas-close"
+          aria-label="Close navigation menu"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="offcanvas-nav" role="list">
+          <li>
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+          </li>
+          <li>
+            <a href="about.html"
+              ><i class="fas fa-info-circle"></i> About BBF</a
+            >
+          </li>
+          <li>
+            <a href="leadership.html"
+              ><i class="fas fa-crown"></i> Leadership</a
+            >
+          </li>
+          <li>
+            <a href="chapters.html"
+              ><i class="fas fa-map-location-dot"></i> Chapters</a
+            >
+          </li>
+          <li>
+            <a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a>
+          </li>
+          <li>
+            <a href="activities.html"
+              ><i class="fas fa-hands-helping"></i> Activities &amp; Projects</a
+            >
+          </li>
+          <li>
+            <a href="news.html"
+              ><i class="fas fa-newspaper"></i> News &amp; Announcements</a
+            >
+          </li>
+          <li>
+            <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
+          </li>
+          <li>
+            <a href="resources.html"
+              ><i class="fas fa-folder-open"></i> Resources</a
+            >
+          </li>
+          <li>
+            <a href="contact.html"
+              ><i class="fas fa-envelope"></i> Contact Us</a
+            >
+          </li>
+          <li>
+            <a href="login.html"
+              ><i class="fas fa-sign-in-alt"></i> Member Login</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="offcanvas-footer">
+        <a href="membership.html" class="btn-bbf-primary">
+          <i class="fas fa-user-plus"></i> Join BBF Today
+        </a>
+      </div>
+    </aside>
+
+    <!-- ══════════════════════════════════════════════════
+       PAGE HEADER
+  ══════════════════════════════════════════════════ -->
+    <header class="page-header" aria-label="Leadership page header">
+      <div class="page-header-bg" aria-hidden="true"></div>
+      <div class="page-header-decor" aria-hidden="true"></div>
+      <div class="container page-header-content">
+        <nav class="page-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="sep" aria-hidden="true"
+            ><i class="fas fa-chevron-right"></i
+          ></span>
+          <span class="current" aria-current="page">Leadership</span>
+        </nav>
+        <h1 class="page-header-title reveal">BBF Executive Officers</h1>
+        <p class="page-header-subtitle reveal">
+          Elected officers serving the fellowship in accordance with the BBF
+          Constitution, Articles 10, 11, and 12.
+        </p>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════
+       01. COORDINATOR / PRESIDENT SPOTLIGHT
+       Source: BBF Constitution, Articles 10.1, 11.1
+  ══════════════════════════════════════════════════ -->
+    <section
+      class="section-py bg-off-white"
+      aria-labelledby="coordinator-heading"
+    >
+      <div class="container">
+        <div class="text-center reveal">
+          <div class="overline">Constitution, Article 11.1</div>
+          <div class="gold-divider-center"></div>
+          <h2 class="section-title mt-3" id="coordinator-heading">
+            Coordinator / President
+          </h2>
+          <p class="section-subtitle mt-2">
+            The Coordinator/President provides overall leadership, presides over
+            meetings, and ensures the BBF Constitution is respected at all
+            times.
+          </p>
+        </div>
+
+        <!-- Coordinator card rendered by JS -->
+        <div id="coordinator-spotlight" class="reveal">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+       02. FULL EXECUTIVE COMMITTEE
+       Source: BBF Constitution, Article 10 (full list of offices)
+  ══════════════════════════════════════════════════ -->
+    <section
+      class="section-py"
+      style="background: var(--bbf-white)"
+      aria-labelledby="exec-heading"
+    >
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header-left reveal">
+            <div class="overline">Constitution, Article 10</div>
+            <div class="gold-divider" style="margin-top: 0.5rem"></div>
+            <h2 class="section-title mt-3" id="exec-heading">
+              The Executive Committee
+            </h2>
+            <p class="section-subtitle mt-2">
+              All nine offices of the BBF Executive as established by the
+              Constitution — each with defined duties under Article 11.
+            </p>
+          </div>
+        </div>
+
+        <!-- Officer cards rendered by JS -->
+        <div
+          id="exec-grid"
+          class="row g-4"
+          role="list"
+          aria-label="BBF executive officers"
+        >
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+       03. GENERAL RESPONSIBILITIES OF LEADERSHIP
+       Source: BBF Constitution, Article 10.1
+  ══════════════════════════════════════════════════ -->
+    <section
+      class="section-py"
+      style="background: var(--bbf-navy)"
+      aria-labelledby="responsibilities-heading"
+    >
+      <div class="container">
+        <div
+          class="text-center reveal"
+          style="max-width: 560px; margin: 0 auto 3.5rem"
+        >
+          <div class="overline-white">Constitution, Article 10.1</div>
+          <div class="gold-divider-center" style="margin-top: 0.5rem"></div>
+          <h2 class="section-title-light mt-3" id="responsibilities-heading">
+            General Responsibilities of Leadership
+          </h2>
+          <p class="section-subtitle-light mt-2" style="margin: 0 auto">
+            All executive officers of BBF — regardless of role — share these ten
+            collective responsibilities.
+          </p>
+        </div>
+
+        <div class="row g-3" id="responsibilities-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+       04. ELECTIONS & TENURE
+       Source: BBF Constitution, Articles 12.1–12.5
+  ══════════════════════════════════════════════════ -->
+    <section
+      class="section-py bg-off-white"
+      aria-labelledby="elections-heading"
+    >
+      <div class="container">
+        <div
+          class="text-center reveal"
+          style="max-width: 540px; margin: 0 auto 3.5rem"
+        >
+          <div class="overline">Constitution, Article 12</div>
+          <div class="gold-divider-center" style="margin-top: 0.5rem"></div>
+          <h2 class="section-title mt-3" id="elections-heading">
+            Elections &amp; Tenure of Office
+          </h2>
+          <p class="section-subtitle mt-2" style="margin: 0 auto">
+            How BBF executive officers are elected, how long they serve, and the
+            requirements for candidacy — as established by the Constitution.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <!-- Election process -->
+          <div class="col-lg-4 col-md-6 reveal reveal-delay-1">
+            <div class="election-card h-100">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 0.75rem;
+                  margin-bottom: 1.25rem;
+                "
+              >
+                <div
+                  style="
+                    width: 44px;
+                    height: 44px;
+                    background: var(--bbf-navy);
+                    border-radius: var(--radius-md);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: var(--bbf-gold);
+                    font-size: 1rem;
+                  "
+                >
+                  <i class="fas fa-vote-yea"></i>
+                </div>
+                <h3
+                  style="
+                    font-size: 1.05rem;
+                    font-weight: 700;
+                    color: var(--bbf-navy);
+                    margin: 0;
+                  "
+                >
+                  Election Process
+                  <span
+                    style="
+                      font-size: 0.65rem;
+                      font-family: var(--font-accent);
+                      color: var(--bbf-text-light);
+                      font-weight: 600;
+                      display: block;
+                      letter-spacing: 0.06em;
+                      text-transform: uppercase;
+                      margin-top: 2px;
+                    "
+                    >Art. 12.1</span
+                  >
+                </h3>
+              </div>
+              <p
+                style="
+                  font-size: var(--fs-sm);
+                  color: var(--bbf-text-muted);
+                  line-height: 1.7;
+                  margin: 0;
+                "
+              >
+                Executive officers shall be elected by eligible members through
+                a process approved by the Fellowship. Elections are held at a
+                properly constituted general meeting of BBF members.
+              </p>
+            </div>
+          </div>
+
+          <!-- Eligibility -->
+          <div class="col-lg-4 col-md-6 reveal reveal-delay-2">
+            <div class="election-card h-100">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 0.75rem;
+                  margin-bottom: 1.25rem;
+                "
+              >
+                <div
+                  style="
+                    width: 44px;
+                    height: 44px;
+                    background: var(--bbf-navy);
+                    border-radius: var(--radius-md);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: var(--bbf-gold);
+                    font-size: 1rem;
+                  "
+                >
+                  <i class="fas fa-user-check"></i>
+                </div>
+                <h3
+                  style="
+                    font-size: 1.05rem;
+                    font-weight: 700;
+                    color: var(--bbf-navy);
+                    margin: 0;
+                  "
+                >
+                  Eligibility for Office
+                  <span
+                    style="
+                      font-size: 0.65rem;
+                      font-family: var(--font-accent);
+                      color: var(--bbf-text-light);
+                      font-weight: 600;
+                      display: block;
+                      letter-spacing: 0.06em;
+                      text-transform: uppercase;
+                      margin-top: 2px;
+                    "
+                    >Art. 12.2</span
+                  >
+                </h3>
+              </div>
+              <div class="d-flex flex-column gap-1">
+                <div class="election-req">
+                  <i class="fas fa-chevron-right"></i> Be a recognised member of
+                  BBF
+                </div>
+                <div class="election-req">
+                  <i class="fas fa-chevron-right"></i> Demonstrate commitment to
+                  the Fellowship's objectives
+                </div>
+                <div class="election-req">
+                  <i class="fas fa-chevron-right"></i> Have a record of
+                  responsible conduct
+                </div>
+                <div class="election-req">
+                  <i class="fas fa-chevron-right"></i> Be willing and available
+                  to perform the duties of the office
+                </div>
+                <div class="election-req">
+                  <i class="fas fa-chevron-right"></i> Satisfy any additional
+                  requirements approved by the Fellowship
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tenure & vacancy -->
+          <div class="col-lg-4 col-md-6 reveal reveal-delay-3">
+            <div class="election-card h-100">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 0.75rem;
+                  margin-bottom: 1.25rem;
+                "
+              >
+                <div
+                  style="
+                    width: 44px;
+                    height: 44px;
+                    background: var(--bbf-navy);
+                    border-radius: var(--radius-md);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: var(--bbf-gold);
+                    font-size: 1rem;
+                  "
+                >
+                  <i class="fas fa-calendar-days"></i>
+                </div>
+                <h3
+                  style="
+                    font-size: 1.05rem;
+                    font-weight: 700;
+                    color: var(--bbf-navy);
+                    margin: 0;
+                  "
+                >
+                  Tenure &amp; Vacancy
+                  <span
+                    style="
+                      font-size: 0.65rem;
+                      font-family: var(--font-accent);
+                      color: var(--bbf-text-light);
+                      font-weight: 600;
+                      display: block;
+                      letter-spacing: 0.06em;
+                      text-transform: uppercase;
+                      margin-top: 2px;
+                    "
+                    >Art. 12.3 – 12.5</span
+                  >
+                </h3>
+              </div>
+              <div class="d-flex flex-column gap-1">
+                <div class="election-req">
+                  <i class="fas fa-chevron-right"></i> Tenure:
+                  <strong>two (2) years</strong>, unless amended
+                </div>
+                <div class="election-req">
+                  <i class="fas fa-chevron-right"></i> Officers may be eligible
+                  for re-election for another term
+                </div>
+                <div class="election-req">
+                  <i class="fas fa-chevron-right"></i> Vacancies: Executive may
+                  appoint an eligible member to act temporarily
+                </div>
+                <div class="election-req">
+                  <i class="fas fa-chevron-right"></i> Removal requires due
+                  process and an opportunity for the officer to respond
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+       05. SERVE THE FELLOWSHIP — NOMINATIONS STRIP
+       Source: BBF Constitution, Article 12
+  ══════════════════════════════════════════════════ -->
+    <section
+      class="section-py-sm"
+      style="
+        background: var(--bbf-white);
+        border-top: 1px solid var(--bbf-light-grey);
+      "
+      aria-label="Leadership nominations"
+    >
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7 reveal-left">
+            <div class="overline">Serve the Brotherhood</div>
+            <h3 class="section-title mt-2" style="font-size: 1.75rem">
+              Interested in a Leadership Role?
+            </h3>
+            <p
+              style="
+                color: var(--bbf-text-muted);
+                line-height: 1.75;
+                margin-top: 0.75rem;
+                max-width: 540px;
+              "
+            >
+              BBF leadership positions are filled through an election process
+              approved by the membership. Any recognised BBF member who meets
+              the eligibility criteria in Article 12.2 and is willing and
+              available to serve may put themselves forward. Contact the BBF
+              Secretary for information on the current election process.
+            </p>
+          </div>
+          <div class="col-lg-5 reveal-right">
+            <div
+              style="
+                background: var(--bbf-off-white);
+                border: 1px solid var(--bbf-light-grey);
+                border-radius: var(--radius-lg);
+                padding: 2rem;
+                box-shadow: var(--shadow-sm);
+              "
+            >
+              <h4
+                style="
+                  font-size: 1rem;
+                  font-weight: 700;
+                  color: var(--bbf-navy);
+                  margin-bottom: 1rem;
+                "
+              >
+                <i
+                  class="fas fa-shield-halved"
+                  style="color: var(--bbf-gold); margin-right: 0.5rem"
+                ></i>
+                To Stand for Office — Art. 12.2
+              </h4>
+              <div class="d-flex flex-column gap-2">
+                <div
+                  style="
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 0.6rem;
+                    font-size: var(--fs-sm);
+                    color: var(--bbf-text-muted);
+                  "
+                >
+                  <i
+                    class="fas fa-chevron-right"
+                    style="
+                      color: var(--bbf-gold);
+                      font-size: 0.65rem;
+                      margin-top: 0.3rem;
+                      flex-shrink: 0;
+                    "
+                  ></i>
+                  Be a recognised member of BBF
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 0.6rem;
+                    font-size: var(--fs-sm);
+                    color: var(--bbf-text-muted);
+                  "
+                >
+                  <i
+                    class="fas fa-chevron-right"
+                    style="
+                      color: var(--bbf-gold);
+                      font-size: 0.65rem;
+                      margin-top: 0.3rem;
+                      flex-shrink: 0;
+                    "
+                  ></i>
+                  Demonstrate commitment to the objectives of the Fellowship
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 0.6rem;
+                    font-size: var(--fs-sm);
+                    color: var(--bbf-text-muted);
+                  "
+                >
+                  <i
+                    class="fas fa-chevron-right"
+                    style="
+                      color: var(--bbf-gold);
+                      font-size: 0.65rem;
+                      margin-top: 0.3rem;
+                      flex-shrink: 0;
+                    "
+                  ></i>
+                  Have a record of responsible conduct
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 0.6rem;
+                    font-size: var(--fs-sm);
+                    color: var(--bbf-text-muted);
+                  "
+                >
+                  <i
+                    class="fas fa-chevron-right"
+                    style="
+                      color: var(--bbf-gold);
+                      font-size: 0.65rem;
+                      margin-top: 0.3rem;
+                      flex-shrink: 0;
+                    "
+                  ></i>
+                  Be willing and available to perform the duties of the office
+                </div>
+              </div>
+              <div class="mt-3">
+                <a href="contact.html" class="btn-bbf-navy btn-sm-bbf">
+                  <i class="fas fa-envelope"></i> Contact the Secretary
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+       06. CLOSING CTA
+  ══════════════════════════════════════════════════ -->
+    <section class="cta-section" aria-labelledby="leadership-cta-heading">
+      <div class="cta-top-line" aria-hidden="true"></div>
+      <div class="cta-bg-decor cta-bg-decor-1" aria-hidden="true"></div>
+      <div class="cta-bg-decor cta-bg-decor-2" aria-hidden="true"></div>
+      <div class="cta-content">
+        <div class="overline-white reveal">Your Next Step</div>
+        <div
+          class="gold-divider-center reveal"
+          style="margin-top: 0.5rem"
+        ></div>
+        <h2 class="cta-title reveal mt-3" id="leadership-cta-heading">
+          Great Leaders Start With<br /><span class="gold-text"
+            >a Decision to Serve.</span
+          >
+        </h2>
+        <p class="cta-desc reveal">
+          Join BBF, participate in fellowship activities, and when the time
+          comes — serve your brothers in a leadership capacity. Every BBF leader
+          began as a member who decided to show up.
+        </p>
+        <div class="cta-btn-group reveal">
+          <a href="membership.html" class="btn-bbf-primary">
+            <i class="fas fa-user-plus"></i> Join BBF Today
+          </a>
+          <a href="about.html" class="btn-bbf-outline-white">
+            <i class="fas fa-info-circle"></i> About BBF
+          </a>
+        </div>
+        <p class="cta-assurance reveal">
+          <i class="fas fa-cross"></i> Christian leadership &nbsp;·&nbsp;
+          <i class="fas fa-shield-halved"></i> Boys' Brigade foundation
+          &nbsp;·&nbsp; <i class="fas fa-book-open"></i> Governed by
+          constitution
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════ -->
+    <footer class="bbf-footer" role="contentinfo">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand-col">
+            <a href="index.html" class="bbf-logo-wrap">
+              <div class="bbf-logo-emblem"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+              <div class="bbf-logo-text">
+                <span class="bbf-logo-name"
+                  >Brigade Brotherhood Fellowship</span
+                >
+                <span class="bbf-logo-slogan"
+                  >One Brigade • One Brotherhood • One Purpose</span
+                >
+              </div>
+            </a>
+            <p class="footer-brand-desc">
+              A fellowship platform for Boys' Brigade members — united by Faith,
+              Fellowship, Service, and Friendship. From the Brigade, we build
+              Brotherhood; through Fellowship, we grow together.
+            </p>
+            <div class="footer-social-links">
+              <a href="#" class="footer-social-link" aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="footer-social-link" aria-label="Twitter"
+                ><i class="fab fa-x-twitter"></i
+              ></a>
+              <a href="#" class="footer-social-link" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="footer-social-link" aria-label="YouTube"
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a href="#" class="footer-social-link" aria-label="WhatsApp"
+                ><i class="fab fa-whatsapp"></i
+              ></a>
+            </div>
+          </div>
+          <div>
+            <h3 class="footer-col-title">Quick Links</h3>
+            <nav class="footer-links">
+              <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+              <a href="about.html"
+                ><i class="fas fa-chevron-right"></i> About BBF</a
+              >
+              <a href="leadership.html"
+                ><i class="fas fa-chevron-right"></i> Leadership</a
+              >
+              <a href="chapters.html"
+                ><i class="fas fa-chevron-right"></i> Chapters</a
+              >
+              <a href="membership.html"
+                ><i class="fas fa-chevron-right"></i> Membership</a
+              >
+              <a href="contact.html"
+                ><i class="fas fa-chevron-right"></i> Contact Us</a
+              >
+            </nav>
+          </div>
+          <div>
+            <h3 class="footer-col-title">Fellowship</h3>
+            <nav class="footer-links">
+              <a href="events.html"
+                ><i class="fas fa-chevron-right"></i> Events</a
+              >
+              <a href="news.html"
+                ><i class="fas fa-chevron-right"></i> News &amp;
+                Announcements</a
+              >
+              <a href="activities.html"
+                ><i class="fas fa-chevron-right"></i> Activities &amp;
+                Projects</a
+              >
+              <a href="gallery.html"
+                ><i class="fas fa-chevron-right"></i> Gallery</a
+              >
+              <a href="resources.html"
+                ><i class="fas fa-chevron-right"></i> Resources</a
+              >
+              <a href="login.html"
+                ><i class="fas fa-chevron-right"></i> Member Login</a
+              >
+            </nav>
+          </div>
+          <div>
+            <h3 class="footer-col-title">Get in Touch</h3>
+            <div class="footer-contact-item">
+              <div class="footer-contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="footer-contact-text">bbfellowship26@gmail.com</div>
+            </div>
+            <div class="footer-contact-item">
+              <div class="footer-contact-icon">
+                <i class="fas fa-globe"></i>
+              </div>
+              <div class="footer-contact-text">www.bbfellowship.org</div>
+            </div>
+            <div style="margin-top: 1.5rem">
+              <p
+                style="
+                  font-size: 0.8rem;
+                  color: rgba(255, 255, 255, 0.5);
+                  margin-bottom: 0.75rem;
+                "
+              >
+                Get BBF updates in your inbox.
+              </p>
+              <form id="newsletter-form" novalidate>
+                <div class="footer-newsletter-form">
+                  <input
+                    type="email"
+                    id="newsletter-email"
+                    class="footer-newsletter-input"
+                    placeholder="Your email address"
+                    autocomplete="email"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    class="footer-newsletter-btn"
+                    aria-label="Subscribe"
+                  >
+                    <i class="fas fa-paper-plane"></i>
+                  </button>
+                </div>
+              </form>
+              <span id="newsletter-msg" role="alert" aria-live="polite"></span>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="footer-bottom-inner">
+            <p class="footer-copyright">
+              &copy; <span id="footer-year">2026</span> Brigade Brotherhood
+              Fellowship. All rights reserved.
+            </p>
+            <nav class="footer-legal-links">
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Use</a>
+              <a href="#">Cookie Policy</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button
+      id="back-to-top"
+      aria-label="Back to top"
+      style="
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 46px;
+        height: 46px;
+        background: var(--gradient-gold);
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--bbf-navy);
+        font-size: 1rem;
+        box-shadow: var(--shadow-gold);
+        cursor: pointer;
+        z-index: 900;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(10px);
+        transition: all var(--transition-base);
+      "
+    >
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="assets/js/data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+      /* ══════════════════════════════════════════════════════
+       LEADERSHIP PAGE — inline JS
+       Renders: coordinator spotlight, executive grid,
+                general responsibilities grid.
+       All data from data.js BBF_LEADERS.
+       Source: BBF Constitution, Articles 10, 11, 12.
+    ══════════════════════════════════════════════════════ */
+
+      // General responsibilities of the Executive — Art. 10.1
+      // TODO [BACKEND]: Replace with GET /api/config/leadership-responsibilities if dynamic
+      const BBF_EXEC_RESPONSIBILITIES = [
+        {
+          icon: "fa-sitemap",
+          text: "Coordinate the affairs of the Fellowship.",
+        },
+        {
+          icon: "fa-check-double",
+          text: "Implement decisions properly made by the Fellowship.",
+        },
+        {
+          icon: "fa-people-group",
+          text: "Promote unity and discipline among members.",
+        },
+        {
+          icon: "fa-shield-halved",
+          text: "Protect the interests and reputation of BBF.",
+        },
+        {
+          icon: "fa-folder-open",
+          text: "Maintain proper records of all Fellowship activities.",
+        },
+        {
+          icon: "fa-scale-balanced",
+          text: "Promote accountability and transparency at all times.",
+        },
+        {
+          icon: "fa-book-open",
+          text: "Ensure activities remain consistent with the Constitution.",
+        },
+        {
+          icon: "fa-hands-clapping",
+          text: "Encourage member participation in Fellowship activities.",
+        },
+        { icon: "fa-coins", text: "Manage Fellowship resources responsibly." },
+        {
+          icon: "fa-gavel",
+          text: "Handle disciplinary and welfare matters fairly.",
+        },
+      ];
+
+      /**
+       * Extract initials from officer name (strips "To Be Announced" → "TBA").
+       */
+      function getOfficerInitials(name) {
+        if (!name || name.toLowerCase().includes("announced")) return "TBA";
+        return name
+          .replace(/^(Brig\.|Mr\.|Mrs\.|Ms\.|Dr\.)\s*/i, "")
+          .split(" ")
+          .filter(Boolean)
+          .slice(0, 2)
+          .map((n) => n[0].toUpperCase())
+          .join("");
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // ── 1. COORDINATOR SPOTLIGHT ──────────────────────
+        // TODO [BACKEND]: Replace with GET /api/leaders?role=coordinator
+        const coordinator = BBF_LEADERS.find(
+          (l) =>
+            l.title.toLowerCase().includes("coordinator") ||
+            l.title.toLowerCase().includes("president"),
+        );
+        const spotlightEl = document.getElementById("coordinator-spotlight");
+
+        if (coordinator && spotlightEl) {
+          spotlightEl.innerHTML = `
+          <div class="coordinator-card" id="leader-${coordinator.id}">
+            <div class="coordinator-card-inner">
+
+              <!-- Photo / initials column -->
+              <div class="coordinator-photo-col">
+                <div class="coordinator-initials" aria-hidden="true">
+                  ${getOfficerInitials(coordinator.name)}
+                </div>
+                <div class="coordinator-photo-overlay"></div>
+              </div>
+
+              <!-- Body column -->
+              <div class="coordinator-body">
+                <div class="coordinator-role-tag">
+                  <i class="fas fa-crown" style="font-size:0.65rem;"></i>
+                  ${coordinator.title}
+                </div>
+                <div class="coordinator-name">${coordinator.name}</div>
+                <p class="coordinator-bio">${coordinator.bio}</p>
+
+                ${
+                  coordinator.responsibilities
+                    ? `
+                <div class="duties-list" aria-label="Duties of the Coordinator/President">
+                  ${coordinator.responsibilities
+                    .map(
+                      (r) => `
+                    <div class="duty-item">
+                      <i class="fas fa-chevron-right"></i>
+                      <span>${r}</span>
+                    </div>
+                  `,
+                    )
+                    .join("")}
+                </div>`
+                    : ""
+                }
+
+                <div class="d-flex flex-wrap gap-3">
+                  <a href="mailto:${coordinator.email}" class="btn-bbf-primary btn-sm-bbf">
+                    <i class="fas fa-envelope"></i> Contact Officer
+                  </a>
+                  <a href="about.html" class="btn-bbf-outline-white btn-sm-bbf">
+                    <i class="fas fa-book-open"></i> About BBF
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        `;
+        }
+
+        // ── 2. EXECUTIVE COMMITTEE GRID ───────────────────
+        // Show all officers except the Coordinator/President
+        // TODO [BACKEND]: Replace with GET /api/leaders?exclude=coordinator
+        const otherOfficers = BBF_LEADERS.filter(
+          (l) =>
+            !l.title.toLowerCase().includes("coordinator") &&
+            !l.title.toLowerCase().includes("president"),
+        );
+        const execGrid = document.getElementById("exec-grid");
+
+        if (execGrid) {
+          execGrid.innerHTML = otherOfficers
+            .map(
+              (officer, i) => `
+          <div class="col-lg-4 col-md-6 reveal reveal-delay-${Math.min(i + 1, 8)}"
+               role="listitem" id="leader-${officer.id}">
+            <div class="officer-card">
+              <div class="officer-avatar-wrap">
+                <span class="officer-avatar-initials" aria-hidden="true">
+                  ${getOfficerInitials(officer.name)}
+                </span>
+                <div class="officer-hover-overlay">
+                  <a href="mailto:${officer.email}" class="officer-email-link">
+                    <i class="fas fa-envelope"></i> Email Office
+                  </a>
+                </div>
+              </div>
+              <div class="officer-body">
+                <div class="officer-role-tag">${officer.title}</div>
+                <div class="officer-name">${officer.name}</div>
+                <p class="officer-bio">${officer.bio}</p>
+                ${
+                  officer.responsibilities
+                    ? `
+                <div class="officer-duties">
+                  <div class="officer-duties-label">Key Duties — Art. 11</div>
+                  <div>
+                    ${officer.responsibilities
+                      .map((r) => `<span class="officer-duty-pill">${r}</span>`)
+                      .join("")}
+                  </div>
+                </div>`
+                    : ""
+                }
+              </div>
+            </div>
+          </div>
+        `,
+            )
+            .join("");
+        }
+
+        // ── 3. GENERAL RESPONSIBILITIES GRID ─────────────
+        const respGrid = document.getElementById("responsibilities-grid");
+        if (respGrid) {
+          respGrid.innerHTML = BBF_EXEC_RESPONSIBILITIES.map(
+            (r, i) => `
+          <div class="col-lg-3 col-md-4 col-sm-6 reveal reveal-delay-${Math.min(i + 1, 8)}">
+            <div class="governance-card">
+              <div class="governance-icon"><i class="fas ${r.icon}"></i></div>
+              <p class="governance-desc">${r.text}</p>
+            </div>
+          </div>
+        `,
+          ).join("");
+        }
+
+        // ── 4. Re-trigger scroll reveal for injected elements
+        setTimeout(() => {
+          const revealEls = document.querySelectorAll(
+            ".reveal:not(.revealed), .reveal-left:not(.revealed), .reveal-right:not(.revealed)",
+          );
+          const obs = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  e.target.classList.add("revealed");
+                  obs.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.1, rootMargin: "0px 0px -30px 0px" },
+          );
+          revealEls.forEach((el) => obs.observe(el));
+        }, 80);
+      }); // end DOMContentLoaded
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BBF News & Announcements — Latest updates, announcements, and news from Brigade Brotherhood Fellowship and its chapters." />
+  <meta name="keywords" content="BBF News, Brigade Brotherhood Fellowship announcements, Boys Brigade Fellowship updates" />
+  <meta name="author" content="Brigade Brotherhood Fellowship" />
+
+  <title>News & Announcements — Brigade Brotherhood Fellowship</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════
+       NEWS PAGE — scoped styles
+    ══════════════════════════════════════════════════════ */
+
+    /* ── Featured article hero ── */
+    .news-hero {
+      background: var(--bbf-navy-mid);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+      min-height: 380px;
+      display: flex;
+      align-items: flex-end;
+      box-shadow: var(--shadow-xl);
+      margin-bottom: 3rem;
+      transition: transform var(--transition-base);
+      border: 1px solid rgba(201,168,76,0.12);
+    }
+    .news-hero:hover { transform: translateY(-3px); }
+    .news-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient-gold);
+      z-index: 2;
+    }
+    .news-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--bbf-navy) 0%, var(--bbf-navy-light) 100%);
+      opacity: 0.6;
+    }
+    .news-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,13,26,0.97) 0%, rgba(10,22,40,0.7) 50%, transparent 100%);
+    }
+    .news-hero-body {
+      position: relative;
+      z-index: 2;
+      padding: 2.5rem 3rem;
+      width: 100%;
+      max-width: 720px;
+    }
+    .news-hero-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.875rem;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-accent);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bbf-gold-light);
+      margin-bottom: 1rem;
+    }
+    .news-hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+      font-weight: 800;
+      color: var(--bbf-white);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .news-hero-title a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+    .news-hero-title a:hover { color: var(--bbf-gold-light); }
+    .news-hero-summary {
+      font-size: var(--fs-base);
+      color: rgba(255,255,255,0.7);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+      max-width: 560px;
+    }
+    .news-hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      align-items: center;
+    }
+    .news-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: var(--fs-xs);
+      color: rgba(255,255,255,0.55);
+      font-family: var(--font-accent);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .news-meta-item i { color: var(--bbf-gold); font-size: 0.65rem; }
+
+    /* ── Search & filter toolbar ── */
+    .news-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .news-search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+      max-width: 320px;
+    }
+    .news-search-wrap input {
+      width: 100%;
+      padding: 0.6rem 1rem 0.6rem 2.5rem;
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-pill);
+      font-size: var(--fs-sm);
+      font-family: var(--font-body);
+      background: var(--bbf-white);
+      color: var(--bbf-text);
+      outline: none;
+      transition: all var(--transition-fast);
+    }
+    .news-search-wrap input:focus {
+      border-color: var(--bbf-gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+    .news-search-wrap i {
+      position: absolute;
+      left: 0.875rem; top: 50%;
+      transform: translateY(-50%);
+      color: var(--bbf-text-light);
+      font-size: 0.8rem;
+      pointer-events: none;
+    }
+    .news-filter-btn {
+      padding: 0.45rem 1.1rem;
+      background: var(--bbf-off-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-accent);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bbf-text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+    }
+    .news-filter-btn:hover { border-color: var(--bbf-navy); color: var(--bbf-navy); }
+    .news-filter-btn.active {
+      background: var(--bbf-navy);
+      color: var(--bbf-white);
+      border-color: var(--bbf-navy);
+    }
+    .news-results-count {
+      font-size: var(--fs-xs);
+      font-family: var(--font-accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bbf-text-light);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── News card (grid) ── */
+    .news-article-card {
+      background: var(--bbf-white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--bbf-light-grey);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: all var(--transition-base);
+    }
+    .news-article-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-6px);
+      border-color: transparent;
+    }
+    .news-card-img {
+      height: 190px;
+      background: linear-gradient(135deg, var(--bbf-navy) 0%, var(--bbf-navy-light) 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .news-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+      opacity: 0.8;
+    }
+    .news-article-card:hover .news-card-img img { transform: scale(1.05); }
+    .news-card-img-placeholder {
+      font-size: 2.5rem;
+      color: rgba(255,255,255,0.12);
+    }
+    .news-card-cat-badge {
+      position: absolute;
+      top: 0.875rem;
+      left: 0.875rem;
+    }
+    .news-card-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .news-card-date {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: var(--fs-xs);
+      color: var(--bbf-text-light);
+      font-family: var(--font-accent);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .news-card-date i { color: var(--bbf-gold); font-size: 0.6rem; }
+    .news-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--bbf-navy);
+      line-height: 1.4;
+      margin-bottom: 0.75rem;
+    }
+    .news-card-title a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+    .news-card-title a:hover { color: var(--bbf-gold-dark); }
+    .news-card-summary {
+      font-size: var(--fs-sm);
+      color: var(--bbf-text-muted);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+    .news-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--bbf-light-grey);
+      margin-top: auto;
+    }
+    .news-card-author {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: var(--fs-xs);
+      color: var(--bbf-text-light);
+    }
+    .news-card-author i { color: var(--bbf-gold); font-size: 0.65rem; }
+    .news-read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: var(--fs-xs);
+      font-family: var(--font-accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bbf-gold-dark);
+      text-decoration: none;
+      transition: gap var(--transition-fast);
+    }
+    .news-read-more:hover { gap: 0.6rem; color: var(--bbf-gold-dark); }
+
+    /* ── Category badge colours ── */
+    .cat-announcement {
+      background: rgba(201,168,76,0.10);
+      color: var(--bbf-gold-dark);
+      border: 1px solid rgba(201,168,76,0.22);
+      font-size: 0.65rem;
+      font-family: var(--font-accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.7rem;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .cat-news {
+      background: rgba(30,64,128,0.10);
+      color: #4A80CC;
+      border: 1px solid rgba(30,64,128,0.22);
+      font-size: 0.65rem;
+      font-family: var(--font-accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.7rem;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .cat-community-service {
+      background: rgba(26,92,58,0.10);
+      color: #2DA66A;
+      border: 1px solid rgba(26,92,58,0.22);
+      font-size: 0.65rem;
+      font-family: var(--font-accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.7rem;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* ── Article detail panel (inline expand) ── */
+    .article-panel {
+      background: var(--bbf-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 3rem;
+    }
+    .article-panel-header {
+      border-bottom: 1px solid var(--bbf-light-grey);
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .article-panel-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 800;
+      color: var(--bbf-navy);
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+    .article-panel-content {
+      font-size: var(--fs-base);
+      color: var(--bbf-text-muted);
+      line-height: 1.9;
+    }
+    .article-panel-content p { margin-bottom: 1rem; }
+
+    /* ── Empty state ── */
+    .news-empty {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--bbf-off-white);
+      border-radius: var(--radius-lg);
+      border: 2px dashed var(--bbf-light-grey);
+    }
+    .news-empty i { font-size: 2.5rem; color: var(--bbf-mid-grey); display: block; margin-bottom: 1rem; }
+    .news-empty p { color: var(--bbf-text-muted); font-size: var(--fs-md); margin: 0; }
+
+    /* ── Sidebar: latest + subscribe ── */
+    .news-sidebar-card {
+      background: var(--bbf-white);
+      border: 1px solid var(--bbf-light-grey);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .sidebar-card-header {
+      background: var(--bbf-navy);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .sidebar-card-header i { color: var(--bbf-gold); }
+    .sidebar-card-header span {
+      font-family: var(--font-accent);
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bbf-white);
+    }
+    .sidebar-card-body { padding: 1.25rem; }
+    .sidebar-news-item {
+      display: flex;
+      gap: 0.875rem;
+      align-items: flex-start;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--bbf-light-grey);
+      transition: all var(--transition-fast);
+    }
+    .sidebar-news-item:last-child { border-bottom: none; }
+    .sidebar-news-item:hover { padding-left: 4px; }
+    .sidebar-news-dot {
+      width: 8px; height: 8px;
+      background: var(--bbf-gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .sidebar-news-title {
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--bbf-navy);
+      line-height: 1.4;
+      margin-bottom: 0.2rem;
+    }
+    .sidebar-news-date {
+      font-size: var(--fs-xs);
+      color: var(--bbf-text-light);
+      font-family: var(--font-accent);
+      letter-spacing: 0.04em;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .news-hero-body { padding: 1.75rem; }
+      .news-hero-title { font-size: 1.4rem; }
+      .news-toolbar { flex-direction: column; align-items: stretch; }
+      .news-search-wrap { max-width: 100%; }
+    }
+    @media (max-width: 576px) {
+      .news-hero { min-height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="bbf-preloader" style="position:fixed;inset:0;background:var(--bbf-navy);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:1rem;">
+    <div style="width:56px;height:56px;background:var(--gradient-gold);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:800;color:var(--bbf-navy);animation:preloaderPulse 1.2s ease-in-out infinite;">BBF</div>
+    <div style="font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.6);">Loading…</div>
+  </div>
+  <style>@keyframes preloaderPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:0.8}}</style>
+
+  <!-- ══════════════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════════════ -->
+  <nav id="bbf-navbar" class="nav-transparent" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="bbf-logo-wrap" aria-label="BBF Home">
+        <div class="bbf-logo-emblem" aria-hidden="true"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+        <li><a href="chapters.html">Chapters</a></li>
+        <li class="nav-dropdown">
+          <a href="#" aria-haspopup="true">Programs <i class="fas fa-chevron-down" style="font-size:0.6rem;margin-left:2px;"></i></a>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="events.html" role="menuitem"><i class="fas fa-calendar-alt" style="width:16px;color:var(--bbf-gold);"></i> Events</a>
+            <a href="activities.html" role="menuitem"><i class="fas fa-hands-helping" style="width:16px;color:var(--bbf-gold);"></i> Activities</a>
+            <a href="gallery.html" role="menuitem"><i class="fas fa-images" style="width:16px;color:var(--bbf-gold);"></i> Gallery</a>
+          </div>
+        </li>
+        <li><a href="news.html" class="active">News</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="membership.html" class="btn-bbf-primary btn-sm-bbf btn-bbf-nav-cta">
+        <i class="fas fa-user-plus"></i> Join BBF
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="bbf-offcanvas">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- OFFCANVAS -->
+  <div id="offcanvas-overlay" class="offcanvas-overlay" aria-hidden="true"></div>
+  <aside id="bbf-offcanvas" class="bbf-offcanvas" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <div class="offcanvas-header">
+      <a href="index.html" class="bbf-logo-wrap">
+        <div class="bbf-logo-emblem" style="width:38px;height:38px;"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+        <div class="bbf-logo-text">
+          <span class="bbf-logo-name" style="font-size:0.82rem;">Brigade Brotherhood Fellowship</span>
+          <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+        </div>
+      </a>
+      <button id="offcanvas-close" class="offcanvas-close" aria-label="Close navigation menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="offcanvas-nav" role="list">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About BBF</a></li>
+        <li><a href="leadership.html"><i class="fas fa-crown"></i> Leadership</a></li>
+        <li><a href="chapters.html"><i class="fas fa-map-location-dot"></i> Chapters</a></li>
+        <li><a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+        <li><a href="activities.html"><i class="fas fa-hands-helping"></i> Activities &amp; Projects</a></li>
+        <li><a href="news.html"><i class="fas fa-newspaper"></i> News &amp; Announcements</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="resources.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        <li style="margin-top:0.5rem;border-top:1px solid rgba(201,168,76,0.12);padding-top:0.75rem;">
+          <a href="login.html"><i class="fas fa-sign-in-alt"></i> Member Login</a>
+        </li>
+      </ul>
+    </div>
+    <div class="offcanvas-footer">
+      <a href="membership.html" class="btn-bbf-primary" style="width:100%;justify-content:center;">
+        <i class="fas fa-user-plus"></i> Join BBF Today
+      </a>
+    </div>
+  </aside>
+
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE HEADER
+  ══════════════════════════════════════════════════ -->
+  <header class="page-header" aria-label="News page header">
+    <div class="page-header-bg" aria-hidden="true"></div>
+    <div class="page-header-decor" aria-hidden="true"></div>
+    <div class="container page-header-content">
+      <nav class="page-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep" aria-hidden="true"><i class="fas fa-chevron-right" style="font-size:0.55rem;"></i></span>
+        <span class="current" aria-current="page">News &amp; Announcements</span>
+      </nav>
+      <h1 class="page-header-title reveal">News &amp; Announcements</h1>
+      <p class="page-header-subtitle reveal">
+        Stay informed — updates, announcements, and news from the BBF secretariat and chapters.
+      </p>
+    </div>
+  </header>
+
+
+  <!-- ══════════════════════════════════════════════════
+       MAIN NEWS SECTION
+       TODO [BACKEND]: Replace BBF_NEWS with GET /api/news
+  ══════════════════════════════════════════════════ -->
+  <section class="section-py" style="background:var(--bbf-off-white);" aria-labelledby="news-main-heading">
+    <div class="container">
+      <div class="row g-5">
+
+        <!-- ── Main content column ── -->
+        <div class="col-lg-8">
+
+          <!-- Featured article hero -->
+          <div id="news-hero-wrap" class="reveal">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Section heading + toolbar -->
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+            <h2 class="section-title" style="font-size:1.4rem;margin:0;" id="news-main-heading">
+              All Articles
+            </h2>
+            <span id="news-total-badge" class="badge-gold"></span>
+          </div>
+
+          <!-- Filter toolbar -->
+          <div class="news-toolbar reveal" role="group" aria-label="Filter and search news">
+            <div class="news-search-wrap">
+              <i class="fas fa-search" aria-hidden="true"></i>
+              <input
+                type="search"
+                id="news-search"
+                placeholder="Search articles…"
+                aria-label="Search news articles"
+                autocomplete="off"
+              />
+            </div>
+            <button class="news-filter-btn active" data-cat="all">All</button>
+            <button class="news-filter-btn" data-cat="Announcement">
+              <i class="fas fa-bullhorn" style="font-size:0.65rem;margin-right:0.3rem;"></i>Announcements
+            </button>
+            <button class="news-filter-btn" data-cat="News">
+              <i class="fas fa-newspaper" style="font-size:0.65rem;margin-right:0.3rem;"></i>News
+            </button>
+          </div>
+
+          <p id="news-results-count" class="news-results-count" aria-live="polite"></p>
+
+          <!-- Article grid -->
+          <div id="news-grid" class="row g-4" role="list" aria-label="News articles">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Inline article panel (shown when "Read More" clicked) -->
+          <div id="article-panel" class="article-panel" style="display:none;" aria-live="polite" aria-label="Article detail">
+            <!-- Populated by JS -->
+          </div>
+
+        </div>
+
+        <!-- ── Sidebar ── -->
+        <div class="col-lg-4">
+          <div class="sticky-top" style="top:calc(var(--navbar-height) + 1.5rem);">
+
+            <!-- Latest announcements -->
+            <div class="news-sidebar-card reveal mb-4" id="sidebar-latest">
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- Subscribe / stay updated -->
+            <div class="news-sidebar-card reveal">
+              <div class="sidebar-card-header">
+                <i class="fas fa-bell"></i>
+                <span>Stay Updated</span>
+              </div>
+              <div class="sidebar-card-body">
+                <p style="font-size:var(--fs-sm);color:var(--bbf-text-muted);line-height:1.65;margin-bottom:1.25rem;">
+                  Get BBF news and announcements delivered to your inbox.
+                </p>
+                <!-- TODO [BACKEND]: Wire to POST /api/newsletter/subscribe -->
+                <form id="sidebar-newsletter-form" novalidate>
+                  <input
+                    type="email"
+                    id="sidebar-email"
+                    placeholder="Your email address"
+                    autocomplete="email"
+                    required
+                    style="width:100%;padding:0.65rem 1rem;border:1px solid var(--bbf-light-grey);
+                      border-radius:var(--radius-sm);font-size:var(--fs-sm);font-family:var(--font-body);
+                      color:var(--bbf-text);outline:none;margin-bottom:0.75rem;
+                      transition:border-color var(--transition-fast);"
+                  />
+                  <button type="submit" class="btn-bbf-primary" style="width:100%;justify-content:center;font-size:0.72rem;">
+                    <i class="fas fa-paper-plane"></i> Subscribe
+                  </button>
+                </form>
+                <span id="sidebar-newsletter-msg" role="alert" aria-live="polite"
+                  style="font-size:var(--fs-xs);margin-top:0.5rem;display:block;"></span>
+              </div>
+            </div>
+
+            <!-- BBF info card -->
+            <div class="mt-4 p-4 reveal"
+                 style="background:var(--bbf-navy);border-radius:var(--radius-lg);
+                        border:1px solid rgba(201,168,76,0.15);">
+              <div style="font-family:var(--font-accent);font-size:0.68rem;letter-spacing:0.12em;
+                text-transform:uppercase;color:var(--bbf-gold);margin-bottom:0.75rem;">About BBF</div>
+              <p style="font-size:var(--fs-sm);color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:1.25rem;">
+                Brigade Brotherhood Fellowship — a platform for Boys' Brigade members built on
+                Faith, Fellowship, Service, and Friendship.
+              </p>
+              <a href="about.html" class="btn-bbf-outline-white btn-sm-bbf" style="width:100%;justify-content:center;font-size:0.7rem;">
+                <i class="fas fa-info-circle"></i> Learn About BBF
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       CTA
+  ══════════════════════════════════════════════════ -->
+  <section class="cta-section" aria-labelledby="news-cta-heading">
+    <div class="cta-top-line" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-1" aria-hidden="true"></div>
+    <div class="cta-bg-decor cta-bg-decor-2" aria-hidden="true"></div>
+    <div class="cta-content">
+      <div class="overline-white reveal">Join the Conversation</div>
+      <div class="gold-divider-center reveal" style="margin-top:0.5rem;"></div>
+      <h2 class="cta-title reveal mt-3" id="news-cta-heading">
+        Be Part of the Story,<br /><span class="gold-text">Not Just a Reader.</span>
+      </h2>
+      <p class="cta-desc reveal">
+        Join BBF and be among the first to receive updates, event announcements,
+        and news directly from the fellowship.
+      </p>
+      <div class="cta-btn-group reveal">
+        <a href="membership.html" class="btn-bbf-primary">
+          <i class="fas fa-user-plus"></i> Join BBF Today
+        </a>
+        <a href="contact.html" class="btn-bbf-outline-white">
+          <i class="fas fa-envelope"></i> Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="bbf-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="bbf-logo-wrap">
+            <div class="bbf-logo-emblem"><img src="assets/images/BBF Image.jpeg" alt="BBF Logo" /></div>
+            <div class="bbf-logo-text">
+              <span class="bbf-logo-name">Brigade Brotherhood Fellowship</span>
+              <span class="bbf-logo-slogan">One Brigade • One Brotherhood • One Purpose</span>
+            </div>
+          </a>
+          <p class="footer-brand-desc">
+            A fellowship platform for Boys' Brigade members — united by Faith, Fellowship,
+            Service, and Friendship. From the Brigade, we build Brotherhood; through
+            Fellowship, we grow together.
+          </p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="footer-social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Quick Links</h3>
+          <nav class="footer-links">
+            <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+            <a href="about.html"><i class="fas fa-chevron-right"></i> About BBF</a>
+            <a href="leadership.html"><i class="fas fa-chevron-right"></i> Leadership</a>
+            <a href="chapters.html"><i class="fas fa-chevron-right"></i> Chapters</a>
+            <a href="membership.html"><i class="fas fa-chevron-right"></i> Membership</a>
+            <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Fellowship</h3>
+          <nav class="footer-links">
+            <a href="events.html"><i class="fas fa-chevron-right"></i> Events</a>
+            <a href="news.html"><i class="fas fa-chevron-right"></i> News &amp; Announcements</a>
+            <a href="activities.html"><i class="fas fa-chevron-right"></i> Activities &amp; Projects</a>
+            <a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a>
+            <a href="resources.html"><i class="fas fa-chevron-right"></i> Resources</a>
+            <a href="login.html"><i class="fas fa-chevron-right"></i> Member Login</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Get in Touch</h3>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="footer-contact-text">bbfellowship26@gmail.com</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-globe"></i></div>
+            <div class="footer-contact-text">www.bbfellowship.org</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon"><i class="fas fa-phone"></i></div>
+            <div class="footer-contact-text">09066681922</div>
+          </div>
+          <div style="margin-top:1.5rem;">
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:0.75rem;">Get BBF updates in your inbox.</p>
+            <form id="newsletter-form" novalidate>
+              <div class="footer-newsletter-form">
+                <input type="email" id="newsletter-email" class="footer-newsletter-input" placeholder="Your email address" autocomplete="email" required />
+                <button type="submit" class="footer-newsletter-btn" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </form>
+            <span id="newsletter-msg" role="alert" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <p class="footer-copyright">&copy; <span id="footer-year">2026</span> Brigade Brotherhood Fellowship. All rights reserved.</p>
+          <nav class="footer-legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Cookie Policy</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:46px;height:46px;background:var(--gradient-gold);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--bbf-navy);font-size:1rem;box-shadow:var(--shadow-gold);cursor:pointer;z-index:900;opacity:0;pointer-events:none;transform:translateY(10px);transition:all var(--transition-base);">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- SCRIPTS -->
+  <script src="assets/js/data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    /* ══════════════════════════════════════════════════════
+       NEWS PAGE — inline JS
+       Renders: featured hero, article grid, sidebar,
+                category filtering, search, inline article panel.
+       TODO [BACKEND]: Replace BBF_NEWS with GET /api/news
+    ══════════════════════════════════════════════════════ */
+
+    /* ── Helpers ── */
+    function fmtDate(str) {
+      return new Date(str + 'T00:00:00')
+        .toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+    function truncate(str, n) {
+      const w = str.split(' ');
+      return w.length <= n ? str : w.slice(0, n).join(' ') + '…';
+    }
+    function catClass(cat) {
+      const map = { 'Announcement': 'cat-announcement', 'News': 'cat-news', 'Community Service': 'cat-community-service' };
+      return map[cat] || 'cat-announcement';
+    }
+    function catIcon(cat) {
+      const map = { 'Announcement': 'fa-bullhorn', 'News': 'fa-newspaper', 'Community Service': 'fa-hand-holding-heart' };
+      return map[cat] || 'fa-tag';
+    }
+
+    /* ── State ── */
+    let activeCategory = 'all';
+    let searchQuery    = '';
+    let openArticleId  = null;
+
+    /* ── Render featured hero ── */
+    function renderHero() {
+      const wrap = document.getElementById('news-hero-wrap');
+      if (!wrap) return;
+      // TODO [BACKEND]: Replace with GET /api/news?featured=true&limit=1
+      const featured = BBF_NEWS.find(n => n.featured);
+      if (!featured) { wrap.innerHTML = ''; return; }
+      wrap.innerHTML = `
+        <div class="news-hero" id="article-${featured.id}">
+          <div class="news-hero-bg"></div>
+          <div class="news-hero-overlay"></div>
+          <div class="news-hero-body">
+            <div class="news-hero-category">
+              <i class="fas ${catIcon(featured.category)}" style="font-size:0.6rem;"></i>
+              ${featured.category}
+            </div>
+            <h2 class="news-hero-title">
+              <a href="#article-${featured.id}" onclick="openArticle(${featured.id});return false;">
+                ${featured.title}
+              </a>
+            </h2>
+            <p class="news-hero-summary">${truncate(featured.summary, 32)}</p>
+            <div class="news-hero-meta">
+              <div class="news-meta-item">
+                <i class="fas fa-clock"></i>${fmtDate(featured.date)}
+              </div>
+              <div class="news-meta-item">
+                <i class="fas fa-user-pen"></i>${featured.author}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /* ── Render article grid ── */
+    function renderGrid() {
+      const grid    = document.getElementById('news-grid');
+      const countEl = document.getElementById('news-results-count');
+      const badge   = document.getElementById('news-total-badge');
+      if (!grid) return;
+
+      // TODO [BACKEND]: Replace with GET /api/news?category={activeCategory}&q={searchQuery}
+      let filtered = BBF_NEWS.filter(n => {
+        const catMatch  = activeCategory === 'all' || n.category === activeCategory;
+        const q         = searchQuery.toLowerCase();
+        const textMatch = !q || n.title.toLowerCase().includes(q) || n.summary.toLowerCase().includes(q);
+        return catMatch && textMatch;
+      });
+
+      // Sort: newest first
+      filtered = [...filtered].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      if (badge) badge.innerHTML = `<i class="fas fa-newspaper"></i> ${BBF_NEWS.length} article${BBF_NEWS.length !== 1 ? 's' : ''}`;
+      if (countEl) countEl.textContent = filtered.length > 0
+        ? `Showing ${filtered.length} of ${BBF_NEWS.length} article${BBF_NEWS.length !== 1 ? 's' : ''}`
+        : '';
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-12">
+            <div class="news-empty">
+              <i class="fas fa-newspaper"></i>
+              <p>No articles found${searchQuery ? ` for "<strong>${searchQuery}</strong>"` : ''} in
+                <strong>${activeCategory === 'all' ? 'any category' : activeCategory}</strong>.</p>
+            </div>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((item, i) => `
+        <div class="col-md-6 reveal reveal-delay-${Math.min(i + 1, 8)}" role="listitem">
+          <article class="news-article-card">
+            <div class="news-card-img">
+              <i class="news-card-img-placeholder fas fa-newspaper"></i>
+              <div class="news-card-cat-badge">
+                <span class="${catClass(item.category)}">
+                  <i class="fas ${catIcon(item.category)}" style="font-size:0.55rem;"></i>
+                  ${item.category}
+                </span>
+              </div>
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-date">
+                <i class="fas fa-clock"></i>${fmtDate(item.date)}
+              </div>
+              <h3 class="news-card-title">
+                <a href="#article-${item.id}"
+                   onclick="openArticle(${item.id});return false;">
+                  ${item.title}
+                </a>
+              </h3>
+              <p class="news-card-summary">${truncate(item.summary, 25)}</p>
+              <div class="news-card-footer">
+                <div class="news-card-author">
+                  <i class="fas fa-user-pen"></i>${item.author}
+                </div>
+                <a href="#article-${item.id}"
+                   class="news-read-more"
+                   onclick="openArticle(${item.id});return false;"
+                   aria-label="Read more: ${item.title}">
+                  Read More <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      `).join('');
+
+      setTimeout(() => {
+        grid.querySelectorAll('.reveal:not(.revealed)').forEach(el => el.classList.add('revealed'));
+      }, 50);
+    }
+
+    /* ── Open inline article panel ── */
+    // TODO [BACKEND]: Replace with GET /api/news/{id} — fetch full article content
+    function openArticle(id) {
+      const panel = document.getElementById('article-panel');
+      if (!panel) return;
+      const item = BBF_NEWS.find(n => n.id === id);
+      if (!item) return;
+
+      if (openArticleId === id) {
+        // Toggle closed
+        panel.style.display = 'none';
+        openArticleId = null;
+        return;
+      }
+      openArticleId = id;
+
+      panel.style.display = 'block';
+      panel.innerHTML = `
+        <div class="article-panel-header">
+          <span class="${catClass(item.category)}" style="margin-bottom:0.875rem;display:inline-flex;">
+            <i class="fas ${catIcon(item.category)}" style="font-size:0.55rem;margin-right:0.3rem;"></i>
+            ${item.category}
+          </span>
+          <div class="article-panel-title">${item.title}</div>
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="news-meta-item" style="color:var(--bbf-text-muted);">
+              <i class="fas fa-clock" style="color:var(--bbf-gold);"></i>${fmtDate(item.date)}
+            </div>
+            <div class="news-meta-item" style="color:var(--bbf-text-muted);">
+              <i class="fas fa-user-pen" style="color:var(--bbf-gold);"></i>${item.author}
+            </div>
+          </div>
+        </div>
+        <div class="article-panel-content">
+          <p>${item.summary}</p>
+          <p style="color:var(--bbf-text-light);font-style:italic;font-size:var(--fs-sm);
+            padding:1rem;background:var(--bbf-off-white);border-radius:var(--radius-sm);
+            border-left:3px solid var(--bbf-gold);">
+            <!-- TODO [BACKEND]: Full article body replaces this placeholder once
+                 GET /api/news/${item.id} returns complete content -->
+            Full article content will be available once the content management
+            system is connected. This is a placeholder summary.
+          </p>
+        </div>
+        <div class="mt-3">
+          <button onclick="closeArticle()"
+            class="btn-bbf-outline btn-sm-bbf">
+            <i class="fas fa-times"></i> Close Article
+          </button>
+        </div>
+      `;
+
+      // Smooth scroll to panel
+      setTimeout(() => {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
+
+    function closeArticle() {
+      const panel = document.getElementById('article-panel');
+      if (panel) panel.style.display = 'none';
+      openArticleId = null;
+    }
+
+    /* ── Render sidebar: latest announcements ── */
+    function renderSidebar() {
+      const sidebar = document.getElementById('sidebar-latest');
+      if (!sidebar) return;
+      // TODO [BACKEND]: Replace with GET /api/news?limit=4&sort=date_desc
+      const latest = [...BBF_NEWS].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 4);
+      sidebar.innerHTML = `
+        <div class="sidebar-card-header">
+          <i class="fas fa-clock-rotate-left"></i>
+          <span>Latest Updates</span>
+        </div>
+        <div class="sidebar-card-body">
+          ${latest.map(item => `
+            <div class="sidebar-news-item">
+              <div class="sidebar-news-dot"></div>
+              <div>
+                <div class="sidebar-news-title">
+                  <a href="#article-${item.id}"
+                     onclick="openArticle(${item.id});return false;"
+                     style="color:inherit;text-decoration:none;">
+                    ${item.title}
+                  </a>
+                </div>
+                <div class="sidebar-news-date">${fmtDate(item.date)}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    /* ── Sidebar newsletter form (simulated) ── */
+    function initSidebarNewsletter() {
+      const form  = document.getElementById('sidebar-newsletter-form');
+      const input = document.getElementById('sidebar-email');
+      const msg   = document.getElementById('sidebar-newsletter-msg');
+      if (!form) return;
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const email = input?.value.trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          if (msg) { msg.textContent = 'Please enter a valid email.'; msg.style.color = '#F07080'; }
+          return;
+        }
+        // TODO [BACKEND]: POST /api/newsletter/subscribe with { email }
+        input.value = '';
+        if (msg) {
+          msg.textContent = 'Subscribed! You\'ll receive BBF updates.';
+          msg.style.color = '#4CC88A';
+          setTimeout(() => { msg.textContent = ''; }, 5000);
+        }
+      });
+    }
+
+    /* ── Init ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      renderHero();
+      renderGrid();
+      renderSidebar();
+      initSidebarNewsletter();
+
+      // Category filter buttons
+      document.querySelectorAll('.news-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.news-filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeCategory = btn.dataset.cat;
+          closeArticle();
+          renderGrid();
+        });
+      });
+
+      // Search
+      document.getElementById('news-search')?.addEventListener('input', e => {
+        searchQuery = e.target.value.trim();
+        closeArticle();
+        renderGrid();
+      });
+
+      // Scroll reveal
+      setTimeout(() => {
+        const els = document.querySelectorAll('.reveal:not(.revealed),.reveal-left:not(.revealed),.reveal-right:not(.revealed)');
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        els.forEach(el => obs.observe(el));
+      }, 80);
+    });
+  </script>
+
+</body>
+</html>

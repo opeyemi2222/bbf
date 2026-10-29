@@ -1,0 +1,18 @@
+# BBF Frontend Redirects
+# Newsletter & API calls → not available on static deploy (PHP backend not included)
+/api/*  /index.html  404
+
+# Clean URL support — allow accessing pages without .html extension
+/about          /about.html           200
+/activities     /activities.html      200
+/chapters       /chapters.html        200
+/contact        /contact.html         200
+/dashboard      /dashboard.html       200
+/events         /events.html          200
+/gallery        /gallery.html         200
+/leadership     /leadership.html      200
+/login          /login.html           200
+/membership     /membership.html      200
+/news           /news.html            200
+/resources      /resources.html       200
+/reset-password /reset-password.html  200
